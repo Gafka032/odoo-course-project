@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Courier Schedule Tree View -->
+    <record id="view_courier_schedule_tree" model="ir.ui.view">
+        <field name="name">courier.schedule.tree</field>
+        <field name="model">courier.schedule</field>
+        <field name="arch" type="xml">
+            <tree string="Courier Schedules" decoration-info="state == 'draft'" decoration-warning="state == 'in_progress'" decoration-success="state == 'completed'" decoration-danger="state == 'cancelled'">
+                <field name="name"/>
+                <field name="courier_id"/>
+                <field name="date"/>
+                <field name="start_time" widget="float_time"/>
+                <field name="end_time" widget="float_time"/>
+                <field name="working_hours" widget="float_time" sum="Total Hours"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Courier Schedule Form View -->
+    <record id="view_courier_schedule_form" model="ir.ui.view">
+        <field name="name">courier.schedule.form</field>
+        <field name="model">courier.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Courier Schedule">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_start" string="Start Shift" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_complete" string="Complete Shift" type="object" class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state not in ('draft', 'confirmed')"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" type="object" invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_deliveries" type="object" class="oe_stat_button" icon="fa-truck" invisible="delivery_count == 0">
+                            <field name="delivery_count" widget="statinfo" string="Deliveries"/>
+                        </button>
+                        <button name="action_view_pickups" type="object" class="oe_stat_button" icon="fa-archive" invisible="pickup_count == 0">
+                            <field name="pickup_count" widget="statinfo" string="Pickups"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="courier_id"/>
+                            <field name="date"/>
+                            <field name="start_time" widget="float_time"/>
+                            <field name="end_time" widget="float_time"/>
+                            <field name="working_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="date_start" invisible="1"/>
+                            <field name="date_end" invisible="1"/>
+                            <field name="color" widget="color_picker"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Assigned Zones">
+                            <field name="zone_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="factor"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Add any notes about this schedule..."/>
+                        </page>
+                        <page string="Deliveries" invisible="delivery_count == 0">
+                            <field name="delivery_order_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="recipient_id"/>
+                                    <field name="delivery_address_id"/>
+                                    <field name="scheduled_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pickups" invisible="pickup_count == 0">
+                            <field name="pickup_request_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="pickup_address_id"/>
+                                    <field name="pickup_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Courier Schedule Search View -->
+    <record id="view_courier_schedule_search" model="ir.ui.view">
+        <field name="name">courier.schedule.search</field>
+        <field name="model">courier.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Search Courier Schedules">
+                <field name="name"/>
+                <field name="courier_id"/>
+                <field name="date"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Completed" name="completed" domain="[('state', '=', 'completed')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="My Schedules" name="my_schedules" domain="[('courier_id', '=', uid)]"/>
+                <filter string="Today" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="This Week" name="this_week" domain="[('date', '&gt;=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Courier" name="group_by_courier" context="{'group_by': 'courier_id'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Courier Schedule Calendar View -->
+    <record id="view_courier_schedule_calendar" model="ir.ui.view">
+        <field name="name">courier.schedule.calendar</field>
+        <field name="model">courier.schedule</field>
+        <field name="arch" type="xml">
+            <calendar string="Courier Schedules" date_start="date_start" date_stop="date_end" color="courier_id" mode="week">
+                <field name="name"/>
+                <field name="courier_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Courier Schedule Action -->
+    <record id="action_courier_schedule" model="ir.actions.act_window">
+        <field name="name">Courier Schedules</field>
+        <field name="res_model">courier.schedule</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="search_view_id" ref="view_courier_schedule_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new courier schedule
+            </p>
+            <p>
+                Create work schedules for couriers.
+            </p>
+        </field>
+    </record>
+</odoo>
