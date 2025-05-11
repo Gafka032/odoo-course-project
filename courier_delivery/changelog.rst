@@ -1,0 +1,70 @@
+===========
+Changelog
+===========
+
+17.0.1.0.0 (2025-05-11)
+-----------------------
+
+Demo Data Improvements
+~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] Updated all demo data with future dates (May 15-21, 2025) to avoid validation errors during module installation
+* [REF] Restructured demo data into separate files by entity type:
+  - delivery_zones_demo.xml: Delivery zone definitions with pricing factors
+  - couriers_demo.xml: Courier user records with assigned zones
+  - partners_demo.xml: Partner records with delivery addresses
+  - pickup_requests_demo.xml: Pickup request records with various statuses
+  - delivery_orders_demo.xml: Delivery order records with different states
+* [ADD] Created courier_schedules_demo.xml with 10 schedule records for three couriers covering May 15-19, 2025
+* [ADD] Added various schedule states (draft, confirmed) and different working hours in demo data
+* [ADD] Assigned specific delivery zones to each courier schedule in demo data
+* [FIX] Fixed CSV import for demo data by renaming files to match model names:
+  - pickup_requests_csv_demo.csv → courier.pickup.request.csv
+  - delivery_orders_csv_demo.csv → courier.delivery.order.csv
+* [IMP] Added these CSV files directly to the 'demo' section in manifest.py
+
+Reporting Enhancements
+~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Enhanced delivery report model with detailed status tracking fields:
+  - draft_deliveries: Count of delivery orders in draft state
+  - confirmed_deliveries: Count of confirmed delivery orders
+  - in_transit_deliveries: Count of deliveries currently in transit
+  - draft_pickups: Count of pickup requests in draft state
+  - confirmed_pickups: Count of confirmed pickup requests
+  - assigned_pickups: Count of pickup requests assigned to couriers
+  - picked_pickups: Count of completed pickup operations
+  - warehouse_pickups: Count of pickups delivered to warehouse
+  - cancelled_pickups: Count of cancelled pickup requests
+* [IMP] Updated SQL query in init() method to populate these new status tracking fields
+* [ADD] Created separate graph and pivot views for pickup analysis
+* [ADD] Added new menu item "Pickup Analysis" in the Reporting section
+
+Test Improvements
+~~~~~~~~~~~~~~~~
+
+* [FIX] Updated test_action_print_report method to be more resilient to data format changes
+* [FIX] Fixed test_action_generate_report to check for correct context keys
+* [FIX] Updated delivery zone tests to use future dates to avoid validation errors
+* [FIX] Made test_get_zone_for_address more flexible regarding zone IDs
+
+17.0.0.0.1 (2025-05-01)
+-----------------------
+
+Initial Release
+~~~~~~~~~~~~~~
+
+* [NEW] Initial release of the courier_delivery module with core functionality
+* [NEW] Implemented courier.pickup.request model for managing pickup requests with workflow:
+  - Draft → Confirmed → Assigned → Picked → Warehouse
+* [NEW] Created courier.delivery.order model for tracking deliveries with states:
+  - Draft → Confirmed → In Transit → Delivered/Failed
+* [NEW] Developed courier.schedule model for managing courier work schedules
+* [NEW] Implemented courier.delivery.zone model for defining geographical zones with pricing
+* [NEW] Added courier.delivery.report model for delivery statistics and analytics
+* [NEW] Extended res.partner and res.users models with delivery-related fields
+* [NEW] Created security groups and access rights for all models
+* [NEW] Implemented basic dashboard for couriers with delivery statistics
+* [NEW] Added PDF report generation for delivery slips
+* [NEW] Created form, tree, and kanban views for all main models
+* [NEW] Implemented multi-company support with proper record rules

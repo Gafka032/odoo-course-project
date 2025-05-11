@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier Delivery Module</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #875A7B;
+        }
+        h1 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+        h3 {
+            font-size: 18px;
+            margin-top: 25px;
+        }
+        .feature-section {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .feature-box {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .feature-title {
+            font-weight: bold;
+            color: #875A7B;
+            margin-bottom: 10px;
+        }
+        .feature-img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .highlight {
+            background-color: #E6F1F8;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h1>Courier Delivery Module</h1>
+            <p>A comprehensive solution for managing courier delivery operations in Odoo 17.0.</p>
+            
+            <div class="highlight">
+                <p>This module provides a complete system for managing pickup requests, delivery orders, courier schedules, and delivery zones with comprehensive reporting and analytics.</p>
+            </div>
+            
+            <img src="banner.png" alt="Courier Delivery Banner" class="feature-img">
+        </div>
+        
+        <div class="feature-section">
+            <h2>Key Features</h2>
+            
+            <div class="feature-box">
+                <div class="feature-title">Pickup Request Management</div>
+                <p>Create and track customer requests for courier pickup with a complete workflow from draft to picked up.</p>
+                <ul>
+                    <li>Automatic sequence numbering</li>
+                    <li>Status tracking</li>
+                    <li>Courier assignment</li>
+                    <li>Integration with delivery orders</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <div class="feature-title">Delivery Order Tracking</div>
+                <p>Manage the full lifecycle of delivery orders from creation to successful delivery.</p>
+                <ul>
+                    <li>Automatic tracking reference generation</li>
+                    <li>Delivery fee calculation based on weight, zone, and package type</li>
+                    <li>Proof of delivery with signature capture</li>
+                    <li>Delivery attempt tracking</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <div class="feature-title">Courier Scheduling</div>
+                <p>Efficiently manage courier work schedules and assignments.</p>
+                <ul>
+                    <li>Define working hours and shifts</li>
+                    <li>Assign delivery zones to couriers</li>
+                    <li>Track deliveries and pickups per schedule</li>
+                    <li>Calendar view for easy scheduling</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <div class="feature-title">Delivery Zones & Pricing</div>
+                <p>Define geographical delivery zones with specific pricing factors.</p>
+                <ul>
+                    <li>Zone-based pricing</li>
+                    <li>Automatic zone assignment based on address</li>
+                    <li>ZIP code and city-based zone matching</li>
+                    <li>Courier assignment to zones</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <div class="feature-title">Comprehensive Reporting</div>
+                <p>Analyze delivery performance with detailed reports and statistics.</p>
+                <ul>
+                    <li>Success rate tracking</li>
+                    <li>Courier performance analysis</li>
+                    <li>Zone-based delivery statistics</li>
+                    <li>Revenue and delivery time reporting</li>
+                    <li>Detailed status tracking for pickups and deliveries</li>
+                    <li>New Pickup Analysis reports and views</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <div class="feature-title">PDF Reports & Documentation</div>
+                <p>Generate professional delivery slips and statistical reports.</p>
+                <ul>
+                    <li>Customizable delivery slip</li>
+                    <li>Delivery statistics reports</li>
+                    <li>Filtering by date, courier, and zone</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Technical Information</h2>
+            
+            <h3>Models</h3>
+            <ul>
+                <li><strong>courier.pickup.request</strong> - Manages pickup requests</li>
+                <li><strong>courier.delivery.order</strong> - Tracks delivery orders</li>
+                <li><strong>courier.schedule</strong> - Manages courier work schedules</li>
+                <li><strong>courier.delivery.zone</strong> - Defines delivery zones</li>
+                <li><strong>courier.delivery.report</strong> - Provides delivery statistics</li>
+            </ul>
+            
+            <h3>Extended Models</h3>
+            <ul>
+                <li><strong>res.partner</strong> - Adds delivery-related fields to partners</li>
+                <li><strong>res.users</strong> - Adds courier-specific fields to users</li>
+            </ul>
+            
+            <h3>Security</h3>
+            <ul>
+                <li>Two security groups: User and Manager</li>
+                <li>Record rules for multi-company support</li>
+                <li>Proper access rights for all models</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Installation & Configuration</h2>
+            
+            <h3>Installation</h3>
+            <p>Install the module from the Apps menu in your Odoo instance.</p>
+            <p>The module includes demo data for testing with dates set in the future (May 15-21, 2025).</p>
+            
+            <h3>Configuration</h3>
+            <ol>
+                <li>Create delivery zones in <em>Courier Delivery > Configuration > Delivery Zones</em></li>
+                <li>Set up couriers by enabling the "Is Courier" flag on users</li>
+                <li>Configure user access rights through the Settings menu</li>
+            </ol>
+        </div>
+        
+        <div class="footer">
+            <p>Developed by Odoo School</p>
+            <p>Maintained by Danylo Senyuk</p>
+            <p>Version 17.0.1.0.0</p>
+            <p>Last Updated: May 11, 2025</p>
+        </div>
+    </div>
+</body>
+</html>
