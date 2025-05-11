@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="courier_delivery.Dashboard">
+        <div class="o_courier_dashboard p-3">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2>Courier Delivery Dashboard</h2>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" t-on-click="onRefreshClick">
+                            <i class="fa fa-refresh me-1"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" t-if="state.loading">
+                <div class="col-12 text-center py-5">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                    <p class="mt-2">Loading dashboard data...</p>
+                </div>
+            </div>
+            
+            <div class="row" t-if="!state.loading">
+                <!-- Pickups Card -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card o_courier_card h-100" t-on-click="onPickupClick">
+                        <div class="card-header">
+                            <i class="fa fa-truck me-2"></i> Pickup Requests
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="o_courier_stat text-primary mb-2">
+                                <t t-esc="state.stats.total_pickups"/>
+                            </div>
+                            <div class="o_courier_label">Total Pickups</div>
+                            
+                            <hr class="my-3"/>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="o_courier_stat text-warning">
+                                        <t t-esc="state.stats.pending_pickups"/>
+                                    </div>
+                                    <div class="o_courier_label">Pending</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="o_status_picked o_courier_stat">
+                                        <t t-esc="state.stats.total_pickups - state.stats.pending_pickups"/>
+                                    </div>
+                                    <div class="o_courier_label">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Click to view pickup requests</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deliveries Card -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card o_courier_card h-100" t-on-click="onDeliveryClick">
+                        <div class="card-header">
+                            <i class="fa fa-box me-2"></i> Delivery Orders
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="o_courier_stat text-primary mb-2">
+                                <t t-esc="state.stats.total_deliveries"/>
+                            </div>
+                            <div class="o_courier_label">Total Deliveries</div>
+                            
+                            <hr class="my-3"/>
+                            
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="o_status_in_transit o_courier_stat">
+                                        <t t-esc="state.stats.in_transit"/>
+                                    </div>
+                                    <div class="o_courier_label">In Transit</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="o_status_delivered o_courier_stat">
+                                        <t t-esc="state.stats.delivered"/>
+                                    </div>
+                                    <div class="o_courier_label">Delivered</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="o_status_failed o_courier_stat">
+                                        <t t-esc="state.stats.total_deliveries - state.stats.in_transit - state.stats.delivered"/>
+                                    </div>
+                                    <div class="o_courier_label">Failed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Click to view delivery orders</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Success Rate Card -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card o_courier_card h-100">
+                        <div class="card-header">
+                            <i class="fa fa-chart-line me-2"></i> Performance
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="o_courier_stat text-primary mb-2">
+                                <t t-esc="state.stats.success_rate"/>%
+                            </div>
+                            <div class="o_courier_label">Success Rate</div>
+                            
+                            <hr class="my-3"/>
+                            
+                            <div class="progress mt-3" style="height: 20px;">
+                                <div class="progress-bar bg-success" role="progressbar" t-att-style="'width: ' + state.stats.success_rate + '%'" t-att-aria-valuenow="state.stats.success_rate" aria-valuemin="0" aria-valuemax="100">
+                                    <t t-esc="state.stats.success_rate"/>%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Based on completed deliveries</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
