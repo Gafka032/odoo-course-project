@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Delivery Order Tree View -->
+    <record id="view_delivery_order_tree" model="ir.ui.view">
+        <field name="name">courier.delivery.order.tree</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Orders" decoration-info="state == 'draft'" decoration-warning="state == 'in_transit'" decoration-success="state == 'delivered'" decoration-danger="state in ['failed', 'cancelled']">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="recipient_id"/>
+                <field name="delivery_address_id"/>
+                <field name="scheduled_date"/>
+                <field name="courier_id"/>
+                <field name="state"/>
+                <field name="priority" widget="priority"/>
+                <field name="zone_id"/>
+                <field name="delivery_fee" sum="Total Fees"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Delivery Order Form View -->
+    <record id="view_delivery_order_form" model="ir.ui.view">
+        <field name="name">courier.delivery.order.form</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Order">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_start_delivery" string="Start Delivery" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_mark_delivered" string="Mark as Delivered" type="object" class="oe_highlight" invisible="state != 'in_transit'"/>
+                    <button name="action_mark_failed" string="Mark as Failed" type="object" invisible="state != 'in_transit'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state not in ('draft', 'confirmed')"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" type="object" invisible="state not in ('cancelled', 'failed')"/>
+                    <button name="action_print_delivery_slip" string="Print Delivery Slip" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_transit,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="recipient_id"/>
+                            <field name="delivery_address_id"/>
+                            <field name="zone_id"/>
+                            <field name="priority" widget="priority"/>
+                        </group>
+                        <group>
+                            <field name="pickup_request_id"/>
+                            <field name="scheduled_date"/>
+                            <field name="actual_delivery_date" readonly="1"/>
+                            <field name="courier_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="package_type"/>
+                            <field name="weight"/>
+                            <field name="delivery_time_estimate"/>
+                            <field name="delivery_fee"/>
+                        </group>
+                        <group>
+                            <field name="tracking_ref"/>
+                            <field name="delivery_attempts" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Add any notes or special instructions for the delivery..."/>
+                        </page>
+                        <page string="Proof of Delivery" invisible="state != 'delivered'">
+                            <group>
+                                <field name="signature" widget="image"/>
+                                <field name="proof_of_delivery" widget="image"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Delivery Order Search View -->
+    <record id="view_delivery_order_search" model="ir.ui.view">
+        <field name="name">courier.delivery.order.search</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Delivery Orders">
+                <field name="name"/>
+                <field name="tracking_ref"/>
+                <field name="partner_id"/>
+                <field name="recipient_id"/>
+                <field name="delivery_address_id"/>
+                <field name="courier_id"/>
+                <field name="zone_id"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="In Transit" name="in_transit" domain="[('state', '=', 'in_transit')]"/>
+                <filter string="Delivered" name="delivered" domain="[('state', '=', 'delivered')]"/>
+                <filter string="Failed" name="failed" domain="[('state', '=', 'failed')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="High Priority" name="high_priority" domain="[('priority', 'in', ['2', '3'])]"/>
+                <filter string="My Deliveries" name="my_deliveries" domain="[('courier_id', '=', uid)]"/>
+                <filter string="Today's Deliveries" name="today_deliveries" domain="[('scheduled_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')), ('scheduled_date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Customer" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Recipient" name="group_by_recipient" context="{'group_by': 'recipient_id'}"/>
+                    <filter string="Courier" name="group_by_courier" context="{'group_by': 'courier_id'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Scheduled Date" name="group_by_scheduled_date" context="{'group_by': 'scheduled_date:day'}"/>
+                    <filter string="Zone" name="group_by_zone" context="{'group_by': 'zone_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Delivery Order Kanban View -->
+    <record id="view_delivery_order_kanban" model="ir.ui.view">
+        <field name="name">courier.delivery.order.kanban</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" records_draggable="0">
+                <field name="name"/>
+                <field name="recipient_id"/>
+                <field name="scheduled_date"/>
+                <field name="courier_id"/>
+                <field name="state"/>
+                <field name="priority"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="recipient_id"/>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <field name="scheduled_date" widget="date"/>
+                                    </div>
+                                    <div t-if="record.courier_id.raw_value">
+                                        <strong>Courier:</strong> <field name="courier_id"/>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="priority" widget="priority"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Delivery Order Calendar View -->
+    <record id="view_delivery_order_calendar" model="ir.ui.view">
+        <field name="name">courier.delivery.order.calendar</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Delivery Orders" date_start="scheduled_date" color="courier_id" mode="month">
+                <field name="name"/>
+                <field name="recipient_id"/>
+                <field name="courier_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Delivery Order Graph View -->
+    <record id="view_delivery_order_graph" model="ir.ui.view">
+        <field name="name">courier.delivery.order.graph</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <graph string="Delivery Analysis" type="bar">
+                <field name="state"/>
+                <field name="delivery_fee" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Delivery Order Pivot View -->
+    <record id="view_delivery_order_pivot" model="ir.ui.view">
+        <field name="name">courier.delivery.order.pivot</field>
+        <field name="model">courier.delivery.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Delivery Analysis">
+                <field name="state" type="row"/>
+                <field name="courier_id" type="col"/>
+                <field name="delivery_fee" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Delivery Order Action -->
+    <record id="action_delivery_order" model="ir.actions.act_window">
+        <field name="name">Delivery Orders</field>
+        <field name="res_model">courier.delivery.order</field>
+        <field name="view_mode">tree,form,kanban,calendar,graph,pivot</field>
+        <field name="search_view_id" ref="view_delivery_order_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new delivery order
+            </p>
+            <p>
+                Create delivery orders for courier deliveries.
+            </p>
+        </field>
+    </record>
+</odoo>
