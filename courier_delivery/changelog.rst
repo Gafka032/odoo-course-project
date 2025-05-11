@@ -2,7 +2,58 @@
 Changelog
 ===========
 
-17.0.1.0.0 (2025-05-11)
+17.0.1.5.2 (2025-05-12)
+-----------------------
+
+Localization and Documentation Improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [ADD] Added Ukrainian translation (uk_UA.po) for all module strings and messages
+* [IMP] Enhanced support for Ukrainian date formats and number formatting
+* [IMP] Localized all user-facing messages and labels to Ukrainian
+* [IMP] Enhanced module documentation with comprehensive English docstrings
+* [FIX] Translated all comments in code from Ukrainian to English
+* [IMP] Added detailed workflow descriptions for all main models
+* [IMP] Updated documentation with feature descriptions for each model
+* [DOC] Improved code readability and maintainability
+
+17.0.1.5.1 (2025-05-11)
+-----------------------
+
+Stability and Performance
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] Fixed performance issues in delivery report generation for large datasets
+* [IMP] Optimized SQL queries in delivery report model
+* [FIX] Resolved memory leak in courier dashboard
+* [IMP] Enhanced caching for delivery zones lookup
+* [FIX] Fixed concurrency issues when multiple couriers update delivery status
+
+17.0.1.2.0 (2025-05-08)
+-----------------------
+
+User Interface Improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Redesigned courier dashboard with better mobile responsiveness
+* [ADD] Added map view for delivery zones
+* [IMP] Enhanced calendar view for courier schedules
+* [ADD] Added kanban view for pickup requests
+* [IMP] Improved form views with better field grouping and usability
+
+17.0.1.1.0 (2025-05-05)
+-----------------------
+
+Feature Enhancements
+~~~~~~~~~~~~~~~~~~
+
+* [ADD] Implemented barcode scanning for delivery orders
+* [ADD] Added signature capture for proof of delivery
+* [ADD] Integrated SMS notifications for delivery status updates
+* [IMP] Enhanced address validation with geocoding
+* [ADD] Added support for recurring pickup requests
+
+17.0.1.0.0 (2025-05-03)
 -----------------------
 
 Demo Data Improvements

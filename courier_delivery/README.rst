@@ -7,14 +7,19 @@ This module provides a comprehensive solution for managing courier delivery oper
 Features
 ========
 
-* **Pickup Requests**: Manage customer requests for courier pickup
-* **Delivery Orders**: Track delivery orders from pickup to delivery
-* **Courier Scheduling**: Schedule and manage courier work hours
-* **Delivery Zones**: Define geographical zones with specific pricing
-* **Reporting**: Analyze delivery performance and statistics
+* **Pickup Requests**: Manage customer requests for courier pickup, including recurring pickups
+* **Delivery Orders**: Track delivery orders from pickup to delivery with barcode scanning
+* **Courier Scheduling**: Schedule and manage courier work hours with enhanced calendar views
+* **Delivery Zones**: Define geographical zones with specific pricing and map visualization
+* **Reporting**: Analyze delivery performance and statistics with optimized queries
 * **Customizable Workflows**: Configurable states for pickup and delivery processes
 * **PDF Reports**: Generate delivery slips and statistical reports
 * **Multi-company Support**: Full multi-company compatibility
+* **Mobile Responsive**: Redesigned dashboard for better mobile experience
+* **Proof of Delivery**: Capture signatures for delivery confirmation
+* **Notifications**: SMS alerts for delivery status updates
+* **Address Validation**: Enhanced geocoding for accurate address validation
+* **Ukrainian Localization**: Full Ukrainian translation with proper date and number formatting
 
 Models
 ======
@@ -78,4 +83,5 @@ Maintainers:
 
 This module is maintained by Odoo School.
 
-Last Updated: May 11, 2025
+Version: 17.0.1.5.2
+Last Updated: May 12, 2025
