@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Partners with Delivery Info -->
+        <record id="partner_demo_sender_1" model="res.partner">
+            <field name="name">Kyiv Electronics Ltd</field>
+            <field name="email">info@kyiv-electronics.example.com</field>
+            <field name="phone">+380441234567</field>
+            <field name="street">Khreshchatyk Street, 15</field>
+            <field name="city">Kyiv</field>
+            <field name="zip">01001</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="is_delivery_address">True</field>
+            <field name="delivery_notes">Large office building, reception on ground floor</field>
+            <field name="preferred_delivery_time">morning</field>
+        </record>
+
+        <record id="partner_demo_sender_2" model="res.partner">
+            <field name="name">Lviv Fashion House</field>
+            <field name="email">contact@lviv-fashion.example.com</field>
+            <field name="phone">+380321234567</field>
+            <field name="street">Svobody Avenue, 25</field>
+            <field name="city">Lviv</field>
+            <field name="zip">79000</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="is_delivery_address">True</field>
+            <field name="delivery_notes">Shop entrance from the main street</field>
+            <field name="preferred_delivery_time">afternoon</field>
+        </record>
+
+        <record id="partner_demo_sender_3" model="res.partner">
+            <field name="name">Odesa Maritime Supplies</field>
+            <field name="email">orders@odesa-maritime.example.com</field>
+            <field name="phone">+380487654321</field>
+            <field name="street">Primorsky Boulevard, 10</field>
+            <field name="city">Odesa</field>
+            <field name="zip">65000</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="is_delivery_address">True</field>
+            <field name="delivery_notes">Near the Opera House, blue building</field>
+            <field name="preferred_delivery_time">evening</field>
+        </record>
+
+        <record id="partner_demo_recipient_1" model="res.partner">
+            <field name="name">Kyiv Tech University</field>
+            <field name="email">procurement@ktu.example.com</field>
+            <field name="phone">+380442223333</field>
+            <field name="street">Peremohy Avenue, 37</field>
+            <field name="city">Kyiv</field>
+            <field name="zip">03056</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="is_delivery_address">True</field>
+            <field name="delivery_notes">Main building, reception desk</field>
+            <field name="preferred_delivery_time">morning</field>
+        </record>
+
+        <record id="partner_demo_recipient_2" model="res.partner">
+            <field name="name">Lviv Coffee Shop</field>
+            <field name="email">orders@lviv-coffee.example.com</field>
+            <field name="phone">+380322223333</field>
+            <field name="street">Rynok Square, 12</field>
+            <field name="city">Lviv</field>
+            <field name="zip">79008</field>
+            <field name="country_id" ref="base.ua"/>
+            <field name="is_delivery_address">True</field>
+            <field name="delivery_notes">Corner building with green door</field>
+            <field name="preferred_delivery_time">afternoon</field>
+        </record>
+    </data>
+</odoo>

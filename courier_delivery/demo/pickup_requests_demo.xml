@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Pickup Requests in Different States -->
+        <record id="pickup_request_demo_draft_1" model="courier.pickup.request">
+            <field name="name">PICK/2025/0001</field>
+            <field name="partner_id" ref="partner_demo_sender_1"/>
+            <field name="pickup_address_id" ref="partner_demo_sender_1"/>
+            <field name="request_date">2025-05-10 10:00:00</field>
+            <field name="pickup_date">2025-05-15 14:00:00</field>
+            <field name="notes">Draft pickup request for testing</field>
+            <field name="state">draft</field>
+            <field name="weight">2.5</field>
+            <field name="package_count">2</field>
+        </record>
+        
+        <record id="pickup_request_demo_confirmed_1" model="courier.pickup.request">
+            <field name="name">PICK/2025/0002</field>
+            <field name="partner_id" ref="partner_demo_sender_3"/>
+            <field name="pickup_address_id" ref="partner_demo_sender_3"/>
+            <field name="request_date">2025-05-10 09:30:00</field>
+            <field name="pickup_date">2025-05-16 15:30:00</field>
+            <field name="notes">Confirmed pickup request</field>
+            <field name="state">confirmed</field>
+            <field name="weight">3.2</field>
+            <field name="package_count">3</field>
+        </record>
+        
+        <record id="pickup_request_demo_warehouse_1" model="courier.pickup.request">
+            <field name="name">PICK/2025/0005</field>
+            <field name="partner_id" ref="partner_demo_sender_3"/>
+            <field name="pickup_address_id" ref="partner_demo_sender_3"/>
+            <field name="request_date">2025-05-10 09:15:00</field>
+            <field name="pickup_date">2025-05-17 14:30:00</field>
+            <field name="notes">Delivered to warehouse</field>
+            <field name="state">warehouse</field>
+            <field name="courier_id" ref="courier_user_1"/>
+            <field name="weight">5.1</field>
+            <field name="package_count">5</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,partner_id:id,pickup_address_id:id,request_date,pickup_date,notes,state,courier_id:id,weight,package_count
+pickup_request_csv_1,PICK/2025/0101,partner_demo_sender_1,partner_demo_sender_1,2025-05-10 10:00:00,2025-05-15 14:00:00,Draft pickup request from CSV,draft,,2.5,2
+pickup_request_csv_2,PICK/2025/0102,partner_demo_sender_2,partner_demo_sender_2,2025-05-10 09:30:00,2025-05-16 15:30:00,Draft pickup request from CSV,draft,,1.8,1
+pickup_request_csv_3,PICK/2025/0103,partner_demo_sender_3,partner_demo_sender_3,2025-05-10 09:30:00,2025-05-17 15:30:00,Confirmed pickup request from CSV,confirmed,,3.2,3
+pickup_request_csv_4,PICK/2025/0104,partner_demo_sender_1,partner_demo_sender_1,2025-05-10 11:20:00,2025-05-18 16:00:00,Assigned to courier from CSV,assigned,courier_user_1,4.5,4
+pickup_request_csv_5,PICK/2025/0105,partner_demo_sender_2,partner_demo_sender_2,2025-05-10 08:45:00,2025-05-19 12:00:00,Picked up by courier from CSV,picked,courier_user_2,2.7,2
+pickup_request_csv_6,PICK/2025/0106,partner_demo_sender_3,partner_demo_sender_3,2025-05-10 09:15:00,2025-05-20 14:30:00,Delivered to warehouse from CSV,warehouse,courier_user_1,5.1,5
+pickup_request_csv_7,PICK/2025/0107,partner_demo_sender_1,partner_demo_sender_1,2025-05-10 10:00:00,2025-05-21 14:00:00,Cancelled by customer from CSV,cancelled,,1.5,1

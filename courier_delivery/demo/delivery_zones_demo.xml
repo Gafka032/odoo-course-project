@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Delivery Zones -->
+        <record id="delivery_zone_central" model="courier.delivery.zone">
+            <field name="name">Central Kyiv</field>
+            <field name="code">CENTRAL</field>
+            <field name="city_names">Kyiv</field>
+            <field name="factor">1.0</field>
+            <field name="delivery_time_estimate">24.0</field>
+            <field name="active">True</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="color">1</field>
+        </record>
+        
+        <record id="delivery_zone_north" model="courier.delivery.zone">
+            <field name="name">North Kyiv</field>
+            <field name="code">NORTH</field>
+            <field name="city_names">Kyiv</field>
+            <field name="factor">1.2</field>
+            <field name="delivery_time_estimate">30.0</field>
+            <field name="active">True</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="color">2</field>
+        </record>
+        
+        <record id="delivery_zone_south" model="courier.delivery.zone">
+            <field name="name">South Kyiv</field>
+            <field name="code">SOUTH</field>
+            <field name="city_names">Kyiv</field>
+            <field name="factor">1.3</field>
+            <field name="delivery_time_estimate">32.0</field>
+            <field name="active">True</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="color">3</field>
+        </record>
+        
+        <record id="delivery_zone_lviv" model="courier.delivery.zone">
+            <field name="name">Lviv Center</field>
+            <field name="code">LVIV</field>
+            <field name="city_names">Lviv</field>
+            <field name="factor">1.1</field>
+            <field name="delivery_time_estimate">28.0</field>
+            <field name="active">True</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="color">4</field>
+        </record>
+        
+        <record id="delivery_zone_odesa" model="courier.delivery.zone">
+            <field name="name">Odesa Center</field>
+            <field name="code">ODESA</field>
+            <field name="city_names">Odesa</field>
+            <field name="factor">1.15</field>
+            <field name="delivery_time_estimate">29.0</field>
+            <field name="active">True</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="color">5</field>
+        </record>
+    </data>
+</odoo>
