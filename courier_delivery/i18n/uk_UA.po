@@ -1,0 +1,2494 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* courier_delivery
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-11 18:57+0000\n"
+"PO-Revision-Date: 2025-05-12 00:29+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: courier_delivery
+#: model:ir.actions.report,print_report_name:courier_delivery.action_report_delivery_slip
+msgid "'Delivery Slip - %s' % (object.name)"
+msgstr "'Накладна на доставку - %s' % (object.name)"
+
+#. module: courier_delivery
+#: model:ir.actions.report,print_report_name:courier_delivery.action_report_delivery_statistics
+msgid ""
+"'Delivery Statistics - %s' % (datetime.datetime.now().strftime('%Y-%m-%d'))"
+msgstr ""
+"'Статистика доставки - %s' % (datetime.datetime.now().strftime('%Y-%m-%d'))"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_kanban_inherit_courier
+msgid "<span class=\"badge badge-success\">Delivery Address</span>"
+msgstr "<span class=\"badge badge-success\">Адреса доставки</span>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_kanban
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_kanban
+msgid "<strong>Courier:</strong>"
+msgstr "<strong>Кур'єр:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Клієнт:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Delivery Address:</strong>"
+msgstr "<strong>Адреса доставки:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_kanban
+msgid "<strong>Delivery Time:</strong>"
+msgstr "<strong>Час доставки:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_kanban_inherit_courier
+msgid "<strong>Delivery Zone:</strong>"
+msgstr "<strong>Зона доставки:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "<strong>Period:</strong>"
+msgstr "<strong>Період:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_kanban
+msgid "<strong>Price Factor:</strong>"
+msgstr "<strong>Фактор ціни:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Recipient:</strong>"
+msgstr "<strong>Одержувач:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Scheduled Date:</strong>"
+msgstr "<strong>Запланована дата:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Status:</strong>"
+msgstr "<strong>Статус:</strong>"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "<strong>Tracking Reference:</strong>"
+msgstr "<strong>Посилання на відстеження:</strong>"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_needaction
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_needaction
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_needaction
+msgid "Action Needed"
+msgstr "Необхідні дії"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__active
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_search
+msgid "Active"
+msgstr "Активний"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_ids
+msgid "Activities"
+msgstr "Діяльність"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_exception_decoration
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Діяльність Виняток Декорування"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_state
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_state
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_state
+msgid "Activity State"
+msgstr "Стан активності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_type_icon
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_type_icon
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Іконка типу діяльності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__actual_delivery_date
+msgid "Actual Delivery Date"
+msgstr "Фактична дата доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__actual_delivery_date
+msgid "Actual date and time when the delivery was completed"
+msgstr "Фактична дата і час завершення доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Add a description of this delivery zone..."
+msgstr "Додайте опис цієї зони доставки..."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+msgid "Add any notes about this schedule..."
+msgstr "Додайте будь-які примітки щодо цього розкладу..."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Add any notes or special instructions for the courier..."
+msgstr "Додайте будь-які примітки або особливі вказівки для кур'єра..."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Add any notes or special instructions for the delivery..."
+msgstr "Додайте будь-які примітки або особливі вказівки щодо доставки..."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__notes
+msgid "Additional notes for the courier"
+msgstr "Додаткові вказівки для кур'єра"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__notes
+msgid "Additional notes for the delivery"
+msgstr "Додаткові вказівки для доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__notes
+msgid "Additional notes for this schedule"
+msgstr "Додаткові примітки до цього графіку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__pickup_address_id
+msgid "Address where the courier should pick up the package"
+msgstr "Адреса, за якою кур'єр повинен забрати посилку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__delivery_address_id
+msgid "Address where the package should be delivered"
+msgstr "Адреса, куди слід доставити посилку"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_partner__preferred_delivery_time__afternoon
+msgid "Afternoon (12:00-17:00)"
+msgstr "Друга половина дня (12:00-17:00)"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_partner__preferred_delivery_time__any
+msgid "Any Time"
+msgstr "У будь-який час"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Assign Courier"
+msgstr "Призначити кур'єра"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Assigned"
+msgstr "Призначено"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__courier_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__courier_id
+msgid "Assigned Courier"
+msgstr "Призначений кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__courier_ids
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Assigned Couriers"
+msgstr "Призначені кур'єри"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Assigned Delivery Zones"
+msgstr "Призначені зони доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__assigned_pickups
+msgid "Assigned Pickups"
+msgstr "Призначені забори"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__zone_ids
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+msgid "Assigned Zones"
+msgstr "Призначені зони"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__assigned
+msgid "Assigned to Courier"
+msgstr "Призначено кур'єру"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_attachment_count
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_attachment_count
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_attachment_count
+msgid "Attachment Count"
+msgstr "Кількість вкладень"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__delivery_time_estimate
+msgid "Average estimated time for deliveries in this zone"
+msgstr "Середній розрахунковий час доставки в цій зоні"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__avg_delivery_time
+msgid "Average time to complete deliveries"
+msgstr "Середній час виконання доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__avg_delivery_time
+msgid "Avg Delivery Time (hours)"
+msgstr "Середній час доставки (години)"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Avg Time (h)"
+msgstr "Середній час (год.)"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Based on completed deliveries"
+msgstr "На основі виконаних поставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_users__vehicle_type__bicycle
+msgid "Bicycle"
+msgstr "Велосипед"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form_duplicate
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Cancel"
+msgstr "Скасувати"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__cancelled
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__cancelled
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_schedule__state__cancelled
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Cancelled"
+msgstr "Скасовано"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__cancelled_deliveries
+msgid "Cancelled Deliveries"
+msgstr "Скасовані доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__cancelled_pickups
+msgid "Cancelled Pickups"
+msgstr "Скасовані забори"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_users__vehicle_type__car
+msgid "Car"
+msgstr "Автомобіль"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__is_delivery_address
+#: model:ir.model.fields,help:courier_delivery.field_res_users__is_delivery_address
+msgid "Check if this address is used for deliveries"
+msgstr "Перевірте, чи використовується ця адреса для доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__is_courier
+msgid "Check if this user is a courier"
+msgstr "Перевірте, чи є цей користувач кур'єром"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__city_names
+msgid "Cities"
+msgstr "Міста"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__city_names
+msgid "Cities included in this delivery zone (comma-separated)"
+msgstr "Міста, що входять до цієї зони доставки (через кому)"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Click to view delivery orders"
+msgstr "Натисніть, щоб переглянути замовлення на доставку"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Click to view pickup requests"
+msgstr "Натисніть, щоб переглянути заявки на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__color
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__color
+msgid "Color"
+msgstr "Колір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__color
+msgid "Color used in calendar view"
+msgstr "Колір, що використовується у поданні календаря"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__color
+msgid "Color used in kanban view"
+msgstr "Колір, що використовується в канбані"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__company_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__company_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__company_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__company_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__company_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__company_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+msgid "Company"
+msgstr "Компанія"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__company_id
+msgid "Company associated with this report"
+msgstr "Компанії, пов'язані з цим звітом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__company_id
+msgid "Company for which to generate the report"
+msgstr "Компанія, для якої потрібно створити звіт"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__company_id
+msgid "Company related to this delivery order"
+msgstr "Компанія, пов'язана з цим замовленням на поставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__company_id
+msgid "Company related to this pickup request"
+msgstr "Компанія, пов'язана з цією заявкою на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__company_id
+msgid "Company related to this schedule"
+msgstr "Компанія, пов'язана з цим розкладом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__company_id
+msgid "Company related to this zone"
+msgstr "Компанія, пов'язана з цією зоною"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+msgid "Complete Shift"
+msgstr "Повна зміна"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_schedule__state__completed
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#, python-format
+msgid "Completed"
+msgstr "Завершено"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_delivery_config
+msgid "Configuration"
+msgstr "Налаштування"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Confirm"
+msgstr "Підтвердити"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__confirmed
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__confirmed
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_schedule__state__confirmed
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Confirmed"
+msgstr "Підтверджено"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__confirmed_deliveries
+msgid "Confirmed Deliveries"
+msgstr "Підтверджені доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__confirmed_pickups
+msgid "Confirmed Pickups"
+msgstr "Підтверджені забори"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Contact us:"
+msgstr "Зв'яжіться з нами:"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__courier_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__courier_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__courier_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Courier"
+msgstr "Кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__courier_count
+msgid "Courier Count"
+msgstr "Кількість кур'єрів"
+
+#. module: courier_delivery
+#: model:ir.actions.client,name:courier_delivery.action_courier_dashboard
+msgid "Courier Dashboard"
+msgstr "Панель кур'єра"
+
+#. module: courier_delivery
+#: model:ir.module.category,name:courier_delivery.module_category_courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_delivery_root
+msgid "Courier Delivery"
+msgstr "Кур'єрська доставка"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Courier Delivery Dashboard"
+msgstr "Панель кур'єрської доставки"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_delivery_order
+msgid "Courier Delivery Order"
+msgstr "Замовлення кур'єрської доставки"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_delivery_report
+msgid "Courier Delivery Report"
+msgstr "Звіт про кур'єрську доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Courier Information"
+msgstr "Інформація для кур'єра"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_report_wizard__report_type__courier
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Courier Performance"
+msgstr "Ефективність кур'єрської діяльності"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_pickup_request
+msgid "Courier Pickup Request"
+msgstr "Заявка на кур'єрський забір"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+msgid "Courier Schedule"
+msgstr "Графік кур'єра"
+
+#. module: courier_delivery
+#: model:ir.actions.act_window,name:courier_delivery.action_courier_schedule
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_schedule
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_calendar
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_tree
+msgid "Courier Schedules"
+msgstr "Розклад кур'єрів"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_schedule
+msgid "Courier Work Schedule"
+msgstr "Графік роботи кур'єра"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__courier_id
+msgid "Courier assigned to this delivery order"
+msgstr "Кур'єр, призначений на це замовлення доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__courier_id
+msgid "Courier assigned to this pickup request"
+msgstr "Кур'єр, призначений на це замовлення забору"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__courier_id
+msgid "Courier assigned to this schedule"
+msgstr "Кур'єр, призначений на цей графік"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__courier_id
+msgid "Courier associated with this report"
+msgstr "Кур'єр, пов'язаний із цим звітом"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/delivery_zone.py:0
+#: model:ir.actions.act_window,name:courier_delivery.action_courier_users
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_users
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_kanban
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+#, python-format
+msgid "Couriers"
+msgstr "Кур'єри"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__courier_ids
+msgid "Couriers assigned to this delivery zone"
+msgstr "Кур'єри, призначені до цієї зони доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Coverage"
+msgstr "Охоплення"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Create Delivery"
+msgstr "Створити доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_courier_users
+msgid "Create a new courier"
+msgstr "Створити нового кур'єра"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_courier_schedule
+msgid "Create a new courier schedule"
+msgstr "Створіть новий графік кур'єра"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_order
+msgid "Create a new delivery order"
+msgstr "Створіть нове замовлення на доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_zone
+msgid "Create a new delivery zone"
+msgstr "Створіть нову зону доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_pickup_request
+msgid "Create a new pickup request"
+msgstr "Створіть нову заявку на забір"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_courier_users
+msgid "Create couriers to assign to delivery orders and pickup requests."
+msgstr ""
+"Створіть кур'єрів, щоб призначати їх на замовлення доставки та заявки на "
+"забір."
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_order
+msgid "Create delivery orders for courier deliveries."
+msgstr "Створіть замовлення на доставку для кур'єрської доставки."
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_pickup_request
+msgid "Create pickup requests for courier collection."
+msgstr "Створіть заявки на забір для кур'єрської доставки."
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_courier_schedule
+msgid "Create work schedules for couriers."
+msgstr "Створіть графіки роботи кур'єрів."
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__create_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__create_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__create_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__create_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__create_uid
+msgid "Created by"
+msgstr "Створено"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid "Created from pickup request %s"
+msgstr "Створено на основі заявки на забір %s"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__create_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__create_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__create_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__create_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__create_date
+msgid "Created on"
+msgstr "Створено в"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__partner_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__partner_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Customer"
+msgstr "Клієнт"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__partner_id
+msgid "Customer who requested the delivery"
+msgstr "Клієнт, який замовив доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__partner_id
+msgid "Customer who requested the pickup"
+msgstr "Клієнт, який замовив забір"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_dashboard
+msgid "Dashboard"
+msgstr "Панель приладів"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__date
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Date"
+msgstr "Дата"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__date_end
+msgid "Date End"
+msgstr "Дата завершення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__date_start
+msgid "Date Start"
+msgstr "Дата початку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Date and Time of Delivery:"
+msgstr "Дата та час доставки:"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__request_date
+msgid "Date and time when the pickup was requested"
+msgstr "Дата та час, коли було створено заявку на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__date
+msgid "Date of the report"
+msgstr "Дата звіту"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__date
+msgid "Date of the schedule"
+msgstr "Дата графіку"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_zone
+msgid "Define delivery zones with specific pricing factors."
+msgstr "Визначте зони доставки з конкретними ціновими факторами."
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__delivered
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#, python-format
+msgid "Delivered"
+msgstr "Доставлено"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__warehouse_pickups
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__warehouse
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Delivered to Warehouse"
+msgstr "Доставлено на склад"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_kanban
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Deliveries"
+msgstr "Доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__recipient_delivery_ids
+#: model:ir.model.fields,help:courier_delivery.field_res_users__recipient_delivery_ids
+msgid "Deliveries where this partner is the recipient"
+msgstr "Доставки, в яких цей партнер є одержувачем"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__delivery_address_id
+msgid "Delivery Address"
+msgstr "Адреса доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_res_partner_filter_inherit_courier
+msgid "Delivery Addresses"
+msgstr "Адреси доставки"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_delivery_report
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_graph
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_pivot
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_graph
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_pivot
+msgid "Delivery Analysis"
+msgstr "Аналіз доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__delivery_attempts
+msgid "Delivery Attempts"
+msgstr "Спроби доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Delivery Confirmation"
+msgstr "Підтвердження доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__delivery_count
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__delivery_count
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__delivery_count
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__delivery_count
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__delivery_count
+msgid "Delivery Count"
+msgstr "Кількість доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__delivery_fee
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Delivery Fee"
+msgstr "Вартість доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+msgid "Delivery Information"
+msgstr "Інформація про доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__notes
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__delivery_notes
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__delivery_notes
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+msgid "Delivery Notes"
+msgstr "Примітки до доставки"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+#, python-format
+msgid "Delivery Order"
+msgstr "Замовлення на доставку"
+
+#. module: courier_delivery
+#. odoo-javascript
+#. odoo-python
+#: code:addons/courier_delivery/models/courier_schedule.py:0
+#: code:addons/courier_delivery/models/delivery_zone.py:0
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.actions.act_window,name:courier_delivery.action_delivery_order
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__delivery_order_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__delivery_order_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__delivery_order_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__delivery_order_ids
+#: model:ir.ui.menu,name:courier_delivery.menu_delivery_order
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_calendar
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_tree
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+#, python-format
+msgid "Delivery Orders"
+msgstr "Замовлення на доставку"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/wizard/delivery_report_wizard.py:0
+#, python-format
+msgid "Delivery Report"
+msgstr "Звіт про доставку"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_delivery_report_wizard
+msgid "Delivery Report Wizard"
+msgstr "Майстер звітів про доставку"
+
+#. module: courier_delivery
+#: model:ir.actions.act_window,name:courier_delivery.action_delivery_report
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_tree
+msgid "Delivery Reports"
+msgstr "Звіти про доставку"
+
+#. module: courier_delivery
+#: model:ir.actions.report,name:courier_delivery.action_report_delivery_slip
+msgid "Delivery Slip"
+msgstr "Накладна на доставку"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_report_courier_delivery_report_delivery_slip
+msgid "Delivery Slip Report"
+msgstr "Звіт про накладну на доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Delivery Slip:"
+msgstr "Накладна на доставку"
+
+#. module: courier_delivery
+#: model:ir.actions.report,name:courier_delivery.action_report_delivery_statistics
+msgid "Delivery Statistics"
+msgstr "Статистика доставок"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Delivery Statistics Report"
+msgstr "Звіт про статистику доставки"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_courier_delivery_zone
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__zone_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__zone_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__zone_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__zone_id
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__delivery_zone_id
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__delivery_zone_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_res_partner_filter_inherit_courier
+msgid "Delivery Zone"
+msgstr "Зона доставки"
+
+#. module: courier_delivery
+#: model:ir.actions.act_window,name:courier_delivery.action_delivery_zone
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__courier_zone_ids
+#: model:ir.ui.menu,name:courier_delivery.menu_delivery_zone
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_tree
+msgid "Delivery Zones"
+msgstr "Зони доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__delivery_order_ids
+msgid "Delivery orders assigned to this courier"
+msgstr "Замовлення на доставку, закріплені за цим кур'єром"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__delivery_order_ids
+msgid "Delivery orders assigned to this courier during this schedule"
+msgstr ""
+"Замовлення на доставку, закріплені за цим кур'єром протягом цього розкладу"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid ""
+"Delivery orders can only be created from pickup requests that have been "
+"delivered to warehouse."
+msgstr ""
+"Замовлення на доставку можуть бути створені тільки із заявок на забір, які "
+"були доставлені на склад."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__delivery_order_ids
+msgid "Delivery orders created from this pickup request"
+msgstr "Замовлення на доставку, створені на основі цієї заяки на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__delivery_order_ids
+msgid "Delivery orders for this partner"
+msgstr "Замовлення на доставку для цього партнера"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_report
+msgid "Delivery reports are automatically generated based on delivery orders."
+msgstr ""
+"Звіти про доставку автоматично генеруються на основі замовлень на доставку."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__zone_id
+msgid "Delivery zone associated with this report"
+msgstr "Зона доставки, пов'язана з цим звітом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__delivery_zone_id
+#: model:ir.model.fields,help:courier_delivery.field_res_users__delivery_zone_id
+msgid "Delivery zone for this address"
+msgstr "Зона доставки для цієї адреси"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__zone_id
+msgid "Delivery zone for this delivery order"
+msgstr "Зона доставки для цього замовлення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__zone_id
+msgid "Delivery zone for this pickup request"
+msgstr "Зона доставки для цієї заявки на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__zone_ids
+msgid "Delivery zones assigned to this courier for this schedule"
+msgstr "Зони доставки, закріплені за цим кур'єром для цього розкладу"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__courier_zone_ids
+msgid "Delivery zones this courier is assigned to"
+msgstr "Зони доставки, за якими закріплений цей кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__description
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Description"
+msgstr "Опис"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__description
+msgid "Description of the delivery zone"
+msgstr "Опис зони доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_report_wizard__report_type__detailed
+msgid "Detailed Report"
+msgstr "Детальний звіт"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__display_name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__display_name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__display_name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__display_name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__display_name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__display_name
+msgid "Display Name"
+msgstr "Ім'я для відображення"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__package_type__document
+msgid "Document"
+msgstr "Документ"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__draft
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__draft
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_schedule__state__draft
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Draft"
+msgstr "Чернетка"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__draft_deliveries
+msgid "Draft Deliveries"
+msgstr "Чернетки доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__draft_pickups
+msgid "Draft Pickups"
+msgstr "Чернетки заявок на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__license_number
+msgid "Driver's license number"
+msgstr "Номер водійського посвідчення"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Email:"
+msgstr "Електронна пошта:"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__date_to
+msgid "End Date"
+msgstr "Дата закінчення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__end_time
+msgid "End Time"
+msgstr "Час закінчення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__date_to
+msgid "End date for the report"
+msgstr "Кінцева дата подання звіту"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__date_end
+msgid "End datetime of the schedule"
+msgstr "Дата завершення розкладу"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/courier_schedule.py:0
+#, python-format
+msgid "End time must be different from start time."
+msgstr "Час закінчення повинен відрізнятися від часу початку."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__end_time
+msgid "End time of the shift (in hours, e.g., 17.5 for 17:30)"
+msgstr "Час закінчення зміни (у годинах, наприклад, 17:5 - 17:30)"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Enter comma-separated ZIP codes..."
+msgstr "Введіть поштові індекси через кому..."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Enter comma-separated city names..."
+msgstr "Введіть назви міст через кому..."
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__delivery_time_estimate
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__delivery_time_estimate
+msgid "Estimated Delivery Time (hours)"
+msgstr "Орієнтовний час доставки (год.)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__delivery_time_estimate
+msgid "Estimated time to complete the delivery"
+msgstr "Орієнтовний час виконання доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_partner__preferred_delivery_time__evening
+msgid "Evening (17:00-21:00)"
+msgstr "Вечір (17:00-21:00)"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__failed
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#, python-format
+msgid "Failed"
+msgstr "Не вдалося"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__failed_deliveries
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__failed_deliveries
+msgid "Failed Deliveries"
+msgstr "Невдалі доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__delivery_fee
+msgid "Fee charged for the delivery service"
+msgstr "Плата за послугу доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__courier_id
+msgid "Filter report by courier"
+msgstr "Фільтрувати звіт за кур'єром"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__zone_id
+msgid "Filter report by delivery zone"
+msgstr "Фільтрувати звіт за зоною доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_follower_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_follower_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_follower_ids
+msgid "Followers"
+msgstr "Підписники"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_partner_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_partner_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Підписники (партнери)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__activity_type_icon
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__activity_type_icon
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Шрифт чудової іконки, наприклад, fa-tasks"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__package_type__fragile
+msgid "Fragile"
+msgstr "Крихкий"
+
+#. module: courier_delivery
+#: model:ir.actions.act_window,name:courier_delivery.action_delivery_report_wizard
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form_duplicate
+msgid "Generate Delivery Report"
+msgstr "Створити звіт про доставку"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_delivery_report_wizard
+msgid "Generate Report"
+msgstr "Створити звіт"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+msgid "Group By"
+msgstr "Групувати за"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__has_message
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__has_message
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__has_message
+msgid "Has Message"
+msgstr "Має повідомлення"
+
+#. module: courier_delivery
+#: model:ir.module.category,description:courier_delivery.module_category_courier_delivery
+msgid "Helps you manage your courier delivery operations"
+msgstr "Допомагає керувати кур'єрською доставкою"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__priority__2
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__priority__2
+msgid "High"
+msgstr "Високий"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "High Priority"
+msgstr "Високий пріоритет"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "High Success Rate"
+msgstr "Високий відсоток успішності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_exception_icon
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_exception_icon
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_exception_icon
+msgid "Icon"
+msgstr "Значок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__activity_exception_icon
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__activity_exception_icon
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Значок для позначення винятків."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__message_needaction
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__message_needaction
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Якщо позначено, нові повідомлення вимагають вашої уваги."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__message_has_error
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__message_has_error
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Якщо позначено, деякі повідомлення мають помилку доставки."
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_schedule__state__in_progress
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+msgid "In Progress"
+msgstr "У процесі"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__state__in_transit
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#, python-format
+msgid "In Transit"
+msgstr "В дорозі"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__in_transit_deliveries
+msgid "In Transit Deliveries"
+msgstr "Транзитні поставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_search
+msgid "Inactive"
+msgstr "Неактивний"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__include_cancelled
+msgid "Include Cancelled"
+msgstr "Включити скасовані"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__include_cancelled
+msgid "Include cancelled deliveries in the report"
+msgstr "Включіть скасовані доставки до звіту"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__is_courier
+msgid "Is Courier"
+msgstr "Чи кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__is_delivery_address
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__is_delivery_address
+msgid "Is Delivery Address"
+msgstr "Чи є адресою доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_is_follower
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_is_follower
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_is_follower
+msgid "Is Follower"
+msgstr "Є підписником"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__package_type__large_package
+msgid "Large Package"
+msgstr "Великий пакунок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__write_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__write_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__write_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__write_uid
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__write_uid
+msgid "Last Updated by"
+msgstr "Востаннє оновлено"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__write_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__write_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__write_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__write_date
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__write_date
+msgid "Last Updated on"
+msgstr "Востаннє оновлено в"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__license_number
+msgid "License Number"
+msgstr "Номер ліцензії"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Loading dashboard data..."
+msgstr "Завантаження даних панелі керування..."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Logo"
+msgstr "Лого"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__priority__1
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__priority__1
+msgid "Low"
+msgstr "Низький"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Low Success Rate"
+msgstr "Низький рівень успішності"
+
+#. module: courier_delivery
+#: model:res.groups,name:courier_delivery.group_courier_delivery_manager
+msgid "Manager"
+msgstr "Менеджер"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Mark as Delivered"
+msgstr "Позначити як доставлено"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Mark as Failed"
+msgstr "Позначити як невдале"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Mark as Picked"
+msgstr "Позначити як забаране"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__max_weight
+msgid "Max Weight Capacity (kg)"
+msgstr "Максимальна вантажопідйомність (кг)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__max_weight
+msgid "Maximum weight the courier can carry"
+msgstr "Максимальна вага, яку може перевезти кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_has_error
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_has_error
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_has_error
+msgid "Message Delivery error"
+msgstr "Помилка доставлення повідомлення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_ids
+msgid "Messages"
+msgstr "Повідомлення"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Metric"
+msgstr "Метрика"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Month"
+msgstr "Місяць"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_partner__preferred_delivery_time__morning
+msgid "Morning (8:00-12:00)"
+msgstr "Ранок (8:00-12:00)"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_users__vehicle_type__motorcycle
+msgid "Motorcycle"
+msgstr "Мотоцикл"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__my_activity_date_deadline
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Кінцевий термін моєї активності"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+msgid "My Deliveries"
+msgstr "Мої Доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "My Pickups"
+msgstr "Мої забори"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+msgid "My Schedules"
+msgstr "Мій розклад"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__name
+msgid "Name of the delivery zone"
+msgstr "Назва зони доставки"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/delivery_order.py:0
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid "New"
+msgstr "Новий"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/courier_schedule.py:0
+#, python-format
+msgid "New Schedule"
+msgstr "Новий розклад"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_date_deadline
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_date_deadline
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Дедлайн наступної активності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_summary
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_summary
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_summary
+msgid "Next Activity Summary"
+msgstr "Наступний підсумок діяльності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_type_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_type_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_type_id
+msgid "Next Activity Type"
+msgstr "Наступний тип діяльності"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_delivery_report
+msgid "No delivery reports found"
+msgstr "Звітів про доставку не знайдено"
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_pickup_report
+msgid "No pickup reports found"
+msgstr "Звітів про заявки на забір не знайдено"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__priority__0
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__priority__0
+msgid "Normal"
+msgstr "Нормальний"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Not assigned yet"
+msgstr "Ще не призначено"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Not delivered yet"
+msgstr "Ще не доставлено"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__notes
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__notes
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Notes"
+msgstr "Примітки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_needaction_counter
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_needaction_counter
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Кількість дій"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__cancelled_deliveries
+msgid "Number of cancelled deliveries"
+msgstr "Кількість скасованих доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__cancelled_pickups
+msgid "Number of cancelled pickup requests"
+msgstr "Кількість скасованих заявок на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__confirmed_deliveries
+msgid "Number of confirmed deliveries"
+msgstr "Кількість підтверджених доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__confirmed_pickups
+msgid "Number of confirmed pickup requests"
+msgstr "Кількість підтверджених заявок на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__courier_count
+msgid "Number of couriers assigned to this zone"
+msgstr "Кількість кур'єрів, призначених до цієї зони"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__delivery_count
+msgid "Number of deliveries assigned during this schedule"
+msgstr "Кількість доставок, призначених за цим графіком"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__in_transit_deliveries
+msgid "Number of deliveries currently in transit"
+msgstr "Кількість відправлень, що перебувають у дорозі"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__delivery_count
+msgid "Number of deliveries in this zone"
+msgstr "Кількість доставок у цій зоні"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__received_delivery_count
+#: model:ir.model.fields,help:courier_delivery.field_res_users__received_delivery_count
+msgid "Number of deliveries where this partner is the recipient"
+msgstr "Кількість доставок, де цей партнер є одержувачем"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__delivery_attempts
+msgid "Number of delivery attempts made"
+msgstr "Кількість здійснених спроб доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__delivery_count
+msgid "Number of delivery orders assigned to this courier"
+msgstr "Кількість замовлень на доставку, призначених цьому кур'єру"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__delivery_count
+msgid "Number of delivery orders for this partner"
+msgstr "Кількість замовлень на доставку для цього партнера"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__delivery_count
+msgid "Number of delivery orders related to this pickup request"
+msgstr "Кількість замовлень на доставку, пов'язаних з цією заякою на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__draft_deliveries
+msgid "Number of draft deliveries"
+msgstr "Кількість чернеток доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__draft_pickups
+msgid "Number of draft pickup requests"
+msgstr "Кількість чернеток заявок на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__message_has_error_counter
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__message_has_error_counter
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__message_has_error_counter
+msgid "Number of errors"
+msgstr "Кількість помилок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__failed_deliveries
+msgid "Number of failed deliveries"
+msgstr "Кількість невдалих доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__failed_deliveries
+msgid "Number of failed deliveries by this courier"
+msgstr "Кількість невдалих доставок цим кур'єром"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__message_needaction_counter
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__message_needaction_counter
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Кількість повідомлень, що потребують дій"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__message_has_error_counter
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__message_has_error_counter
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Кількість повідомлень з помилковою доставкою"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__package_count
+msgid "Number of packages to be picked up"
+msgstr "Кількість пакунків, які потрібно забрати"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__assigned_pickups
+msgid "Number of pickup requests assigned to couriers"
+msgstr "Кількість заявок на самовивіз, призначених кур'єрам"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__pickup_count
+msgid "Number of pickup requests assigned to this courier"
+msgstr "Кількість заявок на забір, призначених цьому кур'єру"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__warehouse_pickups
+msgid "Number of pickup requests delivered to warehouse"
+msgstr "Кількість заявок на забір, доставлених на склад"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__pickup_count
+msgid "Number of pickup requests made by this partner"
+msgstr "Кількість заявок на забір, зроблених цим партнером"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__picked_pickups
+msgid "Number of pickup requests that have been picked up"
+msgstr "Кількість заявок на забір, які були виконані"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__pickup_count
+msgid "Number of pickups assigned during this schedule"
+msgstr "Кількість заявок на забір, призначених за цим розкладом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__successful_deliveries
+msgid "Number of successful deliveries"
+msgstr "Кількість успішних доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__successful_deliveries
+msgid "Number of successful deliveries by this courier"
+msgstr "Кількість успішних доставок цим кур'єром"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__schedule_count
+msgid "Number of work schedules for this courier"
+msgstr "Кількість графіків роботи для цього кур'єра"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid "Only picked up requests can be marked as delivered to warehouse."
+msgstr "Тільки забрані заявки можуть бути позначені як доставлені на склад."
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_delivery_operations
+msgid "Operations"
+msgstr "Операції"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__package_count
+msgid "Package Count"
+msgstr "Кількість посилок"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Package Information"
+msgstr "Інформація про пакунок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__package_type
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Package Type"
+msgstr "Тип пакування"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__package_type__parcel
+msgid "Parcel"
+msgstr "Посилка"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Pending"
+msgstr "На розгляді"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__success_rate
+msgid "Percentage of successful deliveries"
+msgstr "Відсоток успішних поставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__success_rate
+msgid "Percentage of successful deliveries by this courier"
+msgstr "Відсоток успішних доставок цим кур'єром"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Performance"
+msgstr "Продуктивність"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Performance Statistics"
+msgstr "Статистика продуктивності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__recipient_id
+msgid "Person or company receiving the delivery"
+msgstr "Особа або компанія, яка отримує доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__proof_of_delivery
+msgid "Photo or document proving delivery"
+msgstr "Фото або документ, що підтверджує доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__picked_pickups
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__state__picked
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Picked Up"
+msgstr "Забрали"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__pickup_address_id
+msgid "Pickup Address"
+msgstr "Адреса самовивозу"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_pickup_report
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_report_graph
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_report_pivot
+msgid "Pickup Analysis"
+msgstr "Аналіз забору"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__pickup_count
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__pickup_count
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__pickup_count
+msgid "Pickup Count"
+msgstr "Кількість заборів"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__pickup_date
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Pickup Date"
+msgstr "Дата забору"
+
+#. module: courier_delivery
+#: model:ir.actions.act_window,name:courier_delivery.action_pickup_report
+msgid "Pickup Reports"
+msgstr "Звіти про забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__pickup_request_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Pickup Request"
+msgstr "Заявка на забір"
+
+#. module: courier_delivery
+#. odoo-javascript
+#. odoo-python
+#: code:addons/courier_delivery/models/courier_schedule.py:0
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.actions.act_window,name:courier_delivery.action_pickup_request
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__pickup_request_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__pickup_request_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__pickup_request_ids
+#: model:ir.ui.menu,name:courier_delivery.menu_pickup_request
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_calendar
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_tree
+#, python-format
+msgid "Pickup Requests"
+msgstr "Заявки на забір"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid "Pickup date cannot be in the past."
+msgstr "Дата самовивозу не може бути в минулому."
+
+#. module: courier_delivery
+#: model_terms:ir.actions.act_window,help:courier_delivery.action_pickup_report
+msgid "Pickup reports are automatically generated based on pickup requests."
+msgstr "Звіти про забори автоматично генеруються на основі заявок на забір."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__pickup_request_ids
+msgid "Pickup requests assigned to this courier"
+msgstr "Заявки на забір, призначені цьому кур'єру"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__pickup_request_ids
+msgid "Pickup requests assigned to this courier during this schedule"
+msgstr "Заявки на забір, закріплені за цим кур'єром за цим розкладом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__pickup_request_ids
+msgid "Pickup requests made by this partner"
+msgstr "Заявки на забір, зроблені цим партнером"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Pickups"
+msgstr "Забори"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/pickup_request.py:0
+#, python-format
+msgid "Please assign a courier before proceeding."
+msgstr "Будь ласка, призначте кур'єра перед тим, як продовжити."
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/delivery_order.py:0
+#, python-format
+msgid "Please assign a courier before starting delivery."
+msgstr "Будь ласка, призначте кур'єра перед початком доставки."
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__preferred_delivery_time
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__preferred_delivery_time
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_res_partner_filter_inherit_courier
+msgid "Preferred Delivery Time"
+msgstr "Бажаний час доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__preferred_delivery_time
+#: model:ir.model.fields,help:courier_delivery.field_res_users__preferred_delivery_time
+msgid "Preferred time of day for deliveries"
+msgstr "Бажаний час доби для доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__factor
+msgid "Price Factor"
+msgstr "Фактор ціни"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__factor
+msgid "Price multiplier for deliveries in this zone"
+msgstr "Ціновий мультиплікатор для доставки в цю зону"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Print Delivery Slip"
+msgstr "Друкувати накладу на доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form_duplicate
+msgid "Print Report"
+msgstr "Друкувати звіт"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__priority
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__priority
+msgid "Priority"
+msgstr "Пріоритет"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__priority
+msgid "Priority level of the delivery"
+msgstr "Рівень пріоритету доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__priority
+msgid "Priority level of the pickup request"
+msgstr "Рівень пріоритету заявки на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__proof_of_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Proof of Delivery"
+msgstr "Підтвердження доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+msgid "Received"
+msgstr "Отримано"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__recipient_delivery_ids
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__recipient_delivery_ids
+msgid "Received Deliveries"
+msgstr "Отримані доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_partner__received_delivery_count
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__received_delivery_count
+msgid "Received Delivery Count"
+msgstr "Кількість отриманих доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__recipient_id
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+msgid "Recipient"
+msgstr "Отримувач"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__signature
+msgid "Recipient Signature"
+msgstr "Підпис отримувача"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Recipient Signature:"
+msgstr "Підпис отримувача:"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__name
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__name
+msgid "Reference"
+msgstr "Посилання"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#, python-format
+msgid "Refresh"
+msgstr "Оновити"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__pickup_request_id
+msgid "Related pickup request for this delivery"
+msgstr "Пов'язані заявки на забір для цієї доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__name
+msgid "Report Reference"
+msgstr "Посилання на звіт"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__report_type
+msgid "Report Type"
+msgstr "Тип звіту"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Report generated on"
+msgstr "Звіт сформовано по"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_delivery_reporting
+msgid "Reporting"
+msgstr "Звіти"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__request_date
+msgid "Request Date"
+msgstr "Дата заявки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_form
+msgid "Reset to Draft"
+msgstr "Скинути до чернетки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__activity_user_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__activity_user_id
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__activity_user_id
+msgid "Responsible User"
+msgstr "Відповідальний користувач"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Revenue"
+msgstr "Дохід"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__schedule_count
+msgid "Schedule Count"
+msgstr "Розклад Підрахунок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__scheduled_date
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+msgid "Scheduled Date"
+msgstr "Запланована дата"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__scheduled_date
+msgid "Scheduled date and time for delivery"
+msgstr "Запланована дата та час доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__pickup_date
+msgid "Scheduled date and time for pickup"
+msgstr "Запланована дата та час забору"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/delivery_order.py:0
+#, python-format
+msgid "Scheduled delivery date cannot be in the past."
+msgstr "Запланована дата доставки не може бути в минулому."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_form_inherit_courier
+msgid "Schedules"
+msgstr "Розклад"
+
+#. module: courier_delivery
+#: model:ir.ui.menu,name:courier_delivery.menu_courier_delivery_scheduling
+msgid "Scheduling"
+msgstr "Планування"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+msgid "Search Courier Schedules"
+msgstr "Пошук розкладу кур'єрів"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+msgid "Search Delivery Orders"
+msgstr "Пошук замовлень на доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Search Delivery Reports"
+msgstr "Пошук звітів про доставку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_search
+msgid "Search Delivery Zones"
+msgstr "Пошук зон доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Search Pickup Requests"
+msgstr "Пошук заявок на забір"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Signature"
+msgstr "Підпис"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__signature
+msgid "Signature of the recipient upon delivery"
+msgstr "Підпис одержувача при отриманні"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_partner__delivery_notes
+#: model:ir.model.fields,help:courier_delivery.field_res_users__delivery_notes
+msgid "Special instructions for couriers delivering to this address"
+msgstr "Особливі вказівки для кур'єрів, які здійснюють доставку на цю адресу"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_partner_form_inherit_courier
+msgid "Special instructions for deliveries to this address..."
+msgstr "Особливі вказівки щодо доставки на цю адресу..."
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report_wizard__date_from
+msgid "Start Date"
+msgstr "Дата початку"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_form
+msgid "Start Delivery"
+msgstr "Початок доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_form
+msgid "Start Shift"
+msgstr "Початок зміни"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__start_time
+msgid "Start Time"
+msgstr "Час початку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__date_from
+msgid "Start date for the report"
+msgstr "Дата початку роботи над звітом"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__date_start
+msgid "Start datetime of the schedule"
+msgstr "Дата початку розкладу"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__start_time
+msgid "Start time of the shift (in hours, e.g., 8.5 for 8:30)"
+msgstr "Час початку зміни (в годинах, наприклад, 8:5 на 8:30)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__state
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__state
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__state
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Status"
+msgstr "Статус"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__activity_state
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__activity_state
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Статус за результатами діяльності\n"
+"Прострочений: Термін виконання вже минув\n"
+"Сьогодні: Дата активності сьогодні\n"
+"Заплановано: Майбутні заходи."
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+#, python-format
+msgid "Success Rate"
+msgstr "Показник успішності"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__success_rate
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__success_rate
+msgid "Success Rate (%)"
+msgstr "Відсоток успішності (%)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__successful_deliveries
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__successful_deliveries
+msgid "Successful Deliveries"
+msgstr "Успішні поставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Summary"
+msgstr "Підсумок"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_report_wizard__report_type__summary
+msgid "Summary Report"
+msgstr "Зведений звіт"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Thank you for choosing our courier service!"
+msgstr "Дякуємо, що обрали нашу кур'єрську службу!"
+
+#. module: courier_delivery
+#: model:res.groups,comment:courier_delivery.group_courier_delivery_manager
+msgid "The manager will have full access to all courier delivery operations."
+msgstr "Менеджер матиме повний доступ до всіх операцій кур'єрської доставки."
+
+#. module: courier_delivery
+#: model:res.groups,comment:courier_delivery.group_courier_delivery_user
+msgid "The user will be able to manage pickup requests and delivery orders."
+msgstr ""
+"Користувач зможе керувати заявками на забір та замовленнями на доставку."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "This Month"
+msgstr "Цей місяць"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "This Week"
+msgstr "Цей тиждень"
+
+#. module: courier_delivery
+#. odoo-python
+#: code:addons/courier_delivery/models/courier_schedule.py:0
+#, python-format
+msgid ""
+"This schedule overlaps with another schedule for the same courier on the "
+"same day."
+msgstr ""
+"Цей графік накладається на інший графік того ж кур'єра в той самий день."
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Today"
+msgstr "Сьогодні"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+msgid "Today's Deliveries"
+msgstr "Сьогоднішні доставки"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Today's Pickups"
+msgstr "Сьогоднішні забори"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__total_deliveries
+#, python-format
+msgid "Total Deliveries"
+msgstr "Загальна кількість доставок"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_tree
+msgid "Total Fees"
+msgstr "Загальна сума зборів"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_courier_schedule_tree
+msgid "Total Hours"
+msgstr "Загальна кількість годин"
+
+#. module: courier_delivery
+#. odoo-javascript
+#: code:addons/courier_delivery/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__total_pickups
+#, python-format
+msgid "Total Pickups"
+msgstr "Всього заборів"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__total_revenue
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_tree
+msgid "Total Revenue"
+msgstr "Загальний дохід"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_tree
+msgid "Total Weight"
+msgstr "Загальна вага"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_report__total_weight
+msgid "Total Weight (kg)"
+msgstr "Загальна вага (кг)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__total_deliveries
+msgid "Total number of deliveries"
+msgstr "Загальна кількість доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__total_pickups
+msgid "Total number of pickups"
+msgstr "Загальна кількість заборів"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__total_revenue
+msgid "Total revenue from deliveries"
+msgstr "Загальний дохід від доставок"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__total_weight
+msgid "Total weight of all deliveries"
+msgstr "Загальний дохід від заборів"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__weight
+msgid "Total weight of the packages to be picked up"
+msgstr "Загальна вага пакунків, які потрібно забрати"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__working_hours
+msgid "Total working hours for this schedule"
+msgstr "Загальна кількість робочих годин за цим графіком"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__tracking_ref
+msgid "Tracking Reference"
+msgstr "Посилання на відстеження"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__tracking_ref
+msgid "Tracking reference for the customer to track the delivery"
+msgstr "Посилання для відстеження, за яким клієнт може відстежувати доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_users__vehicle_type__truck
+msgid "Truck"
+msgstr "Вантажівка"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__package_type
+msgid "Type of package being delivered"
+msgstr "Тип пакунка, що доставляється"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report_wizard__report_type
+msgid "Type of report to generate"
+msgstr "Тип звіту для створення"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__activity_exception_decoration
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__activity_exception_decoration
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Тип дії винятку в записі."
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__vehicle_type
+msgid "Type of vehicle used by the courier"
+msgstr "Тип транспортного засобу, яким користується кур'єр"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__code
+msgid "Unique code for the delivery zone"
+msgstr "Унікальний код для зони доставки"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__name
+msgid "Unique identifier for the delivery order"
+msgstr "Унікальний ідентифікатор для замовлення на доставку"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_pickup_request__name
+msgid "Unique identifier for the pickup request"
+msgstr "Унікальний ідентифікатор для заявки на забір"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_report__name
+msgid "Unique identifier for the report"
+msgstr "Унікальний ідентифікатор для звіту"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_schedule__name
+msgid "Unique identifier for the schedule entry"
+msgstr "Унікальний ідентифікатор для запису розкладу"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_order__priority__3
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_pickup_request__priority__3
+msgid "Urgent"
+msgstr "Терміново"
+
+#. module: courier_delivery
+#: model:ir.model,name:courier_delivery.model_res_users
+#: model:res.groups,name:courier_delivery.group_courier_delivery_user
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+msgid "User"
+msgstr "Користувач"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+msgid "Users"
+msgstr "Користувачі"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Value"
+msgstr "Значення"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__res_users__vehicle_type__van
+msgid "Van"
+msgstr "Фургон"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__vehicle_type
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_users_search_courier
+msgid "Vehicle Type"
+msgstr "Тип транспортного засобу"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_wizard_form_duplicate
+msgid "View Report"
+msgstr "Переглянути звіт"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+msgid "Week"
+msgstr "Тиждень"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_order__weight
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_pickup_request__weight
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_slip_document
+msgid "Weight (kg)"
+msgstr "Вага (кг)"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_order__weight
+msgid "Weight of the package"
+msgstr "Вага пакунка"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__active
+msgid "Whether this zone is active"
+msgstr "Чи активна ця зона"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_res_users__courier_schedule_ids
+msgid "Work Schedules"
+msgstr "Графік роботи"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_res_users__courier_schedule_ids
+msgid "Work schedules for this courier"
+msgstr "Графік роботи цього кур'єра"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_schedule__working_hours
+msgid "Working Hours"
+msgstr "Робочі години"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__zip_codes
+msgid "ZIP Codes"
+msgstr "Поштові індекси"
+
+#. module: courier_delivery
+#: model:ir.model.fields,help:courier_delivery.field_courier_delivery_zone__zip_codes
+msgid "ZIP codes included in this zone (comma-separated)"
+msgstr "Поштові індекси, що входять до цієї зони (через кому)"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_order_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_report_search
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_pickup_request_search
+msgid "Zone"
+msgstr "Зона"
+
+#. module: courier_delivery
+#: model:ir.model.fields.selection,name:courier_delivery.selection__courier_delivery_report_wizard__report_type__zone
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "Zone Analysis"
+msgstr "Аналіз зон"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__code
+msgid "Zone Code"
+msgstr "Код зони"
+
+#. module: courier_delivery
+#: model:ir.model.fields,field_description:courier_delivery.field_courier_delivery_zone__name
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_form
+msgid "Zone Name"
+msgstr "Назва зони"
+
+#. module: courier_delivery
+#: model:ir.model.constraint,message:courier_delivery.constraint_courier_delivery_zone_code_uniq
+msgid "Zone code must be unique per company!"
+msgstr "Код зони повинен бути унікальним для кожної компанії!"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.view_delivery_zone_kanban
+msgid "hours"
+msgstr "години"
+
+#. module: courier_delivery
+#: model_terms:ir.ui.view,arch_db:courier_delivery.report_delivery_statistics_document
+msgid "to"
+msgstr "до"
