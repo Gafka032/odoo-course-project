@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- This is a duplicate of the view already defined in views/delivery_report_wizard_views.xml -->
+    <!-- It's included here for completeness of the wizard folder structure -->
+    <record id="view_delivery_report_wizard_form_duplicate" model="ir.ui.view">
+        <field name="name">courier.delivery.report.wizard.form.duplicate</field>
+        <field name="model">courier.delivery.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Delivery Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="report_type"/>
+                            <field name="include_cancelled"/>
+                        </group>
+                        <group>
+                            <field name="courier_id" invisible="report_type == 'zone'"/>
+                            <field name="zone_id" invisible="report_type == 'courier'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_generate_report" string="View Report" type="object" class="btn-primary"/>
+                    <button name="action_print_report" string="Print Report" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
