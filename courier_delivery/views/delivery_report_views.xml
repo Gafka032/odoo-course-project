@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Delivery Report Tree View -->
+    <record id="view_delivery_report_tree" model="ir.ui.view">
+        <field name="name">courier.delivery.report.tree</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Reports">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="courier_id"/>
+                <field name="zone_id"/>
+                <field name="total_deliveries"/>
+                <field name="successful_deliveries"/>
+                <field name="failed_deliveries"/>
+                <field name="success_rate" widget="percentage"/>
+                <field name="avg_delivery_time"/>
+                <field name="total_weight" sum="Total Weight"/>
+                <field name="total_revenue" sum="Total Revenue"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Delivery Report Graph View -->
+    <record id="view_delivery_report_graph" model="ir.ui.view">
+        <field name="name">courier.delivery.report.graph</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <graph string="Delivery Analysis" type="bar" stacked="True">
+                <field name="date"/>
+                <field name="courier_id"/>
+                <field name="successful_deliveries" type="measure"/>
+                <field name="failed_deliveries" type="measure"/>
+                <field name="in_transit_deliveries" type="measure"/>
+                <field name="draft_deliveries" type="measure"/>
+                <field name="confirmed_deliveries" type="measure"/>
+                <field name="cancelled_deliveries" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <!-- Pickup Report Graph View -->
+    <record id="view_pickup_report_graph" model="ir.ui.view">
+        <field name="name">courier.pickup.report.graph</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <graph string="Pickup Analysis" type="bar" stacked="True">
+                <field name="date"/>
+                <field name="courier_id"/>
+                <field name="draft_pickups" type="measure"/>
+                <field name="confirmed_pickups" type="measure"/>
+                <field name="assigned_pickups" type="measure"/>
+                <field name="picked_pickups" type="measure"/>
+                <field name="warehouse_pickups" type="measure"/>
+                <field name="cancelled_pickups" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Delivery Report Pivot View -->
+    <record id="view_delivery_report_pivot" model="ir.ui.view">
+        <field name="name">courier.delivery.report.pivot</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Delivery Analysis">
+                <field name="date" type="row"/>
+                <field name="courier_id" type="col"/>
+                <field name="total_deliveries" type="measure"/>
+                <field name="successful_deliveries" type="measure"/>
+                <field name="failed_deliveries" type="measure"/>
+                <field name="in_transit_deliveries" type="measure"/>
+                <field name="draft_deliveries" type="measure"/>
+                <field name="confirmed_deliveries" type="measure"/>
+                <field name="cancelled_deliveries" type="measure"/>
+                <field name="success_rate" type="measure"/>
+                <field name="total_revenue" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    
+    <!-- Pickup Report Pivot View -->
+    <record id="view_pickup_report_pivot" model="ir.ui.view">
+        <field name="name">courier.pickup.report.pivot</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Pickup Analysis">
+                <field name="date" type="row"/>
+                <field name="courier_id" type="col"/>
+                <field name="total_pickups" type="measure"/>
+                <field name="draft_pickups" type="measure"/>
+                <field name="confirmed_pickups" type="measure"/>
+                <field name="assigned_pickups" type="measure"/>
+                <field name="picked_pickups" type="measure"/>
+                <field name="warehouse_pickups" type="measure"/>
+                <field name="cancelled_pickups" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Delivery Report Search View -->
+    <record id="view_delivery_report_search" model="ir.ui.view">
+        <field name="name">courier.delivery.report.search</field>
+        <field name="model">courier.delivery.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Delivery Reports">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="courier_id"/>
+                <field name="zone_id"/>
+                <separator/>
+                <filter string="High Success Rate" name="high_success" domain="[('success_rate', '>=', 90)]"/>
+                <filter string="Low Success Rate" name="low_success" domain="[('success_rate', '&lt;', 70)]"/>
+                <filter string="Today" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="This Week" name="this_week" domain="[('date', '&gt;=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <filter string="This Month" name="this_month" domain="[('date', '&gt;=', (context_today().replace(day=1)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Courier" name="group_by_courier" context="{'group_by': 'courier_id'}"/>
+                    <filter string="Zone" name="group_by_zone" context="{'group_by': 'zone_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date:day'}"/>
+                    <filter string="Week" name="group_by_week" context="{'group_by': 'date:week'}"/>
+                    <filter string="Month" name="group_by_month" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Delivery Report Action -->
+    <record id="action_delivery_report" model="ir.actions.act_window">
+        <field name="name">Delivery Reports</field>
+        <field name="res_model">courier.delivery.report</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="search_view_id" ref="view_delivery_report_search"/>
+        <field name="context">{'search_default_group_by_date': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No delivery reports found
+            </p>
+            <p>
+                Delivery reports are automatically generated based on delivery orders.
+            </p>
+        </field>
+    </record>
+    
+    <!-- Pickup Report Action -->
+    <record id="action_pickup_report" model="ir.actions.act_window">
+        <field name="name">Pickup Reports</field>
+        <field name="res_model">courier.delivery.report</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="view_ids" eval="[(5, 0, 0), 
+                                      (0, 0, {'view_mode': 'graph', 'view_id': ref('view_pickup_report_graph')}),
+                                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_pickup_report_pivot')}),
+                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('view_delivery_report_tree')})]" />
+        <field name="search_view_id" ref="view_delivery_report_search"/>
+        <field name="context">{'search_default_group_by_date': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No pickup reports found
+            </p>
+            <p>
+                Pickup reports are automatically generated based on pickup requests.
+            </p>
+        </field>
+    </record>
+</odoo>
