@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Pickup Requests -->
+        <record id="seq_courier_pickup_request" model="ir.sequence">
+            <field name="name">Courier Pickup Request</field>
+            <field name="code">courier.pickup.request</field>
+            <field name="prefix">PICKUP/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequence for Delivery Orders -->
+        <record id="seq_courier_delivery_order" model="ir.sequence">
+            <field name="name">Courier Delivery Order</field>
+            <field name="code">courier.delivery.order</field>
+            <field name="prefix">DEL/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequence for Tracking References -->
+        <record id="seq_courier_delivery_tracking" model="ir.sequence">
+            <field name="name">Courier Tracking Reference</field>
+            <field name="code">courier.delivery.tracking</field>
+            <field name="prefix">TRK%(year)s</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
