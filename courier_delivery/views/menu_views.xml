@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_courier_delivery_root" 
+              name="Courier Delivery" 
+              web_icon="courier_delivery,static/description/icon.png" 
+              sequence="10"/>
+    
+    <!-- Dashboard Menu -->
+    <menuitem id="menu_courier_dashboard" 
+              name="Dashboard" 
+              parent="menu_courier_delivery_root" 
+              action="action_courier_dashboard" 
+              sequence="5"/>
+              
+    <!-- Operations Submenu -->
+    <menuitem id="menu_courier_delivery_operations" 
+              name="Operations" 
+              parent="menu_courier_delivery_root" 
+              sequence="10"/>
+    
+    <!-- Pickup Requests Menu -->
+    <menuitem id="menu_pickup_request" 
+              name="Pickup Requests" 
+              parent="menu_courier_delivery_operations" 
+              action="action_pickup_request" 
+              sequence="10"/>
+    
+    <!-- Delivery Orders Menu -->
+    <menuitem id="menu_delivery_order" 
+              name="Delivery Orders" 
+              parent="menu_courier_delivery_operations" 
+              action="action_delivery_order" 
+              sequence="20"/>
+    
+    <!-- Scheduling Submenu -->
+    <menuitem id="menu_courier_delivery_scheduling" 
+              name="Scheduling" 
+              parent="menu_courier_delivery_root" 
+              sequence="20"/>
+    
+    <!-- Courier Schedules Menu -->
+    <menuitem id="menu_courier_schedule" 
+              name="Courier Schedules" 
+              parent="menu_courier_delivery_scheduling" 
+              action="action_courier_schedule" 
+              sequence="10"/>
+    
+    <!-- Configuration Submenu -->
+    <menuitem id="menu_courier_delivery_config" 
+              name="Configuration" 
+              parent="menu_courier_delivery_root" 
+              sequence="30" 
+              groups="courier_delivery.group_courier_delivery_manager"/>
+    
+    <!-- Delivery Zones Menu -->
+    <menuitem id="menu_delivery_zone" 
+              name="Delivery Zones" 
+              parent="menu_courier_delivery_config" 
+              action="action_delivery_zone" 
+              sequence="10"/>
+    
+    <!-- Couriers Menu -->
+    <menuitem id="menu_courier_users"
+              name="Couriers"
+              parent="menu_courier_delivery_config"
+              action="action_courier_users"
+              sequence="20"/>
+    
+    <!-- Reporting Submenu -->
+    <menuitem id="menu_courier_delivery_reporting" 
+              name="Reporting" 
+              parent="menu_courier_delivery_root" 
+              sequence="40"/>
+    
+    <!-- Delivery Reports Menu -->
+    <menuitem id="menu_delivery_report" 
+              name="Delivery Analysis" 
+              parent="menu_courier_delivery_reporting" 
+              action="action_delivery_report" 
+              sequence="10"/>
+              
+    <!-- Pickup Reports Menu -->
+    <menuitem id="menu_pickup_report" 
+              name="Pickup Analysis" 
+              parent="menu_courier_delivery_reporting" 
+              action="action_pickup_report" 
+              sequence="15"/>
+    
+    <!-- Generate Report Menu -->
+    <menuitem id="menu_delivery_report_wizard" 
+              name="Generate Report" 
+              parent="menu_courier_delivery_reporting" 
+              action="action_delivery_report_wizard" 
+              sequence="20"/>
+</odoo>

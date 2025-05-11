@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Delivery Zone Tree View -->
+    <record id="view_delivery_zone_tree" model="ir.ui.view">
+        <field name="name">courier.delivery.zone.tree</field>
+        <field name="model">courier.delivery.zone</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Zones">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="factor"/>
+                <field name="delivery_time_estimate"/>
+                <field name="active"/>
+                <field name="courier_count"/>
+                <field name="delivery_count"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Delivery Zone Form View -->
+    <record id="view_delivery_zone_form" model="ir.ui.view">
+        <field name="name">courier.delivery.zone.form</field>
+        <field name="model">courier.delivery.zone</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Zone">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_deliveries" type="object" class="oe_stat_button" icon="fa-truck" invisible="delivery_count == 0">
+                            <field name="delivery_count" widget="statinfo" string="Deliveries"/>
+                        </button>
+                        <button name="action_view_couriers" type="object" class="oe_stat_button" icon="fa-user" invisible="courier_count == 0">
+                            <field name="courier_count" widget="statinfo" string="Couriers"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Zone Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="factor"/>
+                            <field name="delivery_time_estimate"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Add a description of this delivery zone..."/>
+                        </page>
+                        <page string="Assigned Couriers">
+                            <field name="courier_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="vehicle_type"/>
+                                    <field name="max_weight"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Coverage">
+                            <group>
+                                <field name="city_names" placeholder="Enter comma-separated city names..."/>
+                                <field name="zip_codes" placeholder="Enter comma-separated ZIP codes..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Delivery Zone Search View -->
+    <record id="view_delivery_zone_search" model="ir.ui.view">
+        <field name="name">courier.delivery.zone.search</field>
+        <field name="model">courier.delivery.zone</field>
+        <field name="arch" type="xml">
+            <search string="Search Delivery Zones">
+                <field name="name"/>
+                <field name="code"/>
+                <separator/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="group_by_company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Delivery Zone Kanban View -->
+    <record id="view_delivery_zone_kanban" model="ir.ui.view">
+        <field name="name">courier.delivery.zone.kanban</field>
+        <field name="model">courier.delivery.zone</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="factor"/>
+                <field name="delivery_time_estimate"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click oe_kanban_card oe_kanban_content" t-attf-style="background-color:#{kanban_color(record.color.raw_value)}">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                    <span class="o_kanban_record_subtitle">
+                                        <field name="code"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div>
+                                    <strong>Price Factor:</strong> <field name="factor"/>
+                                </div>
+                                <div>
+                                    <strong>Delivery Time:</strong> <field name="delivery_time_estimate"/> hours
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <span class="badge badge-pill"><field name="courier_count"/> Couriers</span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <span class="badge badge-pill"><field name="delivery_count"/> Deliveries</span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Delivery Zone Action -->
+    <record id="action_delivery_zone" model="ir.actions.act_window">
+        <field name="name">Delivery Zones</field>
+        <field name="res_model">courier.delivery.zone</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="view_delivery_zone_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new delivery zone
+            </p>
+            <p>
+                Define delivery zones with specific pricing factors.
+            </p>
+        </field>
+    </record>
+</odoo>
