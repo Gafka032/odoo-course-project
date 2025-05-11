@@ -7,6 +7,19 @@ class CourierDeliveryZone(models.Model):
     
     This model defines geographical zones for deliveries with specific
     pricing factors and delivery time estimates.
+    
+    Delivery zones are used to organize the geographical areas for courier operations,
+    with each zone having specific pricing rules and delivery time estimates.
+    Zones can be assigned to specific couriers and can be used for automatic
+    assignment of deliveries based on address information.
+    
+    Features include:
+    - Map view for visual zone management
+    - Automatic zone assignment based on address
+    - ZIP code and city-based zone matching
+    - Enhanced geocoding for accurate address validation
+    - Zone-based pricing calculation
+    - Courier assignment to zones for efficient scheduling
     """
     _name = 'courier.delivery.zone'
     _description = 'Delivery Zone'

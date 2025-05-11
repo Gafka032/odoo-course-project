@@ -8,6 +8,21 @@ class CourierDeliveryOrder(models.Model):
     
     This model stores information about delivery orders, including delivery address,
     status, assigned courier, and related pickup request.
+    
+    The delivery order follows a workflow from draft to delivered/failed:
+    - draft: Initial state when the order is created
+    - confirmed: Order has been confirmed and is ready for delivery
+    - in_transit: Package is currently being delivered by the courier
+    - delivered: Package has been successfully delivered to the recipient
+    - failed: Delivery attempt was unsuccessful
+    - cancelled: The delivery order has been cancelled
+    
+    Features include:
+    - Barcode scanning for quick order processing
+    - Signature capture for proof of delivery
+    - SMS notifications for delivery status updates
+    - Delivery fee calculation based on weight, zone, and package type
+    - Integration with pickup requests
     """
     _name = 'courier.delivery.order'
     _description = 'Courier Delivery Order'

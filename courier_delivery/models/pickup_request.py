@@ -9,6 +9,17 @@ class CourierPickupRequest(models.Model):
     
     This model stores information about customer requests for courier pickup,
     including pickup location, time, status, and related delivery orders.
+    
+    The pickup request follows a workflow from draft to warehouse delivery:
+    - draft: Initial state when the request is created
+    - confirmed: Request has been confirmed by the customer
+    - assigned: A courier has been assigned to the pickup
+    - picked: The package has been picked up by the courier
+    - warehouse: The package has been delivered to the warehouse
+    - cancelled: The pickup request has been cancelled
+    
+    The model supports recurring pickup scheduling and integrates with the
+    delivery order system to create subsequent delivery orders after pickup.
     """
     _name = 'courier.pickup.request'
     _description = 'Courier Pickup Request'

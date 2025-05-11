@@ -83,8 +83,8 @@ class TestDeliveryZone(TransactionCase):
         # Initially there should be no deliveries
         self.assertEqual(self.zone.delivery_count, 0, "New zone should have no deliveries")
         
-        # Створюємо замовлення на доставку, пов'язане з цією зоною
-        # Використовуємо майбутню дату для уникнення помилки валідації
+        # Create a delivery order associated with this zone
+        # Using a future date to avoid validation errors
         from datetime import datetime, timedelta
         future_date = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
         
@@ -100,8 +100,8 @@ class TestDeliveryZone(TransactionCase):
         self.zone._compute_delivery_count()
         self.assertEqual(self.zone.delivery_count, 1, "Zone should have one delivery")
         
-        # Створюємо ще одне замовлення на доставку
-        # Використовуємо майбутню дату для уникнення помилки валідації
+        # Create another delivery order
+        # Using a future date to avoid validation errors
         future_date2 = (datetime.now() + timedelta(days=60)).strftime('%Y-%m-%d %H:%M:%S')
         
         delivery2 = self.env['courier.delivery.order'].create({

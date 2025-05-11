@@ -8,6 +8,22 @@ class CourierSchedule(models.Model):
     Model for managing courier work schedules.
     
     This model tracks courier availability, working hours, and assigned deliveries.
+    It provides a comprehensive scheduling system for managing courier resources
+    and optimizing delivery operations.
+    
+    The schedule follows a workflow from draft to completed:
+    - draft: Initial state when the schedule is created
+    - confirmed: Schedule has been confirmed and assigned
+    - completed: Schedule has been completed
+    - cancelled: Schedule has been cancelled
+    
+    Features include:
+    - Enhanced calendar view for easy scheduling
+    - Mobile-responsive interface for couriers
+    - Assignment of delivery zones to couriers for specific time periods
+    - Tracking of deliveries and pickups per schedule
+    - Workload analysis and optimization
+    - Integration with delivery orders and pickup requests
     """
     _name = 'courier.schedule'
     _description = 'Courier Work Schedule'

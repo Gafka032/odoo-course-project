@@ -7,7 +7,12 @@ class CourierDeliveryReport(models.Model):
     Model for tracking courier delivery reports and statistics.
     
     This model stores aggregated data about deliveries, success rates,
-    and performance metrics for couriers and delivery zones.
+    and performance metrics for couriers and delivery zones. It provides
+    comprehensive analytics for monitoring delivery performance across
+    different dimensions such as courier, zone, and time period.
+    
+    The report includes detailed status tracking for both deliveries and pickups,
+    allowing for granular analysis of the delivery workflow efficiency.
     """
     _name = 'courier.delivery.report'
     _description = 'Courier Delivery Report'
@@ -136,8 +141,12 @@ class CourierDeliveryReport(models.Model):
     def init(self):
         """
         Initialize the SQL view for the delivery report.
+        
+        This method creates or replaces the database view that powers the delivery report.
+        The view combines data from delivery orders and pickup requests to provide
+        comprehensive statistics on delivery operations.
         """
-        # Використовуємо SQL напряму замість неіснуючої моделі ir.model.tools
+        # Using SQL directly instead of non-existent ir.model.tools model
         query = """
             CREATE OR REPLACE VIEW courier_delivery_report AS (
                 WITH pickup_stats AS (
