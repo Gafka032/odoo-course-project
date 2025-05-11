@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- User Form View Inheritance -->
+    <record id="view_users_form_inherit_courier" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.courier</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Courier Information" name="courier_info" invisible="is_courier == False">
+                    <group>
+                        <group>
+                            <field name="is_courier"/>
+                            <field name="vehicle_type" required="is_courier == True"/>
+                            <field name="license_number" required="is_courier == True and vehicle_type not in ('bicycle')"/>
+                            <field name="max_weight"/>
+                        </group>
+                        <group>
+                            <field name="schedule_count"/>
+                            <field name="pickup_count"/>
+                            <field name="delivery_count"/>
+                        </group>
+                    </group>
+                    <group string="Performance Statistics" invisible="delivery_count == 0">
+                        <group>
+                            <field name="successful_deliveries"/>
+                            <field name="failed_deliveries"/>
+                            <field name="success_rate" widget="percentage"/>
+                        </group>
+                    </group>
+                    <group string="Assigned Delivery Zones">
+                        <field name="courier_zone_ids" widget="many2many_tags"/>
+                    </group>
+                    <div class="oe_button_box" name="courier_button_box">
+                        <button name="action_view_schedules" type="object" class="oe_stat_button" icon="fa-calendar"
+                                invisible="schedule_count == 0">
+                            <field name="schedule_count" widget="statinfo" string="Schedules"/>
+                        </button>
+                        <button name="action_view_pickups" type="object" class="oe_stat_button" icon="fa-archive"
+                                invisible="pickup_count == 0">
+                            <field name="pickup_count" widget="statinfo" string="Pickups"/>
+                        </button>
+                        <button name="action_view_deliveries" type="object" class="oe_stat_button" icon="fa-truck"
+                                invisible="delivery_count == 0">
+                            <field name="delivery_count" widget="statinfo" string="Deliveries"/>
+                        </button>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- User Tree View Inheritance -->
+    <record id="view_users_tree_inherit_courier" model="ir.ui.view">
+        <field name="name">res.users.tree.inherit.courier</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <field name="login" position="after">
+                <field name="is_courier" invisible="1"/>
+                <field name="vehicle_type" optional="show" invisible="is_courier == False"/>
+                <field name="max_weight" optional="hide" invisible="is_courier == False"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- User Search View - Створюємо нове представлення замість успадкування -->
+    <record id="view_users_search_courier" model="ir.ui.view">
+        <field name="name">res.users.search.courier</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <search string="Users">
+                <field name="name" string="User"/>
+                <field name="login"/>
+                <field name="company_ids" string="Company"/>
+                <filter string="Couriers" name="couriers" domain="[('is_courier', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}"/>
+                    <filter string="Vehicle Type" name="group_vehicle_type" context="{'group_by': 'vehicle_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Courier Action -->
+    <record id="action_courier_users" model="ir.actions.act_window">
+        <field name="name">Couriers</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_courier', '=', True)]</field>
+        <field name="context">{'search_default_couriers': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new courier
+            </p>
+            <p>
+                Create couriers to assign to delivery orders and pickup requests.
+            </p>
+        </field>
+    </record>
+
+</odoo>

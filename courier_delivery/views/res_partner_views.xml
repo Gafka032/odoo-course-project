@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Partner Form View Inheritance -->
+    <record id="view_partner_form_inherit_courier" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.courier</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page string="Delivery Information" name="delivery_info">
+                    <group>
+                        <group>
+                            <field name="is_delivery_address"/>
+                            <field name="preferred_delivery_time"/>
+                            <field name="delivery_zone_id"/>
+                        </group>
+                        <group>
+                            <field name="pickup_count"/>
+                            <field name="delivery_count"/>
+                            <field name="received_delivery_count"/>
+                        </group>
+                    </group>
+                    <group string="Delivery Notes">
+                        <field name="delivery_notes" nolabel="1" placeholder="Special instructions for deliveries to this address..."/>
+                    </group>
+                    <div class="oe_button_box" name="delivery_button_box">
+                        <button name="action_view_pickups" type="object" class="oe_stat_button" icon="fa-archive"
+                                invisible="pickup_count == 0">
+                            <field name="pickup_count" widget="statinfo" string="Pickups"/>
+                        </button>
+                        <button name="action_view_deliveries" type="object" class="oe_stat_button" icon="fa-truck"
+                                invisible="delivery_count == 0">
+                            <field name="delivery_count" widget="statinfo" string="Deliveries"/>
+                        </button>
+                        <button name="action_view_received_deliveries" type="object" class="oe_stat_button" icon="fa-inbox"
+                                invisible="received_delivery_count == 0">
+                            <field name="received_delivery_count" widget="statinfo" string="Received"/>
+                        </button>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Partner Kanban View Inheritance -->
+    <record id="view_partner_kanban_inherit_courier" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit.courier</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <field name="state_id" position="after">
+                <field name="delivery_zone_id"/>
+                <field name="is_delivery_address"/>
+                <field name="preferred_delivery_time"/>
+            </field>
+            <!-- В Odoo 17.0 структура канбан-представлення змінилася, тому ми додаємо інформацію в інше місце -->
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="before">
+                <div t-if="record.delivery_zone_id.raw_value or record.is_delivery_address.raw_value" class="oe_kanban_bottom_left">
+                    <div t-if="record.delivery_zone_id.raw_value" class="mt-1">
+                        <strong>Delivery Zone:</strong> <field name="delivery_zone_id"/>
+                    </div>
+                    <div t-if="record.is_delivery_address.raw_value" class="mt-1">
+                        <span class="badge badge-success">Delivery Address</span>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Partner Search View Inheritance -->
+    <record id="view_res_partner_filter_inherit_courier" model="ir.ui.view">
+        <field name="name">res.partner.select.inherit.courier</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <!-- В Odoo 17.0 фільтр supplier більше не існує, тому додаємо наш фільтр в інше місце -->
+            <xpath expr="//filter[@name='type_person']" position="after">
+                <filter string="Delivery Addresses" name="delivery_addresses" domain="[('is_delivery_address', '=', True)]"/>
+            </xpath>
+            <!-- Використовуємо більш надійний XPath вираз для групування -->
+            <xpath expr="//filter[@name='group_country']" position="after">
+                <filter string="Delivery Zone" name="group_delivery_zone" context="{'group_by': 'delivery_zone_id'}"/>
+                <filter string="Preferred Delivery Time" name="group_preferred_delivery_time" context="{'group_by': 'preferred_delivery_time'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
