@@ -6,7 +6,7 @@ Changelog
 -----------------------
 
 Localization and Documentation Improvements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * [ADD] Added Ukrainian translation (uk_UA.po) for all module strings and messages
 * [IMP] Enhanced support for Ukrainian date formats and number formatting
@@ -21,7 +21,7 @@ Localization and Documentation Improvements
 -----------------------
 
 Stability and Performance
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * [FIX] Fixed performance issues in delivery report generation for large datasets
 * [IMP] Optimized SQL queries in delivery report model
@@ -33,7 +33,7 @@ Stability and Performance
 -----------------------
 
 User Interface Improvements
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * [IMP] Redesigned courier dashboard with better mobile responsiveness
 * [ADD] Added map view for delivery zones
@@ -45,7 +45,7 @@ User Interface Improvements
 -----------------------
 
 Feature Enhancements
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 * [ADD] Implemented barcode scanning for delivery orders
 * [ADD] Added signature capture for proof of delivery
@@ -57,7 +57,7 @@ Feature Enhancements
 -----------------------
 
 Demo Data Improvements
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 * [FIX] Updated all demo data with future dates (May 15-21, 2025) to avoid validation errors during module installation
 * [REF] Restructured demo data into separate files by entity type:
@@ -75,7 +75,7 @@ Demo Data Improvements
 * [IMP] Added these CSV files directly to the 'demo' section in manifest.py
 
 Reporting Enhancements
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 * [IMP] Enhanced delivery report model with detailed status tracking fields:
   - draft_deliveries: Count of delivery orders in draft state
@@ -92,7 +92,7 @@ Reporting Enhancements
 * [ADD] Added new menu item "Pickup Analysis" in the Reporting section
 
 Test Improvements
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 * [FIX] Updated test_action_print_report method to be more resilient to data format changes
 * [FIX] Fixed test_action_generate_report to check for correct context keys
@@ -103,7 +103,7 @@ Test Improvements
 -----------------------
 
 Initial Release
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 * [NEW] Initial release of the courier_delivery module with core functionality
 * [NEW] Implemented courier.pickup.request model for managing pickup requests with workflow:

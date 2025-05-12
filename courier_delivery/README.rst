@@ -33,7 +33,7 @@ The module includes the following main models:
 5. **Courier Delivery Report**: Provides delivery statistics and analytics with detailed status tracking
 
 Installation
-===========
+============
 
 To install this module, you need to:
 
@@ -44,7 +44,7 @@ To install this module, you need to:
 The module includes demo data for testing purposes, with all dates set in the future (May 15-21, 2025) to avoid validation errors.
 
 Configuration
-============
+=============
 
 After installation, you should:
 
@@ -72,12 +72,12 @@ Authors:
 * Odoo School
 
 Contributors:
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 * Danylo Senyuk
 
 Maintainers:
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 * Odoo School
 

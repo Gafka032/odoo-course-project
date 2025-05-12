@@ -2,10 +2,10 @@
 <odoo>
     <!-- Delivery Order Tree View -->
     <record id="view_delivery_order_tree" model="ir.ui.view">
-        <field name="name">courier.delivery.order.tree</field>
+        <field name="name">courier.delivery.order.tree.view</field>
         <field name="model">courier.delivery.order</field>
         <field name="arch" type="xml">
-            <tree string="Delivery Orders" decoration-info="state == 'draft'" decoration-warning="state == 'in_transit'" decoration-success="state == 'delivered'" decoration-danger="state in ['failed', 'cancelled']">
+            <tree decoration-info="state == 'draft'" decoration-warning="state == 'in_transit'" decoration-success="state == 'delivered'" decoration-danger="state in ['failed', 'cancelled']">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="recipient_id"/>

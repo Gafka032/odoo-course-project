@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
-        <!-- Delivery Orders in Different States -->
-        <record id="delivery_order_demo_draft_1" model="courier.delivery.order">
-            <field name="name">DEL/2025/0001</field>
-            <field name="partner_id" ref="partner_demo_sender_1"/>
-            <field name="recipient_id" ref="partner_demo_recipient_2"/>
-            <field name="delivery_address_id" ref="partner_demo_recipient_2"/>
-            <field name="scheduled_date">2025-05-15 10:00:00</field>
-            <field name="notes">Draft delivery order</field>
-            <field name="state">draft</field>
-            <field name="weight">2.0</field>
-            <field name="delivery_fee">150.0</field>
-            <field name="zone_id" ref="delivery_zone_lviv"/>
-        </record>
+    <!-- Delivery Orders in Different States -->
+    <record id="delivery_order_demo_draft_1" model="courier.delivery.order">
+        <field name="name">DEL/2025/0001</field>
+        <field name="partner_id" ref="partner_demo_sender_1"/>
+        <field name="recipient_id" ref="partner_demo_recipient_2"/>
+        <field name="delivery_address_id" ref="partner_demo_recipient_2"/>
+        <field name="scheduled_date">2025-05-15 10:00:00</field>
+        <field name="notes">Draft delivery order</field>
+        <field name="state">draft</field>
+        <field name="weight">2.0</field>
+        <field name="delivery_fee">150.0</field>
+        <field name="zone_id" ref="delivery_zone_lviv"/>
+    </record>
         
-        <record id="delivery_order_demo_confirmed_1" model="courier.delivery.order">
-            <field name="name">DEL/2025/0002</field>
-            <field name="partner_id" ref="partner_demo_sender_2"/>
-            <field name="recipient_id" ref="partner_demo_sender_3"/>
-            <field name="delivery_address_id" ref="partner_demo_sender_3"/>
-            <field name="scheduled_date">2025-05-16 11:00:00</field>
-            <field name="notes">Confirmed delivery order</field>
-            <field name="state">confirmed</field>
-            <field name="weight">3.0</field>
-            <field name="delivery_fee">200.0</field>
-            <field name="zone_id" ref="delivery_zone_odesa"/>
-            <field name="pickup_request_id" ref="pickup_request_demo_warehouse_1"/>
-        </record>
+    <record id="delivery_order_demo_confirmed_1" model="courier.delivery.order">
+        <field name="name">DEL/2025/0002</field>
+        <field name="partner_id" ref="partner_demo_sender_2"/>
+        <field name="recipient_id" ref="partner_demo_sender_3"/>
+        <field name="delivery_address_id" ref="partner_demo_sender_3"/>
+        <field name="scheduled_date">2025-05-16 11:00:00</field>
+        <field name="notes">Confirmed delivery order</field>
+        <field name="state">confirmed</field>
+        <field name="weight">3.0</field>
+        <field name="delivery_fee">200.0</field>
+        <field name="zone_id" ref="delivery_zone_odesa"/>
+        <field name="pickup_request_id" ref="pickup_request_demo_warehouse_1"/>
+    </record>
         
-        <record id="delivery_order_demo_delivered_1" model="courier.delivery.order">
-            <field name="name">DEL/2025/0004</field>
-            <field name="partner_id" ref="partner_demo_sender_1"/>
-            <field name="recipient_id" ref="partner_demo_recipient_2"/>
-            <field name="delivery_address_id" ref="partner_demo_recipient_2"/>
-            <field name="scheduled_date">2025-05-17 09:00:00</field>
-            <field name="actual_delivery_date">2025-05-17 11:30:00</field>
-            <field name="notes">Delivered successfully</field>
-            <field name="state">delivered</field>
-            <field name="courier_id" ref="courier_user_2"/>
-            <field name="weight">2.5</field>
-            <field name="delivery_fee">175.0</field>
-            <field name="zone_id" ref="delivery_zone_lviv"/>
-        </record>
-    </data>
+    <record id="delivery_order_demo_delivered_1" model="courier.delivery.order">
+        <field name="name">DEL/2025/0004</field>
+        <field name="partner_id" ref="partner_demo_sender_1"/>
+        <field name="recipient_id" ref="partner_demo_recipient_2"/>
+        <field name="delivery_address_id" ref="partner_demo_recipient_2"/>
+        <field name="scheduled_date">2025-05-17 09:00:00</field>
+        <field name="actual_delivery_date">2025-05-17 11:30:00</field>
+        <field name="notes">Delivered successfully</field>
+        <field name="state">delivered</field>
+        <field name="courier_id" ref="courier_user_2"/>
+        <field name="weight">2.5</field>
+        <field name="delivery_fee">175.0</field>
+        <field name="zone_id" ref="delivery_zone_lviv"/>
+    </record>
 </odoo>

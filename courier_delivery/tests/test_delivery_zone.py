@@ -11,15 +11,15 @@ class TestDeliveryZone(TransactionCase):
         Set up test data for delivery zone tests.
         """
         super(TestDeliveryZone, self).setUp()
-        
+
         # Create test couriers
         self.courier1 = self.env.ref('base.user_demo')
         self.courier2 = self.env.ref('base.user_admin')
-        
+
         # Set courier flag on demo users
         self.courier1.write({'is_courier': True})
         self.courier2.write({'is_courier': True})
-        
+
         # Create a test partner
         self.partner = self.env['res.partner'].create({
             'name': 'Test Partner',
@@ -28,7 +28,7 @@ class TestDeliveryZone(TransactionCase):
             'zip': '12345',
             'country_id': self.env.ref('base.ua').id
         })
-        
+
         # Create a test zone
         self.zone = self.env['courier.delivery.zone'].create({
             'name': 'Test Zone',
@@ -57,21 +57,21 @@ class TestDeliveryZone(TransactionCase):
         """
         # Initially there should be one courier
         self.assertEqual(self.zone.courier_count, 1, "Zone should have one courier")
-        
+
         # Add another courier
         self.zone.write({
             'courier_ids': [(4, self.courier2.id)]
         })
-        
+
         # Refresh and check count
         self.zone._compute_courier_count()
         self.assertEqual(self.zone.courier_count, 2, "Zone should have two couriers")
-        
+
         # Remove all couriers
         self.zone.write({
             'courier_ids': [(5, 0, 0)]
         })
-        
+
         # Refresh and check count
         self.zone._compute_courier_count()
         self.assertEqual(self.zone.courier_count, 0, "Zone should have no couriers")
@@ -82,36 +82,36 @@ class TestDeliveryZone(TransactionCase):
         """
         # Initially there should be no deliveries
         self.assertEqual(self.zone.delivery_count, 0, "New zone should have no deliveries")
-        
+
         # Create a delivery order associated with this zone
         # Using a future date to avoid validation errors
         from datetime import datetime, timedelta
         future_date = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
-        
-        delivery = self.env['courier.delivery.order'].create({
+
+        self.env['courier.delivery.order'].create({
             'partner_id': self.partner.id,
             'recipient_id': self.partner.id,
             'delivery_address_id': self.partner.id,
             'scheduled_date': future_date,
             'zone_id': self.zone.id,
         })
-        
+
         # Refresh and check count
         self.zone._compute_delivery_count()
         self.assertEqual(self.zone.delivery_count, 1, "Zone should have one delivery")
-        
+
         # Create another delivery order
         # Using a future date to avoid validation errors
         future_date2 = (datetime.now() + timedelta(days=60)).strftime('%Y-%m-%d %H:%M:%S')
-        
-        delivery2 = self.env['courier.delivery.order'].create({
+
+        self.env['courier.delivery.order'].create({
             'partner_id': self.partner.id,
             'recipient_id': self.partner.id,
             'delivery_address_id': self.partner.id,
             'scheduled_date': future_date2,
             'zone_id': self.zone.id,
         })
-        
+
         # Refresh and check count
         self.zone._compute_delivery_count()
         self.assertEqual(self.zone.delivery_count, 2, "Zone should have two deliveries")
@@ -128,7 +128,7 @@ class TestDeliveryZone(TransactionCase):
             'zip': '12345',  # Matches zone's ZIP codes
             'country_id': self.env.ref('base.ua').id
         })
-        
+
         # Create a partner with non-matching ZIP code
         partner_no_match = self.env['res.partner'].create({
             'name': 'Partner with non-matching ZIP',
@@ -137,17 +137,17 @@ class TestDeliveryZone(TransactionCase):
             'zip': '99999',  # Doesn't match any zone
             'country_id': self.env.ref('base.ua').id
         })
-        
+
         # Test with matching partner
         found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_match.id)
         self.assertEqual(found_zone.id, self.zone.id, "Should find the correct zone for matching ZIP")
-        
-        # Тест з партнером, що не відповідає жодній зоні
-        # Повинен повернути першу активну зону
+
+        # Test with partner that does not match any zone
+        # Must return the first active zone
         found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_no_match.id)
-        # Перевіряємо, що зона була знайдена, але не перевіряємо конкретний ID
+        # We check that the zone was found, but we do not check the specific ID
         self.assertTrue(found_zone, "Should return an active zone for non-matching ZIP")
-        
+
         # Create another zone with higher priority
         zone2 = self.env['courier.delivery.zone'].create({
             'name': 'Another Zone',
@@ -156,7 +156,7 @@ class TestDeliveryZone(TransactionCase):
             'active': True,
             'zip_codes': '99999'
         })
-        
+
         # Test again with non-matching partner
         # Now should find the new zone
         found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_no_match.id)

@@ -2,10 +2,10 @@
 <odoo>
     <!-- Courier Schedule Tree View -->
     <record id="view_courier_schedule_tree" model="ir.ui.view">
-        <field name="name">courier.schedule.tree</field>
+        <field name="name">courier.schedule.tree.view</field>
         <field name="model">courier.schedule</field>
         <field name="arch" type="xml">
-            <tree string="Courier Schedules" decoration-info="state == 'draft'" decoration-warning="state == 'in_progress'" decoration-success="state == 'completed'" decoration-danger="state == 'cancelled'">
+            <tree decoration-info="state == 'draft'" decoration-warning="state == 'in_progress'" decoration-success="state == 'completed'" decoration-danger="state == 'cancelled'">
                 <field name="name"/>
                 <field name="courier_id"/>
                 <field name="date"/>

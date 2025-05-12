@@ -4,15 +4,15 @@ from odoo import models, fields, api, _
 class CourierDeliveryZone(models.Model):
     """
     Model for managing delivery zones.
-    
+
     This model defines geographical zones for deliveries with specific
     pricing factors and delivery time estimates.
-    
+
     Delivery zones are used to organize the geographical areas for courier operations,
     with each zone having specific pricing rules and delivery time estimates.
     Zones can be assigned to specific couriers and can be used for automatic
     assignment of deliveries based on address information.
-    
+
     Features include:
     - Map view for visual zone management
     - Automatic zone assignment based on address
@@ -36,7 +36,6 @@ class CourierDeliveryZone(models.Model):
         help="Unique code for the delivery zone"
     )
     description = fields.Text(
-        string='Description',
         help="Description of the delivery zone"
     )
     factor = fields.Float(
@@ -46,13 +45,11 @@ class CourierDeliveryZone(models.Model):
         help="Price multiplier for deliveries in this zone"
     )
     active = fields.Boolean(
-        string='Active',
         default=True,
         help="Whether this zone is active"
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         required=True,
         default=lambda self: self.env.company,
         help="Company related to this zone"
@@ -69,24 +66,19 @@ class CourierDeliveryZone(models.Model):
         help="Average estimated time for deliveries in this zone"
     )
     color = fields.Integer(
-        string='Color',
         help="Color used in kanban view"
     )
     city_names = fields.Char(
-        string='Cities',
         help="Cities included in this delivery zone (comma-separated)"
     )
     zip_codes = fields.Char(
-        string='ZIP Codes',
         help="ZIP codes included in this zone (comma-separated)"
     )
     delivery_count = fields.Integer(
-        string='Delivery Count',
         compute='_compute_delivery_count',
         help="Number of deliveries in this zone"
     )
     courier_count = fields.Integer(
-        string='Courier Count',
         compute='_compute_courier_count',
         help="Number of couriers assigned to this zone"
     )
@@ -115,7 +107,7 @@ class CourierDeliveryZone(models.Model):
     def action_view_deliveries(self):
         """
         Open the delivery orders related to this zone.
-        
+
         Returns:
             Action to display the related delivery orders
         """
@@ -132,7 +124,7 @@ class CourierDeliveryZone(models.Model):
     def action_view_couriers(self):
         """
         Open the couriers assigned to this zone.
-        
+
         Returns:
             Action to display the related couriers
         """
@@ -149,18 +141,18 @@ class CourierDeliveryZone(models.Model):
     def get_zone_for_address(self, partner_id):
         """
         Find the appropriate delivery zone for a given address.
-        
+
         Args:
             partner_id: ID of the partner (address)
-            
+
         Returns:
             Delivery zone record or False if not found
         """
         if not partner_id:
             return False
-            
+
         partner = self.env['res.partner'].browse(partner_id)
-        
+
         # First try to match by city
         if partner.city:
             zones = self.search([
@@ -170,7 +162,7 @@ class CourierDeliveryZone(models.Model):
             ])
             if zones:
                 return zones[0]
-        
+
         # Then try to match by ZIP code
         if partner.zip:
             zones = self.search([
@@ -182,7 +174,7 @@ class CourierDeliveryZone(models.Model):
                     zip_list = [z.strip() for z in zone.zip_codes.split(',')]
                     if partner.zip in zip_list:
                         return zone
-        
+
         # Default zone (first active one)
         return self.search([
             ('active', '=', True),

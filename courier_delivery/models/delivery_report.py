@@ -1,16 +1,16 @@
-from odoo import models, fields, api, _, tools
-from datetime import datetime, timedelta
+from datetime import timedelta
+from odoo import models, fields, api, tools
 
 
 class CourierDeliveryReport(models.Model):
     """
     Model for tracking courier delivery reports and statistics.
-    
+
     This model stores aggregated data about deliveries, success rates,
     and performance metrics for couriers and delivery zones. It provides
     comprehensive analytics for monitoring delivery performance across
     different dimensions such as courier, zone, and time period.
-    
+
     The report includes detailed status tracking for both deliveries and pickups,
     allowing for granular analysis of the delivery workflow efficiency.
     """
@@ -20,120 +20,102 @@ class CourierDeliveryReport(models.Model):
     _auto = False  # This is a database view
 
     name = fields.Char(
-        string='Report Reference',
+        string='Report Reference',  # Not redundant as it's different from field name
         readonly=True,
         help="Unique identifier for the report"
     )
     date = fields.Date(
-        string='Date',
         readonly=True,
         help="Date of the report"
     )
     courier_id = fields.Many2one(
         'res.users',
-        string='Courier',
         readonly=True,
         help="Courier associated with this report"
     )
     zone_id = fields.Many2one(
         'courier.delivery.zone',
-        string='Delivery Zone',
         readonly=True,
         help="Delivery zone associated with this report"
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         readonly=True,
         help="Company associated with this report"
     )
     total_deliveries = fields.Integer(
-        string='Total Deliveries',
         readonly=True,
         help="Total number of deliveries"
     )
     successful_deliveries = fields.Integer(
-        string='Successful Deliveries',
         readonly=True,
         help="Number of successful deliveries"
     )
     failed_deliveries = fields.Integer(
-        string='Failed Deliveries',
         readonly=True,
         help="Number of failed deliveries"
     )
     cancelled_deliveries = fields.Integer(
-        string='Cancelled Deliveries',
         readonly=True,
         help="Number of cancelled deliveries"
     )
     in_transit_deliveries = fields.Integer(
-        string='In Transit Deliveries',
         readonly=True,
         help="Number of deliveries currently in transit"
     )
     draft_deliveries = fields.Integer(
-        string='Draft Deliveries',
         readonly=True,
         help="Number of draft deliveries"
     )
     confirmed_deliveries = fields.Integer(
-        string='Confirmed Deliveries',
         readonly=True,
         help="Number of confirmed deliveries"
     )
     success_rate = fields.Float(
-        string='Success Rate (%)',
         readonly=True,
         help="Percentage of successful deliveries"
     )
     avg_delivery_time = fields.Float(
-        string='Avg Delivery Time (hours)',
+        string='Avg Delivery Time (hours)',  # Keep this one as it's not redundant
         readonly=True,
         help="Average time to complete deliveries"
     )
     total_pickups = fields.Integer(
-        string='Total Pickups',
         readonly=True,
         help="Total number of pickups"
     )
     draft_pickups = fields.Integer(
-        string='Draft Pickups',
         readonly=True,
         help="Number of draft pickup requests"
     )
     confirmed_pickups = fields.Integer(
-        string='Confirmed Pickups',
         readonly=True,
         help="Number of confirmed pickup requests"
     )
     assigned_pickups = fields.Integer(
-        string='Assigned Pickups',
         readonly=True,
         help="Number of pickup requests assigned to couriers"
     )
     picked_pickups = fields.Integer(
-        string='Picked Up',
+        string='Picked Up',  # Keep this one as it's not redundant
         readonly=True,
         help="Number of pickup requests that have been picked up"
     )
     warehouse_pickups = fields.Integer(
-        string='Delivered to Warehouse',
+        string='Delivered to Warehouse',  # Keep this one as it's not redundant
         readonly=True,
         help="Number of pickup requests delivered to warehouse"
     )
     cancelled_pickups = fields.Integer(
-        string='Cancelled Pickups',
         readonly=True,
         help="Number of cancelled pickup requests"
     )
     total_weight = fields.Float(
-        string='Total Weight (kg)',
+        string='Total Weight (kg)',  # Keep this one as it's not redundant
         readonly=True,
         help="Total weight of all deliveries"
     )
     total_revenue = fields.Float(
-        string='Total Revenue',
         readonly=True,
         help="Total revenue from deliveries"
     )
@@ -141,7 +123,7 @@ class CourierDeliveryReport(models.Model):
     def init(self):
         """
         Initialize the SQL view for the delivery report.
-        
+
         This method creates or replaces the database view that powers the delivery report.
         The view combines data from delivery orders and pickup requests to provide
         comprehensive statistics on delivery operations.
@@ -237,68 +219,77 @@ class CourierDeliveryReport(models.Model):
     def get_report_values(self, date_from=False, date_to=False, courier_id=False, zone_id=False):
         """
         Get report values based on filters.
-        
+
         Args:
             date_from: Start date for the report
             date_to: End date for the report
             courier_id: Filter by courier
             zone_id: Filter by delivery zone
-            
+
         Returns:
             Dictionary with report values
         """
-        domain = []
-        
-        if date_from:
-            domain.append(('date', '>=', date_from))
-        else:
-            # Default to last 30 days
+        # Prepare domain with date filters
+        if not date_from:
             date_from = fields.Date.today() - timedelta(days=30)
-            domain.append(('date', '>=', date_from))
-            
-        if date_to:
-            domain.append(('date', '<=', date_to))
-        else:
+        if not date_to:
             date_to = fields.Date.today()
-            domain.append(('date', '<=', date_to))
-            
+
+        domain = [
+            ('date', '>=', date_from),
+            ('date', '<=', date_to)
+        ]
+
+        # Add optional filters
         if courier_id:
             domain.append(('courier_id', '=', courier_id))
-            
         if zone_id:
             domain.append(('zone_id', '=', zone_id))
-            
+
+        # Get reports matching the domain
         reports = self.search(domain)
-        
-        # Aggregate data
+
+        # Calculate metrics
+        metrics = self._calculate_report_metrics(reports)
+
+        # Return result dictionary with all values
+        return {
+            'date_from': date_from,
+            'date_to': date_to,
+            'reports': reports,
+            **metrics
+        }
+
+    def _calculate_report_metrics(self, reports):
+        """
+        Calculate metrics from a recordset of reports.
+
+        Args:
+            reports: Recordset of courier.delivery.report
+
+        Returns:
+            Dictionary with calculated metrics
+        """
+        # Get basic metrics
         total_deliveries = sum(reports.mapped('total_deliveries'))
         successful_deliveries = sum(reports.mapped('successful_deliveries'))
-        failed_deliveries = sum(reports.mapped('failed_deliveries'))
-        cancelled_deliveries = sum(reports.mapped('cancelled_deliveries'))
-        
+
         # Calculate success rate
         success_rate = 0
         if total_deliveries:
             success_rate = (successful_deliveries * 100.0) / total_deliveries
-            
+
         # Calculate average delivery time
         delivery_times = [r.avg_delivery_time for r in reports if r.avg_delivery_time > 0]
         avg_delivery_time = sum(delivery_times) / len(delivery_times) if delivery_times else 0
-        
-        # Total weight and revenue
-        total_weight = sum(reports.mapped('total_weight'))
-        total_revenue = sum(reports.mapped('total_revenue'))
-        
+
         return {
-            'date_from': date_from,
-            'date_to': date_to,
             'total_deliveries': total_deliveries,
             'successful_deliveries': successful_deliveries,
-            'failed_deliveries': failed_deliveries,
-            'cancelled_deliveries': cancelled_deliveries,
+            'failed_deliveries': sum(reports.mapped('failed_deliveries')),
+            'cancelled_deliveries': sum(reports.mapped('cancelled_deliveries')),
             'success_rate': success_rate,
             'avg_delivery_time': avg_delivery_time,
-            'total_weight': total_weight,
-            'total_revenue': total_revenue,
-            'reports': reports,
+            'total_weight': sum(reports.mapped('total_weight')),
+            'total_revenue': sum(reports.mapped('total_revenue'))
         }

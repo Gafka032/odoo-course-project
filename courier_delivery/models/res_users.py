@@ -4,14 +4,13 @@ from odoo import models, fields, api
 class ResUsers(models.Model):
     """
     Extend the res.users model to add courier-specific fields.
-    
+
     This extension adds fields to track courier capabilities, schedules,
     and delivery statistics.
     """
     _inherit = 'res.users'
 
     is_courier = fields.Boolean(
-        string='Is Courier',
         help="Check if this user is a courier"
     )
     courier_zone_ids = fields.Many2many(
@@ -25,63 +24,56 @@ class ResUsers(models.Model):
         ('car', 'Car'),
         ('van', 'Van'),
         ('truck', 'Truck')
-    ], string='Vehicle Type', help="Type of vehicle used by the courier")
-    
+    ], help="Type of vehicle used by the courier")
+
     license_number = fields.Char(
-        string='License Number',
         help="Driver's license number"
     )
     max_weight = fields.Float(
-        string='Max Weight Capacity (kg)',
+        string='Max Weight Capacity (kg)',  # Keep this one as it's not redundant
         help="Maximum weight the courier can carry"
     )
     courier_schedule_ids = fields.One2many(
         'courier.schedule',
         'courier_id',
-        string='Work Schedules',
+        string='Work Schedules',  # Keep this one as it's not redundant
         help="Work schedules for this courier"
     )
     pickup_request_ids = fields.One2many(
         'courier.pickup.request',
         'courier_id',
-        string='Pickup Requests',
+        string='Pickup Requests',  # Keep this one as it's not redundant
         help="Pickup requests assigned to this courier"
     )
     delivery_order_ids = fields.One2many(
         'courier.delivery.order',
         'courier_id',
-        string='Delivery Orders',
+        string='Delivery Orders',  # Keep this one as it's not redundant
         help="Delivery orders assigned to this courier"
     )
-    
+
     schedule_count = fields.Integer(
-        string='Schedule Count',
         compute='_compute_schedule_count',
         help="Number of work schedules for this courier"
     )
     pickup_count = fields.Integer(
-        string='Pickup Count',
         compute='_compute_pickup_count',
         help="Number of pickup requests assigned to this courier"
     )
     delivery_count = fields.Integer(
-        string='Delivery Count',
         compute='_compute_delivery_count',
         help="Number of delivery orders assigned to this courier"
     )
-    
+
     successful_deliveries = fields.Integer(
-        string='Successful Deliveries',
         compute='_compute_delivery_stats',
         help="Number of successful deliveries by this courier"
     )
     failed_deliveries = fields.Integer(
-        string='Failed Deliveries',
         compute='_compute_delivery_stats',
         help="Number of failed deliveries by this courier"
     )
     success_rate = fields.Float(
-        string='Success Rate (%)',
         compute='_compute_delivery_stats',
         help="Percentage of successful deliveries by this courier"
     )
@@ -119,14 +111,14 @@ class ResUsers(models.Model):
             deliveries = user.delivery_order_ids
             user.successful_deliveries = len(deliveries.filtered(lambda d: d.state == 'delivered'))
             user.failed_deliveries = len(deliveries.filtered(lambda d: d.state == 'failed'))
-            
+
             total = len(deliveries.filtered(lambda d: d.state in ('delivered', 'failed')))
             user.success_rate = (user.successful_deliveries * 100.0 / total) if total else 0.0
 
     def action_view_schedules(self):
         """
         Open the work schedules for this courier.
-        
+
         Returns:
             Action to display the related work schedules
         """
@@ -143,7 +135,7 @@ class ResUsers(models.Model):
     def action_view_pickups(self):
         """
         Open the pickup requests assigned to this courier.
-        
+
         Returns:
             Action to display the related pickup requests
         """
@@ -160,7 +152,7 @@ class ResUsers(models.Model):
     def action_view_deliveries(self):
         """
         Open the delivery orders assigned to this courier.
-        
+
         Returns:
             Action to display the related delivery orders
         """

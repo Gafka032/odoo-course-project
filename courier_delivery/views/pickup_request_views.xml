@@ -2,10 +2,10 @@
 <odoo>
     <!-- Pickup Request Tree View -->
     <record id="view_pickup_request_tree" model="ir.ui.view">
-        <field name="name">courier.pickup.request.tree</field>
+        <field name="name">courier.pickup.request.tree.view</field>
         <field name="model">courier.pickup.request</field>
         <field name="arch" type="xml">
-            <tree string="Pickup Requests" decoration-info="state == 'draft'" decoration-success="state == 'picked'" decoration-warning="state == 'assigned'" decoration-danger="state == 'cancelled'">
+            <tree decoration-info="state == 'draft'" decoration-success="state == 'picked'" decoration-warning="state == 'assigned'" decoration-danger="state == 'cancelled'">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="pickup_address_id"/>

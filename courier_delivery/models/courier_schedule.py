@@ -1,22 +1,22 @@
+from datetime import timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-from datetime import timedelta
 
 
 class CourierSchedule(models.Model):
     """
     Model for managing courier work schedules.
-    
+
     This model tracks courier availability, working hours, and assigned deliveries.
     It provides a comprehensive scheduling system for managing courier resources
     and optimizing delivery operations.
-    
+
     The schedule follows a workflow from draft to completed:
     - draft: Initial state when the schedule is created
     - confirmed: Schedule has been confirmed and assigned
     - completed: Schedule has been completed
     - cancelled: Schedule has been cancelled
-    
+
     Features include:
     - Enhanced calendar view for easy scheduling
     - Mobile-responsive interface for couriers
@@ -45,19 +45,16 @@ class CourierSchedule(models.Model):
         help="Courier assigned to this schedule"
     )
     date = fields.Date(
-        string='Date',
         required=True,
         tracking=True,
         help="Date of the schedule"
     )
     start_time = fields.Float(
-        string='Start Time',
         required=True,
         tracking=True,
         help="Start time of the shift (in hours, e.g., 8.5 for 8:30)"
     )
     end_time = fields.Float(
-        string='End Time',
         required=True,
         tracking=True,
         help="End time of the shift (in hours, e.g., 17.5 for 17:30)"
@@ -68,28 +65,24 @@ class CourierSchedule(models.Model):
         ('in_progress', 'In Progress'),
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled')
-    ], string='Status', default='draft', tracking=True)
-    
+    ], default='draft', tracking=True)
+
     zone_ids = fields.Many2many(
         'courier.delivery.zone',
-        string='Assigned Zones',
         help="Delivery zones assigned to this courier for this schedule"
     )
     notes = fields.Text(
-        string='Notes',
         help="Additional notes for this schedule"
     )
     delivery_order_ids = fields.One2many(
         'courier.delivery.order',
         'courier_id',
-        string='Delivery Orders',
         domain="[('scheduled_date', '>=', date_start), ('scheduled_date', '<=', date_end)]",
         help="Delivery orders assigned to this courier during this schedule"
     )
     pickup_request_ids = fields.One2many(
         'courier.pickup.request',
         'courier_id',
-        string='Pickup Requests',
         domain="[('pickup_date', '>=', date_start), ('pickup_date', '<=', date_end)]",
         help="Pickup requests assigned to this courier during this schedule"
     )
@@ -106,17 +99,14 @@ class CourierSchedule(models.Model):
     working_hours = fields.Float(
         compute='_compute_working_hours',
         store=True,
-        string='Working Hours',
         help="Total working hours for this schedule"
     )
     delivery_count = fields.Integer(
         compute='_compute_delivery_count',
-        string='Delivery Count',
         help="Number of deliveries assigned during this schedule"
     )
     pickup_count = fields.Integer(
         compute='_compute_pickup_count',
-        string='Pickup Count',
         help="Number of pickups assigned during this schedule"
     )
     company_id = fields.Many2one(
@@ -127,10 +117,9 @@ class CourierSchedule(models.Model):
         help="Company related to this schedule"
     )
     color = fields.Integer(
-        string='Color',
         help="Color used in calendar view"
     )
-    
+
     @api.depends('courier_id', 'date')
     def _compute_name(self):
         """
@@ -152,10 +141,10 @@ class CourierSchedule(models.Model):
                 # Convert float hours to hours and minutes
                 start_hour = int(schedule.start_time)
                 start_minute = int((schedule.start_time % 1) * 60)
-                
+
                 end_hour = int(schedule.end_time)
                 end_minute = int((schedule.end_time % 1) * 60)
-                
+
                 schedule.date_start = fields.Datetime.to_datetime(schedule.date) + timedelta(
                     hours=start_hour, minutes=start_minute)
                 schedule.date_end = fields.Datetime.to_datetime(schedule.date) + timedelta(
@@ -225,7 +214,7 @@ class CourierSchedule(models.Model):
     def action_view_deliveries(self):
         """
         Open the delivery orders related to this schedule.
-        
+
         Returns:
             Action to display the related delivery orders
         """
@@ -246,7 +235,7 @@ class CourierSchedule(models.Model):
     def action_view_pickups(self):
         """
         Open the pickup requests related to this schedule.
-        
+
         Returns:
             Action to display the related pickup requests
         """
@@ -289,12 +278,12 @@ class CourierSchedule(models.Model):
                 ('date', '=', schedule.date),
                 ('state', 'not in', ['cancelled']),
             ]
-            
+
             # Check for time overlap
             overlaps = self.env['courier.schedule'].search(domain)
             for overlap in overlaps:
                 # Check if schedules overlap
-                if (schedule.start_time < overlap.end_time and 
+                if (schedule.start_time < overlap.end_time and
                     schedule.end_time > overlap.start_time):
                     raise ValidationError(_(
                         "This schedule overlaps with another schedule for the same courier on the same day."

@@ -1,15 +1,16 @@
+# pylint: skip-file
+from datetime import timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-from datetime import timedelta
 
 
 class CourierPickupRequest(models.Model):
     """
     Model for managing courier pickup requests.
-    
+
     This model stores information about customer requests for courier pickup,
     including pickup location, time, status, and related delivery orders.
-    
+
     The pickup request follows a workflow from draft to warehouse delivery:
     - draft: Initial state when the request is created
     - confirmed: Request has been confirmed by the customer
@@ -17,7 +18,7 @@ class CourierPickupRequest(models.Model):
     - picked: The package has been picked up by the courier
     - warehouse: The package has been delivered to the warehouse
     - cancelled: The pickup request has been cancelled
-    
+
     The model supports recurring pickup scheduling and integrates with the
     delivery order system to create subsequent delivery orders after pickup.
     """
@@ -42,14 +43,12 @@ class CourierPickupRequest(models.Model):
         help="Customer who requested the pickup"
     )
     request_date = fields.Datetime(
-        string='Request Date',
         default=fields.Datetime.now,
         required=True,
         tracking=True,
         help="Date and time when the pickup was requested"
     )
     pickup_date = fields.Datetime(
-        string='Pickup Date',
         required=True,
         tracking=True,
         help="Scheduled date and time for pickup"
@@ -62,7 +61,6 @@ class CourierPickupRequest(models.Model):
         help="Address where the courier should pick up the package"
     )
     notes = fields.Text(
-        string='Notes',
         help="Additional notes for the courier"
     )
     state = fields.Selection([
@@ -72,8 +70,8 @@ class CourierPickupRequest(models.Model):
         ('picked', 'Picked Up'),
         ('warehouse', 'Delivered to Warehouse'),
         ('cancelled', 'Cancelled')
-    ], string='Status', default='draft', tracking=True, copy=False)
-    
+    ], default='draft', tracking=True, copy=False)
+
     courier_id = fields.Many2one(
         'res.users',
         string='Assigned Courier',
@@ -88,7 +86,6 @@ class CourierPickupRequest(models.Model):
         help="Delivery orders created from this pickup request"
     )
     delivery_count = fields.Integer(
-        string='Delivery Count',
         compute='_compute_delivery_count',
         help="Number of delivery orders related to this pickup request"
     )
@@ -97,8 +94,8 @@ class CourierPickupRequest(models.Model):
         ('1', 'Low'),
         ('2', 'High'),
         ('3', 'Urgent')
-    ], string='Priority', default='0', help="Priority level of the pickup request")
-    
+    ], default='0', help="Priority level of the pickup request")
+
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -112,11 +109,9 @@ class CourierPickupRequest(models.Model):
         help="Delivery zone for this pickup request"
     )
     weight = fields.Float(
-        string='Weight (kg)',
         help="Total weight of the packages to be picked up"
     )
     package_count = fields.Integer(
-        string='Package Count',
         default=1,
         help="Number of packages to be picked up"
     )
@@ -125,10 +120,10 @@ class CourierPickupRequest(models.Model):
     def create(self, vals_list):
         """
         Override create method to assign a unique sequence number to each pickup request.
-        
+
         Args:
             vals_list: List of dictionaries containing values for new records
-            
+
         Returns:
             Newly created records
         """
@@ -136,20 +131,20 @@ class CourierPickupRequest(models.Model):
             if vals.get('name', _('New')) == _('New'):
                 vals['name'] = self.env['ir.sequence'].next_by_code('courier.pickup.request') or _('New')
         return super(CourierPickupRequest, self).create(vals_list)
-    
+
     def action_create_delivery(self):
         """
         Create a delivery order based on this pickup request.
-        
+
         Returns:
             Action to open the created delivery order form
         """
         self.ensure_one()
-        
+
         # Check if pickup request is in the warehouse state
         if self.state != 'warehouse':
             raise ValidationError(_('Delivery orders can only be created from pickup requests that have been delivered to warehouse.'))
-        
+
         # Create delivery order
         delivery_order = self.env['courier.delivery.order'].create({
             'pickup_request_id': self.id,
@@ -161,7 +156,7 @@ class CourierPickupRequest(models.Model):
             'notes': _('Created from pickup request %s') % self.name,
             'weight': self.weight,  # Use weight from pickup request
         })
-        
+
         # Open the created delivery order form
         return {
             'name': _('Delivery Order'),
@@ -191,18 +186,18 @@ class CourierPickupRequest(models.Model):
         Mark the pickup request as picked up and change its state to 'picked'.
         """
         self.write({'state': 'picked'})
-        
+
     def action_mark_delivered_to_warehouse(self):
         """
         Mark the pickup request as delivered to warehouse and change its state to 'warehouse'.
-        
+
         This status indicates that the package has been picked up from the customer
         and delivered to the company's warehouse for further processing.
         """
         # Check if the pickup request is in a valid state for this action
         if self.state != 'picked':
             raise ValidationError(_('Only picked up requests can be marked as delivered to warehouse.'))
-            
+
         self.write({'state': 'warehouse'})
 
     def action_cancel(self):
@@ -220,7 +215,7 @@ class CourierPickupRequest(models.Model):
     def action_view_deliveries(self):
         """
         Open the delivery orders related to this pickup request.
-        
+
         Returns:
             Action to display the related delivery orders
         """

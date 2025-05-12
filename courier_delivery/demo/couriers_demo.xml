@@ -1,51 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
-        <!-- Courier Users -->
-        <record id="courier_user_1" model="res.users">
-            <field name="name">Oleksandr Courier</field>
-            <field name="login">courier1@example.com</field>
-            <field name="password">courier1</field>
-            <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]"/>
-            <field name="is_courier">True</field>
-            <field name="vehicle_type">motorcycle</field>
-            <field name="license_number">MC12345</field>
-            <field name="max_weight">20.0</field>
-        </record>
+    <!-- Courier Users -->
+    <record id="courier_user_1" model="res.users" context="{'no_reset_password': True}">
+        <field name="name">Oleksandr Courier</field>
+        <field name="login">courier1@example.com</field>
+        <field name="password">courier1</field>
+        <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]" />
+        <field name="is_courier">True</field>
+        <field name="vehicle_type">motorcycle</field>
+        <field name="license_number">MC12345</field>
+        <field name="max_weight">20.0</field>
+    </record>
 
-        <record id="courier_user_2" model="res.users">
-            <field name="name">Natalia Courier</field>
-            <field name="login">courier2@example.com</field>
-            <field name="password">courier2</field>
-            <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]"/>
-            <field name="is_courier">True</field>
-            <field name="vehicle_type">car</field>
-            <field name="license_number">CR67890</field>
-            <field name="max_weight">50.0</field>
-        </record>
+    <record id="courier_user_2" model="res.users" context="{'no_reset_password': True}">
+        <field name="name">Natalia Courier</field>
+        <field name="login">courier2@example.com</field>
+        <field name="password">courier2</field>
+        <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]" />
+        <field name="is_courier">True</field>
+        <field name="vehicle_type">car</field>
+        <field name="license_number">CR67890</field>
+        <field name="max_weight">50.0</field>
+    </record>
 
-        <record id="courier_user_3" model="res.users">
-            <field name="name">Petro Courier</field>
-            <field name="login">courier3@example.com</field>
-            <field name="password">courier3</field>
-            <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]"/>
-            <field name="is_courier">True</field>
-            <field name="vehicle_type">bicycle</field>
-            <field name="license_number">BC54321</field>
-            <field name="max_weight">10.0</field>
-        </record>
-
-        <!-- Assign couriers to zones -->
-        <record id="delivery_zone_central" model="courier.delivery.zone">
-            <field name="courier_ids" eval="[(4, ref('courier_user_1')), (4, ref('courier_user_3'))]"/>
-        </record>
-
-        <record id="delivery_zone_north" model="courier.delivery.zone">
-            <field name="courier_ids" eval="[(4, ref('courier_user_1')), (4, ref('courier_user_2'))]"/>
-        </record>
-
-        <record id="delivery_zone_south" model="courier.delivery.zone">
-            <field name="courier_ids" eval="[(4, ref('courier_user_2'))]"/>
-        </record>
-    </data>
+    <record id="courier_user_3" model="res.users" context="{'no_reset_password': True}">
+        <field name="name">Petro Courier</field>
+        <field name="login">courier3@example.com</field>
+        <field name="password">courier3</field>
+        <field name="groups_id" eval="[(6,0,[ref('courier_delivery.group_courier_delivery_user'), ref('base.group_user')])]" />
+        <field name="is_courier">True</field>
+        <field name="vehicle_type">bicycle</field>
+        <field name="license_number">BC54321</field>
+        <field name="max_weight">10.0</field>
+    </record>
 </odoo>

@@ -1,7 +1,6 @@
+from datetime import datetime, timedelta
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
-from datetime import datetime, timedelta
-
 
 class TestPickupRequest(TransactionCase):
     """
@@ -13,14 +12,14 @@ class TestPickupRequest(TransactionCase):
         Set up test data for pickup request tests.
         """
         super(TestPickupRequest, self).setUp()
-        
+
         # Get demo data
         self.partner = self.env.ref('base.res_partner_1')
         self.courier = self.env.ref('base.user_demo')
-        
+
         # Set courier flag on demo user
         self.courier.write({'is_courier': True})
-        
+
         # Create a test zone
         self.zone = self.env['courier.delivery.zone'].create({
             'name': 'Test Zone',
@@ -28,7 +27,7 @@ class TestPickupRequest(TransactionCase):
             'factor': 1.0,
             'active': True
         })
-        
+
         # Create a test pickup request
         self.pickup_request = self.env['courier.pickup.request'].create({
             'partner_id': self.partner.id,
@@ -56,25 +55,25 @@ class TestPickupRequest(TransactionCase):
         # Test confirm action
         self.pickup_request.action_confirm()
         self.assertEqual(self.pickup_request.state, 'confirmed', "Pickup request should be in confirmed state")
-        
+
         # Test assign courier action
         with self.assertRaises(ValidationError):
             # Should raise error if no courier assigned
             self.pickup_request.action_assign_courier()
-        
+
         # Assign courier and try again
         self.pickup_request.courier_id = self.courier.id
         self.pickup_request.action_assign_courier()
         self.assertEqual(self.pickup_request.state, 'assigned', "Pickup request should be in assigned state")
-        
+
         # Test mark as picked action
         self.pickup_request.action_mark_picked()
         self.assertEqual(self.pickup_request.state, 'picked', "Pickup request should be in picked state")
-        
+
         # Test cancel action
         self.pickup_request.action_cancel()
         self.assertEqual(self.pickup_request.state, 'cancelled', "Pickup request should be in cancelled state")
-        
+
         # Test reset to draft action
         self.pickup_request.action_reset_to_draft()
         self.assertEqual(self.pickup_request.state, 'draft', "Pickup request should be back in draft state")
@@ -88,13 +87,13 @@ class TestPickupRequest(TransactionCase):
             self.pickup_request.write({
                 'pickup_date': datetime.now() - timedelta(days=1)
             })
-        
+
         # Test with future date (should work)
         future_date = datetime.now() + timedelta(days=2)
         self.pickup_request.write({
             'pickup_date': future_date
         })
-        self.assertEqual(self.pickup_request.pickup_date.date(), future_date.date(), 
+        self.assertEqual(self.pickup_request.pickup_date.date(), future_date.date(),
                          "Pickup date should be updated correctly")
 
     def test_onchange_partner(self):
@@ -104,7 +103,7 @@ class TestPickupRequest(TransactionCase):
         new_partner = self.env.ref('base.res_partner_2')
         self.pickup_request.partner_id = new_partner.id
         self.pickup_request._onchange_partner_id()
-        self.assertEqual(self.pickup_request.pickup_address_id, new_partner, 
+        self.assertEqual(self.pickup_request.pickup_address_id, new_partner,
                          "Pickup address should be updated when partner changes")
 
     def test_delivery_count(self):
@@ -112,19 +111,19 @@ class TestPickupRequest(TransactionCase):
         Test that delivery count is computed correctly.
         """
         # Initially there should be no deliveries
-        self.assertEqual(self.pickup_request.delivery_count, 0, 
+        self.assertEqual(self.pickup_request.delivery_count, 0,
                          "New pickup request should have no deliveries")
-        
+
         # Create a delivery order linked to this pickup request
-        delivery = self.env['courier.delivery.order'].create({
+        self.env['courier.delivery.order'].create({
             'pickup_request_id': self.pickup_request.id,
             'partner_id': self.partner.id,
             'recipient_id': self.partner.id,
             'delivery_address_id': self.partner.id,
             'scheduled_date': datetime.now() + timedelta(days=1),
         })
-        
+
         # Refresh and check count
         self.pickup_request._compute_delivery_count()
-        self.assertEqual(self.pickup_request.delivery_count, 1, 
+        self.assertEqual(self.pickup_request.delivery_count, 1,
                          "Pickup request should have one delivery")

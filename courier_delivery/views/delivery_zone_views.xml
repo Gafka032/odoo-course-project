@@ -2,10 +2,10 @@
 <odoo>
     <!-- Delivery Zone Tree View -->
     <record id="view_delivery_zone_tree" model="ir.ui.view">
-        <field name="name">courier.delivery.zone.tree</field>
+        <field name="name">courier.delivery.zone.tree.view</field>
         <field name="model">courier.delivery.zone</field>
         <field name="arch" type="xml">
-            <tree string="Delivery Zones">
+            <tree>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="factor"/>
