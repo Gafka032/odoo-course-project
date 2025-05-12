@@ -2,6 +2,41 @@
 Changelog
 ===========
 
+17.0.1.5.6 (2025-05-12)
+-----------------------
+
+Technical Documentation and Project Analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [DOC] Created comprehensive technical specification in README.md
+* [DOC] Added detailed project description with functional requirements
+* [DOC] Documented all module models, views, and interfaces
+* [DOC] Added security, reporting, and localization requirements
+* [DOC] Included development phases and acceptance criteria
+* [DOC] Added analysis of compliance with course project requirements
+* [IMP] Enhanced overall project documentation structure
+* [IMP] Updated all documentation to reflect current module state
+
+Localization Enhancements
+~~~~~~~~~~~~~~~~~~~~~
+
+* [IMP] Enhanced Ukrainian translation with additional context-specific terms
+* [IMP] Updated documentation to highlight Ukrainian localization features
+* [IMP] Added more comprehensive date and number formatting for Ukrainian locale
+* [IMP] Improved translation consistency across all module interfaces
+* [DOC] Updated README and index.html with detailed Ukrainian localization information
+
+Test and Demo Data Improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* [FIX] Fixed tests for new pickup and delivery status fields
+* [IMP] Made test_action_print_report more resilient to data format changes
+* [FIX] Corrected test_action_generate_report to verify proper context keys
+* [FIX] Updated CSV import for demo data with correct model naming convention
+* [FIX] Renamed demo CSV files to match Odoo model names (courier.pickup.request.csv, courier.delivery.order.csv)
+* [IMP] Added direct reference to CSV files in manifest.py 'demo' section
+* [FIX] Ensured all demo data uses future dates (May 15-21, 2025) for consistency
+
 17.0.1.5.2 (2025-05-12)
 -----------------------
 

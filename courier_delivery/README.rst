@@ -83,5 +83,5 @@ Maintainers:
 
 This module is maintained by Odoo School.
 
-Version: 17.0.1.5.2
+Version: 17.0.1.5.6
 Last Updated: May 12, 2025
