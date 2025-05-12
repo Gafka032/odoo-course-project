@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Assign couriers to zones using direct function calls -->
+    <function model="courier.delivery.zone" name="write">
+        <value model="courier.delivery.zone" eval="[ref('delivery_zone_central')]"/>
+        <value eval="{'courier_ids': [(4, ref('courier_delivery.courier_user_1')), (4, ref('courier_delivery.courier_user_3'))]}"/>
+    </function>
+
+    <function model="courier.delivery.zone" name="write">
+        <value model="courier.delivery.zone" eval="[ref('delivery_zone_north')]"/>
+        <value eval="{'courier_ids': [(4, ref('courier_delivery.courier_user_1')), (4, ref('courier_delivery.courier_user_2'))]}"/>
+    </function>
+
+    <function model="courier.delivery.zone" name="write">
+        <value model="courier.delivery.zone" eval="[ref('delivery_zone_south')]"/>
+        <value eval="{'courier_ids': [(4, ref('courier_delivery.courier_user_2'))]}"/>
+    </function>
+</odoo>
