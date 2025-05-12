@@ -1,6 +1,6 @@
 {
     'name': 'Courier Delivery',
-    'version': '17.0.1.5.2' ,
+    'version': '17.0.1.5.2',
     'summary': 'Manage courier pickup requests and delivery orders',
     'category': 'Services',
     'author': 'Odoo School',

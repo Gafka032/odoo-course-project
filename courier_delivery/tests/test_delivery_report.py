@@ -56,19 +56,25 @@ class TestDeliveryReport(TransactionCase):
         })
 
         # Create report wizard
-        self.report_wizard = self.env['courier.delivery.report.wizard'].create({
-            'date_from': (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'),
-            'date_to': (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d'),
-            'report_type': 'summary'
-        })
+        self.report_wizard = (
+            self.env['courier.delivery.report.wizard'].create({
+                'date_from': (datetime.now() -
+                              timedelta(days=30)).strftime('%Y-%m-%d'),
+                'date_to': (datetime.now() +
+                            timedelta(days=30)).strftime('%Y-%m-%d'),
+                'report_type': 'summary'
+            }))
 
     def test_report_wizard_creation(self):
         """
         Test that report wizard is created correctly.
         """
-        self.assertTrue(self.report_wizard.date_from, "Wizard should have a start date")
-        self.assertTrue(self.report_wizard.date_to, "Wizard should have an end date")
-        self.assertEqual(self.report_wizard.report_type, 'summary', "Report type should be set correctly")
+        self.assertTrue(self.report_wizard.date_from,
+                        "Wizard should have a start date")
+        self.assertTrue(self.report_wizard.date_to,
+                        "Wizard should have an end date")
+        self.assertEqual(self.report_wizard.report_type, 'summary',
+                         "Report type should be set correctly")
 
     def test_report_wizard_onchange(self):
         """
@@ -81,19 +87,24 @@ class TestDeliveryReport(TransactionCase):
         # Change to courier report type
         self.report_wizard.report_type = 'courier'
         self.report_wizard._onchange_report_type()
-        self.assertEqual(self.report_wizard.courier_id.id, self.courier.id, "Courier should remain set")
-        self.assertFalse(self.report_wizard.zone_id, "Zone should be cleared for courier report")
+        self.assertEqual(self.report_wizard.courier_id.id, self.courier.id,
+                         "Courier should remain set")
+        self.assertFalse(self.report_wizard.zone_id,
+                         "Zone should be cleared for courier report")
 
         # Change to zone report type
         self.report_wizard.courier_id = self.courier.id  # Set it again
         self.report_wizard.report_type = 'zone'
         self.report_wizard._onchange_report_type()
-        self.assertFalse(self.report_wizard.courier_id, "Courier should be cleared for zone report")
-        self.assertFalse(self.report_wizard.zone_id, "Zone should be cleared initially")
+        self.assertFalse(self.report_wizard.courier_id,
+                         "Courier should be cleared for zone report")
+        self.assertFalse(self.report_wizard.zone_id,
+                         "Zone should be cleared initially")
 
         # Set zone and check it remains
         self.report_wizard.zone_id = self.zone.id
-        self.assertEqual(self.report_wizard.zone_id.id, self.zone.id, "Zone should be set correctly")
+        self.assertEqual(self.report_wizard.zone_id.id, self.zone.id,
+                         "Zone should be set correctly")
 
     def test_report_wizard_action_generate(self):
         """
@@ -109,10 +120,14 @@ class TestDeliveryReport(TransactionCase):
         result = self.report_wizard.action_generate_report()
 
         # Check result
-        self.assertEqual(result['type'], 'ir.actions.act_window', "Should return a window action")
-        self.assertEqual(result['res_model'], 'courier.delivery.report', "Should target the report model")
-        self.assertIn('domain', result, "Result should contain a domain")
-        self.assertIn('context', result, "Result should contain a context")
+        self.assertEqual(result['type'], 'ir.actions.act_window',
+                         "Should return a window action")
+        self.assertEqual(result['res_model'], 'courier.delivery.report',
+                         "Should target the report model")
+        self.assertIn('domain', result,
+                      "Result should contain a domain")
+        self.assertIn('context', result,
+                      "Result should contain a context")
 
         # Check domain includes our filters
         domain = result['domain']
@@ -120,12 +135,20 @@ class TestDeliveryReport(TransactionCase):
         for filter_item in domain:
             if filter_item[0] == 'courier_id':
                 courier_filter = True
-                self.assertEqual(filter_item[2], self.courier.id, "Domain should filter by the selected courier")
-        self.assertTrue(courier_filter, "Domain should include courier filter")
+                self.assertEqual(filter_item[2], self.courier.id,
+                                 "Domain should filter by "
+                                 "the selected courier")
+        self.assertTrue(courier_filter, "Domain should include "
+                                        "courier filter")
 
         # Check that the context contains the necessary keys for filtering
-        self.assertIn('search_default_group_by_date', result['context'], "Context should include date grouping")
-        self.assertIn('search_default_group_by_courier', result['context'], "Context should include courier grouping for courier report type")
+        self.assertIn('search_default_group_by_date',
+                      result['context'],
+                      "Context should include date grouping")
+        self.assertIn('search_default_group_by_courier',
+                      result['context'],
+                      "Context should include courier grouping "
+                      "for courier report type")
 
     def test_report_wizard_action_print(self):
         """
@@ -150,7 +173,8 @@ class TestDeliveryReport(TransactionCase):
 
     def test_delivery_report_fields(self):
         """
-        Test that the delivery report model correctly includes all required fields.
+        Test that the delivery report model correctly includes all required
+        fields.
         """
         # Force initialization of the SQL view
         self.env['courier.delivery.report'].init()
@@ -163,18 +187,31 @@ class TestDeliveryReport(TransactionCase):
 
         # Check that all required fields exist in the model
         # Delivery status fields
-        self.assertTrue(hasattr(report_data, 'draft_deliveries'), "Should have draft_deliveries field")
-        self.assertTrue(hasattr(report_data, 'confirmed_deliveries'), "Should have confirmed_deliveries field")
-        self.assertTrue(hasattr(report_data, 'in_transit_deliveries'), "Should have in_transit_deliveries field")
-        self.assertTrue(hasattr(report_data, 'successful_deliveries'), "Should have successful_deliveries field")
-        self.assertTrue(hasattr(report_data, 'failed_deliveries'), "Should have failed_deliveries field")
-        self.assertTrue(hasattr(report_data, 'cancelled_deliveries'), "Should have cancelled_deliveries field")
+        self.assertTrue(hasattr(report_data, 'draft_deliveries'),
+                        "Should have draft_deliveries field")
+        self.assertTrue(hasattr(report_data, 'confirmed_deliveries'),
+                        "Should have confirmed_deliveries field")
+        self.assertTrue(hasattr(report_data, 'in_transit_deliveries'),
+                        "Should have in_transit_deliveries field")
+        self.assertTrue(hasattr(report_data, 'successful_deliveries'),
+                        "Should have successful_deliveries field")
+        self.assertTrue(hasattr(report_data, 'failed_deliveries'),
+                        "Should have failed_deliveries field")
+        self.assertTrue(hasattr(report_data, 'cancelled_deliveries'),
+                        "Should have cancelled_deliveries field")
 
         # Pickup status fields
-        self.assertTrue(hasattr(report_data, 'total_pickups'), "Should have total_pickups field")
-        self.assertTrue(hasattr(report_data, 'draft_pickups'), "Should have draft_pickups field")
-        self.assertTrue(hasattr(report_data, 'confirmed_pickups'), "Should have confirmed_pickups field")
-        self.assertTrue(hasattr(report_data, 'assigned_pickups'), "Should have assigned_pickups field")
-        self.assertTrue(hasattr(report_data, 'picked_pickups'), "Should have picked_pickups field")
-        self.assertTrue(hasattr(report_data, 'warehouse_pickups'), "Should have warehouse_pickups field")
-        self.assertTrue(hasattr(report_data, 'cancelled_pickups'), "Should have cancelled_pickups field")
+        self.assertTrue(hasattr(report_data, 'total_pickups'),
+                        "Should have total_pickups field")
+        self.assertTrue(hasattr(report_data, 'draft_pickups'),
+                        "Should have draft_pickups field")
+        self.assertTrue(hasattr(report_data, 'confirmed_pickups'),
+                        "Should have confirmed_pickups field")
+        self.assertTrue(hasattr(report_data, 'assigned_pickups'),
+                        "Should have assigned_pickups field")
+        self.assertTrue(hasattr(report_data, 'picked_pickups'),
+                        "Should have picked_pickups field")
+        self.assertTrue(hasattr(report_data, 'warehouse_pickups'),
+                        "Should have warehouse_pickups field")
+        self.assertTrue(hasattr(report_data, 'cancelled_pickups'),
+                        "Should have cancelled_pickups field")

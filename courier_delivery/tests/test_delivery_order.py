@@ -57,20 +57,28 @@ class TestDeliveryOrder(TransactionCase):
         """
         Test that delivery order is created correctly with a sequence number.
         """
-        self.assertTrue(self.delivery_order.name, "Delivery order should have a name")
-        self.assertNotEqual(self.delivery_order.name, 'New', "Delivery order should have a sequence number")
-        self.assertTrue(self.delivery_order.tracking_ref, "Delivery order should have a tracking reference")
-        self.assertEqual(self.delivery_order.state, 'draft', "New delivery order should be in draft state")
-        self.assertEqual(self.delivery_order.partner_id, self.partner, "Partner should be set correctly")
-        self.assertEqual(self.delivery_order.recipient_id, self.recipient, "Recipient should be set correctly")
+        self.assertTrue(self.delivery_order.name,
+                        "Delivery order should have a name")
+        self.assertNotEqual(self.delivery_order.name, 'New',
+                            "Delivery order should have a sequence number")
+        self.assertTrue(self.delivery_order.tracking_ref,
+                        "Delivery order should have a tracking reference")
+        self.assertEqual(self.delivery_order.state, 'draft',
+                         "New delivery order should be in draft state")
+        self.assertEqual(self.delivery_order.partner_id, self.partner,
+                         "Partner should be set correctly")
+        self.assertEqual(self.delivery_order.recipient_id, self.recipient,
+                         "Recipient should be set correctly")
 
     def test_delivery_order_workflow(self):
         """
-        Test the delivery order workflow: draft -> confirmed -> in_transit -> delivered.
+        Test the delivery order workflow: draft -> confirmed -> in_transit
+        -> delivered.
         """
         # Test confirm action
         self.delivery_order.action_confirm()
-        self.assertEqual(self.delivery_order.state, 'confirmed', "Delivery order should be in confirmed state")
+        self.assertEqual(self.delivery_order.state, 'confirmed',
+                         "Delivery order should be in confirmed state")
 
         # Test start delivery action
         with self.assertRaises(ValidationError):
@@ -80,21 +88,26 @@ class TestDeliveryOrder(TransactionCase):
         # Assign courier and try again
         self.delivery_order.courier_id = self.courier.id
         self.delivery_order.action_start_delivery()
-        self.assertEqual(self.delivery_order.state, 'in_transit', "Delivery order should be in in_transit state")
+        self.assertEqual(self.delivery_order.state, 'in_transit',
+                         "Delivery order should be in in_transit state")
 
         # Test mark as delivered action
         self.delivery_order.action_mark_delivered()
-        self.assertEqual(self.delivery_order.state, 'delivered', "Delivery order should be in delivered state")
-        self.assertTrue(self.delivery_order.actual_delivery_date, "Actual delivery date should be set")
+        self.assertEqual(self.delivery_order.state, 'delivered',
+                         "Delivery order should be in delivered state")
+        self.assertTrue(self.delivery_order.actual_delivery_date,
+                        "Actual delivery date should be set")
 
         # Test cancel action (from draft state)
         self.delivery_order.action_reset_to_draft()
         self.delivery_order.action_cancel()
-        self.assertEqual(self.delivery_order.state, 'cancelled', "Delivery order should be in cancelled state")
+        self.assertEqual(self.delivery_order.state, 'cancelled',
+                         "Delivery order should be in cancelled state")
 
         # Test reset to draft action
         self.delivery_order.action_reset_to_draft()
-        self.assertEqual(self.delivery_order.state, 'draft', "Delivery order should be back in draft state")
+        self.assertEqual(self.delivery_order.state, 'draft',
+                         "Delivery order should be back in draft state")
 
     def test_delivery_fee_computation(self):
         """
@@ -113,8 +126,10 @@ class TestDeliveryOrder(TransactionCase):
         self.delivery_order._compute_delivery_fee()
         heavy_fee = self.delivery_order.delivery_fee
 
-        self.assertLess(light_fee, medium_fee, "Heavier packages should cost more")
-        self.assertLess(medium_fee, heavy_fee, "Heavier packages should cost more")
+        self.assertLess(light_fee, medium_fee,
+                        "Heavier packages should cost more")
+        self.assertLess(medium_fee, heavy_fee,
+                        "Heavier packages should cost more")
 
         # Test with different package types
         self.delivery_order.weight = 5.0  # Reset weight
@@ -131,8 +146,11 @@ class TestDeliveryOrder(TransactionCase):
         self.delivery_order._compute_delivery_fee()
         fragile_fee = self.delivery_order.delivery_fee
 
-        self.assertLess(document_fee, parcel_fee, "Documents should cost less than parcels")
-        self.assertLess(parcel_fee, fragile_fee, "Fragile packages should cost more than regular parcels")
+        self.assertLess(document_fee, parcel_fee,
+                        "Documents should cost less than parcels")
+        self.assertLess(parcel_fee, fragile_fee,
+                        "Fragile packages should cost more than "
+                        "regular parcels")
 
         # Test with different zones
         expensive_zone = self.env['courier.delivery.zone'].create({
@@ -152,7 +170,8 @@ class TestDeliveryOrder(TransactionCase):
         self.delivery_order._compute_delivery_fee()
         expensive_zone_fee = self.delivery_order.delivery_fee
 
-        self.assertLess(standard_zone_fee, expensive_zone_fee, "Expensive zones should cost more")
+        self.assertLess(standard_zone_fee, expensive_zone_fee,
+                        "Expensive zones should cost more")
 
     def test_scheduled_date_validation(self):
         """
@@ -169,7 +188,8 @@ class TestDeliveryOrder(TransactionCase):
         self.delivery_order.write({
             'scheduled_date': future_date
         })
-        self.assertEqual(self.delivery_order.scheduled_date.date(), future_date.date(),
+        self.assertEqual(self.delivery_order.scheduled_date.date(),
+                         future_date.date(),
                          "Scheduled date should be updated correctly")
 
     def test_onchange_recipient(self):
@@ -179,8 +199,10 @@ class TestDeliveryOrder(TransactionCase):
         new_recipient = self.env.ref('base.res_partner_3')
         self.delivery_order.recipient_id = new_recipient.id
         self.delivery_order._onchange_recipient_id()
-        self.assertEqual(self.delivery_order.delivery_address_id, new_recipient,
-                         "Delivery address should be updated when recipient changes")
+        self.assertEqual(self.delivery_order.delivery_address_id,
+                         new_recipient,
+                         "Delivery address should be updated when "
+                         "recipient changes")
 
     def test_onchange_pickup_request(self):
         """

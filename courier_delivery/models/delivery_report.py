@@ -11,7 +11,8 @@ class CourierDeliveryReport(models.Model):
     comprehensive analytics for monitoring delivery performance across
     different dimensions such as courier, zone, and time period.
 
-    The report includes detailed status tracking for both deliveries and pickups,
+    The report includes detailed status tracking for both deliveries
+    and pickups,
     allowing for granular analysis of the delivery workflow efficiency.
     """
     _name = 'courier.delivery.report'
@@ -20,7 +21,7 @@ class CourierDeliveryReport(models.Model):
     _auto = False  # This is a database view
 
     name = fields.Char(
-        string='Report Reference',  # Not redundant as it's different from field name
+        string='Report Reference',
         readonly=True,
         help="Unique identifier for the report"
     )
@@ -76,7 +77,7 @@ class CourierDeliveryReport(models.Model):
         help="Percentage of successful deliveries"
     )
     avg_delivery_time = fields.Float(
-        string='Avg Delivery Time (hours)',  # Keep this one as it's not redundant
+        string='Avg Delivery Time (hours)',
         readonly=True,
         help="Average time to complete deliveries"
     )
@@ -97,12 +98,12 @@ class CourierDeliveryReport(models.Model):
         help="Number of pickup requests assigned to couriers"
     )
     picked_pickups = fields.Integer(
-        string='Picked Up',  # Keep this one as it's not redundant
+        string='Picked Up',
         readonly=True,
         help="Number of pickup requests that have been picked up"
     )
     warehouse_pickups = fields.Integer(
-        string='Delivered to Warehouse',  # Keep this one as it's not redundant
+        string='Delivered to Warehouse',
         readonly=True,
         help="Number of pickup requests delivered to warehouse"
     )
@@ -111,7 +112,7 @@ class CourierDeliveryReport(models.Model):
         help="Number of cancelled pickup requests"
     )
     total_weight = fields.Float(
-        string='Total Weight (kg)',  # Keep this one as it's not redundant
+        string='Total Weight (kg)',
         readonly=True,
         help="Total weight of all deliveries"
     )
@@ -124,28 +125,36 @@ class CourierDeliveryReport(models.Model):
         """
         Initialize the SQL view for the delivery report.
 
-        This method creates or replaces the database view that powers the delivery report.
-        The view combines data from delivery orders and pickup requests to provide
+        This method creates or replaces the database view that powers the
+        delivery report.
+        The view combines data from delivery orders and pickup requests
+        to provide
         comprehensive statistics on delivery operations.
         """
         # Using SQL directly instead of non-existent ir.model.tools model
         query = """
             CREATE OR REPLACE VIEW courier_delivery_report AS (
                 WITH pickup_stats AS (
-                    SELECT 
+                    SELECT
                         p.create_date::date as pickup_date,
                         count(*) as pickup_count,
-                        sum(CASE WHEN p.state = 'draft' THEN 1 ELSE 0 END) as draft_pickups,
-                        sum(CASE WHEN p.state = 'confirmed' THEN 1 ELSE 0 END) as confirmed_pickups,
-                        sum(CASE WHEN p.state = 'assigned' THEN 1 ELSE 0 END) as assigned_pickups,
-                        sum(CASE WHEN p.state = 'picked' THEN 1 ELSE 0 END) as picked_pickups,
-                        sum(CASE WHEN p.state = 'warehouse' THEN 1 ELSE 0 END) as warehouse_pickups,
-                        sum(CASE WHEN p.state = 'cancelled' THEN 1 ELSE 0 END) as cancelled_pickups,
+                        sum(CASE WHEN p.state = 'draft' THEN 1 ELSE 0 END)
+                        as draft_pickups,
+                        sum(CASE WHEN p.state = 'confirmed' THEN 1 ELSE 0 END)
+                        as confirmed_pickups,
+                        sum(CASE WHEN p.state = 'assigned' THEN 1 ELSE 0 END)
+                        as assigned_pickups,
+                        sum(CASE WHEN p.state = 'picked' THEN 1 ELSE 0 END)
+                        as picked_pickups,
+                        sum(CASE WHEN p.state = 'warehouse' THEN 1 ELSE 0 END)
+                        as warehouse_pickups,
+                        sum(CASE WHEN p.state = 'cancelled' THEN 1 ELSE 0 END)
+                        as cancelled_pickups,
                         p.courier_id as pickup_courier_id,
                         p.company_id as pickup_company_id
-                    FROM 
+                    FROM
                         courier_pickup_request p
-                    GROUP BY 
+                    GROUP BY
                         p.create_date::date, p.courier_id, p.company_id
                 )
                 SELECT
@@ -155,27 +164,38 @@ class CourierDeliveryReport(models.Model):
                     d.zone_id,
                     d.company_id,
                     count(d.id) as total_deliveries,
-                    sum(CASE WHEN d.state = 'delivered' THEN 1 ELSE 0 END) as successful_deliveries,
-                    sum(CASE WHEN d.state = 'failed' THEN 1 ELSE 0 END) as failed_deliveries,
-                    sum(CASE WHEN d.state = 'cancelled' THEN 1 ELSE 0 END) as cancelled_deliveries,
-                    sum(CASE WHEN d.state = 'in_transit' THEN 1 ELSE 0 END) as in_transit_deliveries,
-                    sum(CASE WHEN d.state = 'draft' THEN 1 ELSE 0 END) as draft_deliveries,
-                    sum(CASE WHEN d.state = 'confirmed' THEN 1 ELSE 0 END) as confirmed_deliveries,
-                    CASE 
-                        WHEN count(d.id) > 0 
-                        THEN (sum(CASE WHEN d.state = 'delivered' THEN 1 ELSE 0 END) * 100.0 / count(d.id)) 
-                        ELSE 0 
+                    sum(CASE WHEN d.state = 'delivered' THEN 1 ELSE 0 END)
+                    as successful_deliveries,
+                    sum(CASE WHEN d.state = 'failed' THEN 1 ELSE 0 END)
+                    as failed_deliveries,
+                    sum(CASE WHEN d.state = 'cancelled' THEN 1 ELSE 0 END)
+                    as cancelled_deliveries,
+                    sum(CASE WHEN d.state = 'in_transit' THEN 1 ELSE 0 END)
+                    as in_transit_deliveries,
+                    sum(CASE WHEN d.state = 'draft' THEN 1 ELSE 0 END)
+                    as draft_deliveries,
+                    sum(CASE WHEN d.state = 'confirmed' THEN 1 ELSE 0 END)
+                    as confirmed_deliveries,
+                    CASE
+                        WHEN count(d.id) > 0
+                        THEN (sum(CASE WHEN d.state = 'delivered'
+                        THEN 1 ELSE 0 END) * 100.0 / count(d.id))
+                        ELSE 0
                     END as success_rate,
-                    CASE 
-                        WHEN sum(CASE WHEN d.state = 'delivered' AND d.actual_delivery_date IS NOT NULL THEN 1 ELSE 0 END) > 0 
+                    CASE
+                        WHEN sum(CASE WHEN d.state = 'delivered' AND
+                        d.actual_delivery_date IS NOT
+                        NULL THEN 1 ELSE 0 END) > 0
                         THEN avg(
-                            CASE 
-                                WHEN d.state = 'delivered' AND d.actual_delivery_date IS NOT NULL 
-                                THEN extract(epoch from (d.actual_delivery_date - d.create_date))/3600 
-                                ELSE NULL 
+                            CASE
+                                WHEN d.state = 'delivered' AND
+                                d.actual_delivery_date IS NOT NULL
+                                THEN extract(epoch from
+                                (d.actual_delivery_date - d.create_date))/3600
+                                ELSE NULL
                             END
-                        ) 
-                        ELSE 0 
+                        )
+                        ELSE 0
                     END as avg_delivery_time,
                     COALESCE(ps.pickup_count, 0) as total_pickups,
                     COALESCE(ps.draft_pickups, 0) as draft_pickups,
@@ -187,15 +207,19 @@ class CourierDeliveryReport(models.Model):
                     sum(d.weight) as total_weight,
                     sum(d.delivery_fee) as total_revenue,
                     concat(
-                        to_char(d.create_date::date, 'YYYY-MM-DD'), 
-                        CASE WHEN d.courier_id IS NOT NULL THEN concat('-C', d.courier_id) ELSE '' END,
-                        CASE WHEN d.zone_id IS NOT NULL THEN concat('-Z', d.zone_id) ELSE '' END
+                        to_char(d.create_date::date, 'YYYY-MM-DD'),
+                        CASE WHEN d.courier_id IS NOT NULL THEN
+                        concat('-C', d.courier_id) ELSE '' END,
+                        CASE WHEN d.zone_id IS NOT NULL THEN
+                        concat('-Z', d.zone_id) ELSE '' END
                     ) as name
                 FROM
                     courier_delivery_order d
                 LEFT JOIN
-                    pickup_stats ps ON d.create_date::date = ps.pickup_date AND 
-                                      (d.courier_id = ps.pickup_courier_id OR (d.courier_id IS NULL AND ps.pickup_courier_id IS NULL))
+                    pickup_stats ps ON d.create_date::date = ps.pickup_date AND
+                                      (d.courier_id = ps.pickup_courier_id OR
+                                       (d.courier_id IS NULL AND
+                                        ps.pickup_courier_id IS NULL))
                 WHERE
                     d.create_date IS NOT NULL
                 GROUP BY
@@ -212,11 +236,13 @@ class CourierDeliveryReport(models.Model):
                     ps.cancelled_pickups
             )
         """
-        tools.drop_view_if_exists(self.env.cr, 'courier_delivery_report')
+        tools.drop_view_if_exists(self.env.cr,
+                                  'courier_delivery_report')
         self.env.cr.execute(query)
 
     @api.model
-    def get_report_values(self, date_from=False, date_to=False, courier_id=False, zone_id=False):
+    def get_report_values(self, date_from=False, date_to=False,
+                          courier_id=False, zone_id=False):
         """
         Get report values based on filters.
 
@@ -280,14 +306,17 @@ class CourierDeliveryReport(models.Model):
             success_rate = (successful_deliveries * 100.0) / total_deliveries
 
         # Calculate average delivery time
-        delivery_times = [r.avg_delivery_time for r in reports if r.avg_delivery_time > 0]
-        avg_delivery_time = sum(delivery_times) / len(delivery_times) if delivery_times else 0
+        delivery_times = [r.avg_delivery_time for r in reports if
+                          r.avg_delivery_time > 0]
+        avg_delivery_time = sum(delivery_times) / len(delivery_times) if (
+            delivery_times) else 0
 
         return {
             'total_deliveries': total_deliveries,
             'successful_deliveries': successful_deliveries,
             'failed_deliveries': sum(reports.mapped('failed_deliveries')),
-            'cancelled_deliveries': sum(reports.mapped('cancelled_deliveries')),
+            'cancelled_deliveries': sum(
+                reports.mapped('cancelled_deliveries')),
             'success_rate': success_rate,
             'avg_delivery_time': avg_delivery_time,
             'total_weight': sum(reports.mapped('total_weight')),

@@ -7,8 +7,10 @@ class CourierSchedule(models.Model):
     """
     Model for managing courier work schedules.
 
-    This model tracks courier availability, working hours, and assigned deliveries.
-    It provides a comprehensive scheduling system for managing courier resources
+    This model tracks courier availability, working hours, and assigned
+    deliveries.
+    It provides a comprehensive scheduling system for managing courier
+    resources
     and optimizing delivery operations.
 
     The schedule follows a workflow from draft to completed:
@@ -77,13 +79,15 @@ class CourierSchedule(models.Model):
     delivery_order_ids = fields.One2many(
         'courier.delivery.order',
         'courier_id',
-        domain="[('scheduled_date', '>=', date_start), ('scheduled_date', '<=', date_end)]",
+        domain="[('scheduled_date', '>=', date_start), "
+               "('scheduled_date', '<=', date_end)]",
         help="Delivery orders assigned to this courier during this schedule"
     )
     pickup_request_ids = fields.One2many(
         'courier.pickup.request',
         'courier_id',
-        domain="[('pickup_date', '>=', date_start), ('pickup_date', '<=', date_end)]",
+        domain="[('pickup_date', '>=', date_start), "
+               "('pickup_date', '<=', date_end)]",
         help="Pickup requests assigned to this courier during this schedule"
     )
     date_start = fields.Datetime(
@@ -145,10 +149,12 @@ class CourierSchedule(models.Model):
                 end_hour = int(schedule.end_time)
                 end_minute = int((schedule.end_time % 1) * 60)
 
-                schedule.date_start = fields.Datetime.to_datetime(schedule.date) + timedelta(
-                    hours=start_hour, minutes=start_minute)
-                schedule.date_end = fields.Datetime.to_datetime(schedule.date) + timedelta(
-                    hours=end_hour, minutes=end_minute)
+                schedule.date_start = (fields.Datetime.to_datetime(
+                    schedule.date) + timedelta(hours=start_hour,
+                                               minutes=start_minute))
+                schedule.date_end = (fields.Datetime.to_datetime(
+                    schedule.date) + timedelta(hours=end_hour,
+                                               minutes=end_minute))
             else:
                 schedule.date_start = False
                 schedule.date_end = False
@@ -160,10 +166,12 @@ class CourierSchedule(models.Model):
         """
         for schedule in self:
             if schedule.end_time >= schedule.start_time:
-                schedule.working_hours = schedule.end_time - schedule.start_time
+                schedule.working_hours = (schedule.end_time -
+                                          schedule.start_time)
             else:
                 # Handle overnight shifts
-                schedule.working_hours = (24 - schedule.start_time) + schedule.end_time
+                schedule.working_hours = ((24 - schedule.start_time) +
+                                          schedule.end_time)
 
     @api.depends('delivery_order_ids')
     def _compute_delivery_count(self):
@@ -263,7 +271,8 @@ class CourierSchedule(models.Model):
                 # This is an overnight shift, which is allowed
                 pass
             elif schedule.end_time == schedule.start_time:
-                raise ValidationError(_("End time must be different from start time."))
+                raise ValidationError(_("End time must be different from start"
+                                        " time."))
 
     @api.constrains('courier_id', 'date', 'start_time', 'end_time')
     def _check_overlap(self):
@@ -283,8 +292,9 @@ class CourierSchedule(models.Model):
             overlaps = self.env['courier.schedule'].search(domain)
             for overlap in overlaps:
                 # Check if schedules overlap
-                if (schedule.start_time < overlap.end_time and
-                    schedule.end_time > overlap.start_time):
+                if (schedule.start_time < overlap.end_time
+                        and schedule.end_time > overlap.start_time):
                     raise ValidationError(_(
-                        "This schedule overlaps with another schedule for the same courier on the same day."
+                        "This schedule overlaps with another schedule for the "
+                        "same courier on the same day."
                     ))

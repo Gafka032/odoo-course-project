@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
 
+
 class TestPickupRequest(TransactionCase):
     """
     Test cases for the courier.pickup.request model.
@@ -43,18 +44,24 @@ class TestPickupRequest(TransactionCase):
         """
         Test that pickup request is created correctly with a sequence number.
         """
-        self.assertTrue(self.pickup_request.name, "Pickup request should have a name")
-        self.assertNotEqual(self.pickup_request.name, 'New', "Pickup request should have a sequence number")
-        self.assertEqual(self.pickup_request.state, 'draft', "New pickup request should be in draft state")
-        self.assertEqual(self.pickup_request.partner_id, self.partner, "Partner should be set correctly")
+        self.assertTrue(self.pickup_request.name,
+                        "Pickup request should have a name")
+        self.assertNotEqual(self.pickup_request.name, 'New',
+                            "Pickup request should have a sequence number")
+        self.assertEqual(self.pickup_request.state, 'draft',
+                         "New pickup request should be in draft state")
+        self.assertEqual(self.pickup_request.partner_id, self.partner,
+                         "Partner should be set correctly")
 
     def test_pickup_request_workflow(self):
         """
-        Test the pickup request workflow: draft -> confirmed -> assigned -> picked.
+        Test the pickup request workflow: draft -> confirmed -> assigned
+        -> picked.
         """
         # Test confirm action
         self.pickup_request.action_confirm()
-        self.assertEqual(self.pickup_request.state, 'confirmed', "Pickup request should be in confirmed state")
+        self.assertEqual(self.pickup_request.state, 'confirmed',
+                         "Pickup request should be in confirmed state")
 
         # Test assign courier action
         with self.assertRaises(ValidationError):
@@ -64,19 +71,23 @@ class TestPickupRequest(TransactionCase):
         # Assign courier and try again
         self.pickup_request.courier_id = self.courier.id
         self.pickup_request.action_assign_courier()
-        self.assertEqual(self.pickup_request.state, 'assigned', "Pickup request should be in assigned state")
+        self.assertEqual(self.pickup_request.state, 'assigned',
+                         "Pickup request should be in assigned state")
 
         # Test mark as picked action
         self.pickup_request.action_mark_picked()
-        self.assertEqual(self.pickup_request.state, 'picked', "Pickup request should be in picked state")
+        self.assertEqual(self.pickup_request.state, 'picked',
+                         "Pickup request should be in picked state")
 
         # Test cancel action
         self.pickup_request.action_cancel()
-        self.assertEqual(self.pickup_request.state, 'cancelled', "Pickup request should be in cancelled state")
+        self.assertEqual(self.pickup_request.state, 'cancelled',
+                         "Pickup request should be in cancelled state")
 
         # Test reset to draft action
         self.pickup_request.action_reset_to_draft()
-        self.assertEqual(self.pickup_request.state, 'draft', "Pickup request should be back in draft state")
+        self.assertEqual(self.pickup_request.state, 'draft',
+                         "Pickup request should be back in draft state")
 
     def test_pickup_date_validation(self):
         """
@@ -93,7 +104,8 @@ class TestPickupRequest(TransactionCase):
         self.pickup_request.write({
             'pickup_date': future_date
         })
-        self.assertEqual(self.pickup_request.pickup_date.date(), future_date.date(),
+        self.assertEqual(self.pickup_request.pickup_date.date(),
+                         future_date.date(),
                          "Pickup date should be updated correctly")
 
     def test_onchange_partner(self):
@@ -104,7 +116,8 @@ class TestPickupRequest(TransactionCase):
         self.pickup_request.partner_id = new_partner.id
         self.pickup_request._onchange_partner_id()
         self.assertEqual(self.pickup_request.pickup_address_id, new_partner,
-                         "Pickup address should be updated when partner changes")
+                         "Pickup address should be updated when partner "
+                         "changes")
 
     def test_delivery_count(self):
         """

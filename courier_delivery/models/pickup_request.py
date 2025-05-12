@@ -119,7 +119,8 @@ class CourierPickupRequest(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         """
-        Override create method to assign a unique sequence number to each pickup request.
+        Override create method to assign a unique sequence number to each
+        pickup request.
 
         Args:
             vals_list: List of dictionaries containing values for new records
@@ -129,7 +130,9 @@ class CourierPickupRequest(models.Model):
         """
         for vals in vals_list:
             if vals.get('name', _('New')) == _('New'):
-                vals['name'] = self.env['ir.sequence'].next_by_code('courier.pickup.request') or _('New')
+                vals['name'] = (self.env['ir.sequence'].
+                                next_by_code('courier.pickup.request') or
+                                _('New'))
         return super(CourierPickupRequest, self).create(vals_list)
 
     def action_create_delivery(self):
@@ -143,15 +146,20 @@ class CourierPickupRequest(models.Model):
 
         # Check if pickup request is in the warehouse state
         if self.state != 'warehouse':
-            raise ValidationError(_('Delivery orders can only be created from pickup requests that have been delivered to warehouse.'))
+            raise ValidationError(_('Delivery orders can only be created '
+                                    'from pickup requests that have been '
+                                    'delivered to warehouse.'))
 
         # Create delivery order
         delivery_order = self.env['courier.delivery.order'].create({
             'pickup_request_id': self.id,
             'partner_id': self.partner_id.id,
-            'recipient_id': self.partner_id.id,  # Default recipient to customer, can be changed later
-            'delivery_address_id': self.partner_id.id,  # Default delivery address to customer, can be changed later
-            'scheduled_date': fields.Datetime.now() + timedelta(days=1),  # Schedule for next day
+            'recipient_id': self.partner_id.id,
+            # Default recipient to customer, can be changed later
+            'delivery_address_id': self.partner_id.id,
+            # Default delivery address to customer, can be changed later
+            'scheduled_date': fields.Datetime.now() + timedelta(days=1),
+            # Schedule for next day
             'courier_id': self.courier_id.id if self.courier_id else False,
             'notes': _('Created from pickup request %s') % self.name,
             'weight': self.weight,  # Use weight from pickup request
@@ -175,10 +183,12 @@ class CourierPickupRequest(models.Model):
 
     def action_assign_courier(self):
         """
-        Assign a courier to the pickup request and change its state to 'assigned'.
+        Assign a courier to the pickup request and change its state
+        to 'assigned'.
         """
         if not self.courier_id:
-            raise ValidationError(_("Please assign a courier before proceeding."))
+            raise ValidationError(_("Please assign a courier before "
+                                    "proceeding."))
         self.write({'state': 'assigned'})
 
     def action_mark_picked(self):
@@ -189,14 +199,17 @@ class CourierPickupRequest(models.Model):
 
     def action_mark_delivered_to_warehouse(self):
         """
-        Mark the pickup request as delivered to warehouse and change its state to 'warehouse'.
+        Mark the pickup request as delivered to warehouse and change its
+        state to 'warehouse'.
 
-        This status indicates that the package has been picked up from the customer
+        This status indicates that the package has been picked up from
+        the customer
         and delivered to the company's warehouse for further processing.
         """
         # Check if the pickup request is in a valid state for this action
         if self.state != 'picked':
-            raise ValidationError(_('Only picked up requests can be marked as delivered to warehouse.'))
+            raise ValidationError(_('Only picked up requests can be marked as'
+                                    ' delivered to warehouse.'))
 
         self.write({'state': 'warehouse'})
 
@@ -251,5 +264,6 @@ class CourierPickupRequest(models.Model):
         Validate that pickup date is not in the past.
         """
         for request in self:
-            if request.pickup_date and request.pickup_date < fields.Datetime.now():
+            if (request.pickup_date and request.pickup_date <
+                    fields.Datetime.now()):
                 raise ValidationError(_("Pickup date cannot be in the past."))

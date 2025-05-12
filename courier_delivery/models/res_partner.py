@@ -65,7 +65,8 @@ class ResPartner(models.Model):
         """
         DeliveryZone = self.env['courier.delivery.zone']
         for partner in self:
-            partner.delivery_zone_id = DeliveryZone.get_zone_for_address(partner.id)
+            partner.delivery_zone_id = (
+                DeliveryZone.get_zone_for_address(partner.id))
 
     @api.depends('pickup_request_ids')
     def _compute_pickup_count(self):
@@ -89,7 +90,8 @@ class ResPartner(models.Model):
         Compute the number of deliveries where this partner is the recipient.
         """
         for partner in self:
-            partner.received_delivery_count = len(partner.recipient_delivery_ids)
+            partner.received_delivery_count = (
+                len(partner.recipient_delivery_ids))
 
     def action_view_pickups(self):
         """

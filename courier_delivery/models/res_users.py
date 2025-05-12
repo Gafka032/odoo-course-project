@@ -30,25 +30,25 @@ class ResUsers(models.Model):
         help="Driver's license number"
     )
     max_weight = fields.Float(
-        string='Max Weight Capacity (kg)',  # Keep this one as it's not redundant
+        string='Max Weight Capacity (kg)',
         help="Maximum weight the courier can carry"
     )
     courier_schedule_ids = fields.One2many(
         'courier.schedule',
         'courier_id',
-        string='Work Schedules',  # Keep this one as it's not redundant
+        string='Work Schedules',
         help="Work schedules for this courier"
     )
     pickup_request_ids = fields.One2many(
         'courier.pickup.request',
         'courier_id',
-        string='Pickup Requests',  # Keep this one as it's not redundant
+        string='Pickup Requests',
         help="Pickup requests assigned to this courier"
     )
     delivery_order_ids = fields.One2many(
         'courier.delivery.order',
         'courier_id',
-        string='Delivery Orders',  # Keep this one as it's not redundant
+        string='Delivery Orders',
         help="Delivery orders assigned to this courier"
     )
 
@@ -109,11 +109,15 @@ class ResUsers(models.Model):
         """
         for user in self:
             deliveries = user.delivery_order_ids
-            user.successful_deliveries = len(deliveries.filtered(lambda d: d.state == 'delivered'))
-            user.failed_deliveries = len(deliveries.filtered(lambda d: d.state == 'failed'))
+            user.successful_deliveries = len(deliveries.filtered(
+                lambda d: d.state == 'delivered'))
+            user.failed_deliveries = len(deliveries.filtered(
+                lambda d: d.state == 'failed'))
 
-            total = len(deliveries.filtered(lambda d: d.state in ('delivered', 'failed')))
-            user.success_rate = (user.successful_deliveries * 100.0 / total) if total else 0.0
+            total = len(deliveries.filtered(lambda d: d.state in ('delivered',
+                                                                  'failed')))
+            user.success_rate = \
+                (user.successful_deliveries * 100.0 / total) if total else 0.0
 
     def action_view_schedules(self):
         """

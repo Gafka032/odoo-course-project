@@ -45,18 +45,23 @@ class TestDeliveryZone(TransactionCase):
         Test that delivery zone is created correctly.
         """
         self.assertTrue(self.zone.name, "Zone should have a name")
-        self.assertEqual(self.zone.code, 'TEST', "Zone code should be set correctly")
-        self.assertEqual(self.zone.factor, 1.2, "Price factor should be set correctly")
+        self.assertEqual(self.zone.code, 'TEST',
+                         "Zone code should be set correctly")
+        self.assertEqual(self.zone.factor, 1.2,
+                         "Price factor should be set correctly")
         self.assertTrue(self.zone.active, "Zone should be active")
-        self.assertEqual(self.zone.delivery_time_estimate, 3.0, "Delivery time estimate should be set correctly")
-        self.assertEqual(len(self.zone.courier_ids), 1, "Zone should have one courier")
+        self.assertEqual(self.zone.delivery_time_estimate, 3.0,
+                         "Delivery time estimate should be set correctly")
+        self.assertEqual(len(self.zone.courier_ids), 1,
+                         "Zone should have one courier")
 
     def test_courier_count(self):
         """
         Test that courier count is computed correctly.
         """
         # Initially there should be one courier
-        self.assertEqual(self.zone.courier_count, 1, "Zone should have one courier")
+        self.assertEqual(self.zone.courier_count, 1,
+                         "Zone should have one courier")
 
         # Add another courier
         self.zone.write({
@@ -65,7 +70,8 @@ class TestDeliveryZone(TransactionCase):
 
         # Refresh and check count
         self.zone._compute_courier_count()
-        self.assertEqual(self.zone.courier_count, 2, "Zone should have two couriers")
+        self.assertEqual(self.zone.courier_count, 2,
+                         "Zone should have two couriers")
 
         # Remove all couriers
         self.zone.write({
@@ -74,19 +80,22 @@ class TestDeliveryZone(TransactionCase):
 
         # Refresh and check count
         self.zone._compute_courier_count()
-        self.assertEqual(self.zone.courier_count, 0, "Zone should have no couriers")
+        self.assertEqual(self.zone.courier_count, 0,
+                         "Zone should have no couriers")
 
     def test_delivery_count(self):
         """
         Test that delivery count is computed correctly.
         """
         # Initially there should be no deliveries
-        self.assertEqual(self.zone.delivery_count, 0, "New zone should have no deliveries")
+        self.assertEqual(self.zone.delivery_count, 0,
+                         "New zone should have no deliveries")
 
         # Create a delivery order associated with this zone
         # Using a future date to avoid validation errors
         from datetime import datetime, timedelta
-        future_date = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %H:%M:%S')
+        future_date = ((datetime.now() + timedelta(days=30)).
+                       strftime('%Y-%m-%d %H:%M:%S'))
 
         self.env['courier.delivery.order'].create({
             'partner_id': self.partner.id,
@@ -98,11 +107,13 @@ class TestDeliveryZone(TransactionCase):
 
         # Refresh and check count
         self.zone._compute_delivery_count()
-        self.assertEqual(self.zone.delivery_count, 1, "Zone should have one delivery")
+        self.assertEqual(self.zone.delivery_count, 1,
+                         "Zone should have one delivery")
 
         # Create another delivery order
         # Using a future date to avoid validation errors
-        future_date2 = (datetime.now() + timedelta(days=60)).strftime('%Y-%m-%d %H:%M:%S')
+        future_date2 = ((datetime.now() + timedelta(days=60)).
+                        strftime('%Y-%m-%d %H:%M:%S'))
 
         self.env['courier.delivery.order'].create({
             'partner_id': self.partner.id,
@@ -114,7 +125,8 @@ class TestDeliveryZone(TransactionCase):
 
         # Refresh and check count
         self.zone._compute_delivery_count()
-        self.assertEqual(self.zone.delivery_count, 2, "Zone should have two deliveries")
+        self.assertEqual(self.zone.delivery_count, 2,
+                         "Zone should have two deliveries")
 
     def test_get_zone_for_address(self):
         """
@@ -139,14 +151,19 @@ class TestDeliveryZone(TransactionCase):
         })
 
         # Test with matching partner
-        found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_match.id)
-        self.assertEqual(found_zone.id, self.zone.id, "Should find the correct zone for matching ZIP")
+        found_zone = (self.env['courier.delivery.zone'].
+                      get_zone_for_address(partner_match.id))
+        self.assertEqual(found_zone.id, self.zone.id,
+                         "Should find the correct zone for matching ZIP")
 
         # Test with partner that does not match any zone
         # Must return the first active zone
-        found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_no_match.id)
+        found_zone = (self.env['courier.delivery.zone'].
+                      get_zone_for_address(partner_no_match.id))
         # We check that the zone was found, but we do not check the specific ID
-        self.assertTrue(found_zone, "Should return an active zone for non-matching ZIP")
+        self.assertTrue(found_zone,
+                        "Should return an active zone for "
+                        "non-matching ZIP")
 
         # Create another zone with higher priority
         zone2 = self.env['courier.delivery.zone'].create({
@@ -159,5 +176,7 @@ class TestDeliveryZone(TransactionCase):
 
         # Test again with non-matching partner
         # Now should find the new zone
-        found_zone = self.env['courier.delivery.zone'].get_zone_for_address(partner_no_match.id)
-        self.assertEqual(found_zone.id, zone2.id, "Should find the correct zone for newly matching ZIP")
+        found_zone = (self.env['courier.delivery.zone'].
+                      get_zone_for_address(partner_no_match.id))
+        self.assertEqual(found_zone.id, zone2.id,
+                         "Should find the correct zone for newly matching ZIP")

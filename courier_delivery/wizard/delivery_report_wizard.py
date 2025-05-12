@@ -1,6 +1,7 @@
 from datetime import timedelta
 from odoo import models, fields, api, _
 
+
 class DeliveryReportWizard(models.TransientModel):
     """
     Wizard for generating delivery reports.
@@ -146,4 +147,6 @@ class DeliveryReportWizard(models.TransientModel):
             'company_id': self.company_id.id,
         }
 
-        return self.env.ref('courier_delivery.action_report_delivery_statistics').report_action(self, data=data)
+        return (self.env.ref
+                ('courier_delivery.action_report_delivery_statistics')
+                .report_action(self, data=data))

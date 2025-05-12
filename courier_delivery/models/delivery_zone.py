@@ -8,7 +8,8 @@ class CourierDeliveryZone(models.Model):
     This model defines geographical zones for deliveries with specific
     pricing factors and delivery time estimates.
 
-    Delivery zones are used to organize the geographical areas for courier operations,
+    Delivery zones are used to organize the geographical areas for courier
+    operations,
     with each zone having specific pricing rules and delivery time estimates.
     Zones can be assigned to specific couriers and can be used for automatic
     assignment of deliveries based on address information.
@@ -84,7 +85,8 @@ class CourierDeliveryZone(models.Model):
     )
 
     _sql_constraints = [
-        ('code_uniq', 'unique(code, company_id)', 'Zone code must be unique per company!')
+        ('code_uniq', 'unique(code, company_id)',
+         'Zone code must be unique per company!')
     ]
 
     @api.depends('courier_ids')
@@ -100,9 +102,10 @@ class CourierDeliveryZone(models.Model):
         Compute the number of deliveries in this zone.
         """
         for zone in self:
-            zone.delivery_count = self.env['courier.delivery.order'].search_count([
-                ('zone_id', '=', zone.id)
-            ])
+            zone.delivery_count = (
+                self.env['courier.delivery.order'].search_count([
+                    ('zone_id', '=', zone.id)
+                ]))
 
     def action_view_deliveries(self):
         """

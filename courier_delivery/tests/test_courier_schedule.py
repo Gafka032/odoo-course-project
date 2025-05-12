@@ -50,34 +50,43 @@ class TestCourierSchedule(TransactionCase):
         Test that schedule is created correctly.
         """
         self.assertTrue(self.schedule.name, "Schedule should have a name")
-        self.assertEqual(self.schedule.state, 'draft', "New schedule should be in draft state")
-        self.assertEqual(self.schedule.courier_id, self.courier, "Courier should be set correctly")
-        self.assertEqual(len(self.schedule.zone_ids), 2, "Schedule should have two zones")
+        self.assertEqual(self.schedule.state, 'draft',
+                         "New schedule should be in draft state")
+        self.assertEqual(self.schedule.courier_id, self.courier,
+                         "Courier should be set correctly")
+        self.assertEqual(len(self.schedule.zone_ids), 2,
+                         "Schedule should have two zones")
 
     def test_schedule_workflow(self):
         """
-        Test the schedule workflow: draft -> confirmed -> in_progress -> completed.
+        Test the schedule workflow: draft -> confirmed -> in_progress
+        -> completed.
         """
         # Test confirm action
         self.schedule.action_confirm()
-        self.assertEqual(self.schedule.state, 'confirmed', "Schedule should be in confirmed state")
+        self.assertEqual(self.schedule.state, 'confirmed',
+                         "Schedule should be in confirmed state")
 
         # Test start action
         self.schedule.action_start()
-        self.assertEqual(self.schedule.state, 'in_progress', "Schedule should be in in_progress state")
+        self.assertEqual(self.schedule.state, 'in_progress',
+                         "Schedule should be in in_progress state")
 
         # Test complete action
         self.schedule.action_complete()
-        self.assertEqual(self.schedule.state, 'completed', "Schedule should be in completed state")
+        self.assertEqual(self.schedule.state, 'completed',
+                         "Schedule should be in completed state")
 
         # Test cancel action (from draft state)
         self.schedule.action_reset_to_draft()
         self.schedule.action_cancel()
-        self.assertEqual(self.schedule.state, 'cancelled', "Schedule should be in cancelled state")
+        self.assertEqual(self.schedule.state, 'cancelled',
+                         "Schedule should be in cancelled state")
 
         # Test reset to draft action
         self.schedule.action_reset_to_draft()
-        self.assertEqual(self.schedule.state, 'draft', "Schedule should be back in draft state")
+        self.assertEqual(self.schedule.state, 'draft',
+                         "Schedule should be back in draft state")
 
     def test_compute_working_hours(self):
         """
@@ -87,19 +96,22 @@ class TestCourierSchedule(TransactionCase):
         self.schedule.start_time = 8.0
         self.schedule.end_time = 16.0
         self.schedule._compute_working_hours()
-        self.assertEqual(self.schedule.working_hours, 8.0, "Working hours should be 8")
+        self.assertEqual(self.schedule.working_hours, 8.0,
+                         "Working hours should be 8")
 
         # Partial hours
         self.schedule.start_time = 8.5
         self.schedule.end_time = 17.25
         self.schedule._compute_working_hours()
-        self.assertEqual(self.schedule.working_hours, 8.75, "Working hours should be 8.75")
+        self.assertEqual(self.schedule.working_hours, 8.75,
+                         "Working hours should be 8.75")
 
         # Overnight shift
         self.schedule.start_time = 22.0
         self.schedule.end_time = 6.0
         self.schedule._compute_working_hours()
-        self.assertEqual(self.schedule.working_hours, 8.0, "Working hours for overnight shift should be 8")
+        self.assertEqual(self.schedule.working_hours, 8.0,
+                         "Working hours for overnight shift should be 8")
 
     def test_compute_date_range(self):
         """
@@ -112,14 +124,17 @@ class TestCourierSchedule(TransactionCase):
         self.schedule._compute_date_range()
 
         # Check date_start
-        expected_start = datetime.combine(today, datetime.min.time()) + timedelta(hours=8)
-        self.assertEqual(self.schedule.date_start.date(), expected_start.date(),
+        expected_start = (datetime.combine(today, datetime.min.time()) +
+                          timedelta(hours=8))
+        self.assertEqual(self.schedule.date_start.date(),
+                         expected_start.date(),
                          "Start date should be correct")
         self.assertEqual(self.schedule.date_start.hour, expected_start.hour,
                          "Start hour should be correct")
 
         # Check date_end
-        expected_end = datetime.combine(today, datetime.min.time()) + timedelta(hours=16)
+        expected_end = (datetime.combine(today, datetime.min.time()) +
+                        timedelta(hours=16))
         self.assertEqual(self.schedule.date_end.date(), expected_end.date(),
                          "End date should be correct")
         self.assertEqual(self.schedule.date_end.hour, expected_end.hour,
@@ -141,8 +156,10 @@ class TestCourierSchedule(TransactionCase):
             'start_time': 8.0,
             'end_time': 16.0
         })
-        self.assertEqual(self.schedule.start_time, 8.0, "Start time should be updated correctly")
-        self.assertEqual(self.schedule.end_time, 16.0, "End time should be updated correctly")
+        self.assertEqual(self.schedule.start_time, 8.0,
+                         "Start time should be updated correctly")
+        self.assertEqual(self.schedule.end_time, 16.0,
+                         "End time should be updated correctly")
 
     def test_overlap_validation(self):
         """
@@ -167,7 +184,8 @@ class TestCourierSchedule(TransactionCase):
             'end_time': 16.0,
             'zone_ids': [(6, 0, [self.zone1.id])],
         })
-        self.assertTrue(non_overlapping.id, "Non-overlapping schedule should be created")
+        self.assertTrue(non_overlapping.id,
+                        "Non-overlapping schedule should be created")
 
         # Create a non-overlapping schedule (different time)
         evening = self.env['courier.schedule'].create({
@@ -177,4 +195,5 @@ class TestCourierSchedule(TransactionCase):
             'end_time': 22.0,
             'zone_ids': [(6, 0, [self.zone1.id])],
         })
-        self.assertTrue(evening.id, "Non-overlapping evening schedule should be created")
+        self.assertTrue(evening.id,
+                        "Non-overlapping evening schedule should be created")

@@ -7,7 +7,8 @@ class CourierDeliveryOrder(models.Model):
     """
     Model for managing courier delivery orders.
 
-    This model stores information about delivery orders, including delivery address,
+    This model stores information about delivery orders, including delivery
+    address,
     status, assigned courier, and related pickup request.
 
     The delivery order follows a workflow from draft to delivered/failed:
@@ -34,7 +35,8 @@ class CourierDeliveryOrder(models.Model):
         required=True,
         copy=False,
         readonly=True,
-        default=lambda self: '/',  # Using '/' instead of _('New') to avoid pylint inference issues
+        # Using '/' instead of _('New') to avoid pylint inference issues
+        default=lambda self: '/',
         help="Unique identifier for the delivery order"
     )
     pickup_request_id = fields.Many2one(
@@ -143,7 +145,8 @@ class CourierDeliveryOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         """
-        Override create method to assign a unique sequence number to each delivery order.
+        Override create method to assign a unique sequence number to each
+        delivery order.
 
         Args:
             vals_list: List of dictionaries containing values for new records
@@ -154,11 +157,14 @@ class CourierDeliveryOrder(models.Model):
         # This is a standard Odoo pattern that avoids pylint inference issues
         for vals in vals_list:
             if 'name' not in vals or vals['name'] == '/' or not vals['name']:
-                vals['name'] = self.env['ir.sequence'].next_by_code('courier.delivery.order') or '/'
-            
+                vals['name'] = (self.env['ir.sequence'].
+                                next_by_code('courier.delivery.order') or '/')
+
             if 'tracking_ref' not in vals or not vals.get('tracking_ref'):
-                vals['tracking_ref'] = self.env['ir.sequence'].next_by_code('courier.delivery.tracking') or ''
-                
+                vals['tracking_ref'] = (self.env['ir.sequence'].
+                                        next_by_code(
+                    'courier.delivery.tracking') or '')
+
         return super(CourierDeliveryOrder, self).create(vals_list)
 
     def action_confirm(self):
@@ -172,7 +178,8 @@ class CourierDeliveryOrder(models.Model):
         Start the delivery process and change the state to 'in_transit'.
         """
         if not self.courier_id:
-            raise ValidationError(_("Please assign a courier before starting delivery."))
+            raise ValidationError(_("Please assign a courier before "
+                                    "starting delivery."))
         self.write({'state': 'in_transit'})
 
     def action_mark_delivered(self):
@@ -216,7 +223,8 @@ class CourierDeliveryOrder(models.Model):
             Action to print the delivery slip report
         """
         self.ensure_one()
-        return self.env.ref('courier_delivery.action_report_delivery_slip').report_action(self)
+        return (self.env.ref('courier_delivery.action_report_delivery_slip').
+                report_action(self))
 
     @api.depends('weight', 'zone_id', 'package_type')
     def _compute_delivery_fee(self):
@@ -252,7 +260,8 @@ class CourierDeliveryOrder(models.Model):
             elif delivery.package_type == 'fragile':
                 package_factor = 1.3
 
-            delivery.delivery_fee = base_fee * weight_factor * zone_factor * package_factor
+            delivery.delivery_fee = (base_fee * weight_factor * zone_factor *
+                                     package_factor)
 
     @api.onchange('recipient_id')
     def _onchange_recipient_id(self):
@@ -270,7 +279,9 @@ class CourierDeliveryOrder(models.Model):
         if self.pickup_request_id:
             self.partner_id = self.pickup_request_id.partner_id
             self.courier_id = self.pickup_request_id.courier_id
-            self.weight = self.pickup_request_id.weight / self.pickup_request_id.package_count if self.pickup_request_id.package_count else 0.0
+            self.weight = (self.pickup_request_id.weight /
+                           self.pickup_request_id.package_count) if (
+                self.pickup_request_id.package_count) else 0.0
 
     @api.constrains('scheduled_date')
     def _check_scheduled_date(self):
@@ -278,8 +289,10 @@ class CourierDeliveryOrder(models.Model):
         Validate that scheduled delivery date is not in the past.
         """
         for record in self:
-            if record.scheduled_date and record.scheduled_date < fields.Datetime.now():
-                raise ValidationError(_("Scheduled delivery date cannot be in the past."))
+            if (record.scheduled_date and record.scheduled_date <
+                    fields.Datetime.now()):
+                raise ValidationError(_("Scheduled delivery date "
+                                        "cannot be in the past."))
 
     @api.model
     def get_dashboard_data(self):
@@ -297,12 +310,15 @@ class CourierDeliveryOrder(models.Model):
 
         # Calculate success rate
         completed = delivered + failed
-        success_rate = round((delivered / completed) * 100) if completed > 0 else 0
+        success_rate = round((delivered / completed) * 100) if \
+            (completed > 0) else 0
 
         # Get pickup request statistics
         PickupRequest = self.env['courier.pickup.request']
         total_pickups = PickupRequest.search_count([])
-        pending_pickups = PickupRequest.search_count([('state', 'in', ['draft', 'confirmed', 'assigned'])])
+        pending_pickups = PickupRequest.search_count([('state', 'in',
+                                                       ['draft', 'confirmed',
+                                                        'assigned'])])
 
         return {
             'total_deliveries': total_deliveries,
